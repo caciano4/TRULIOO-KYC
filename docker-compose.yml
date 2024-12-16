@@ -1,0 +1,84 @@
+version: '1.0'
+
+services:
+  app:
+    container_name: app_kyc
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE}
+    ports:
+      - "${PORT}:80"
+    env_file:
+      - .env
+    volumes:
+      - .:/app:delegated
+      - /app/tmp
+    restart: always
+    networks:
+      - networks_kyc
+    depends_on:
+      - db
+    environment:
+      - AIR_WATCH_DELAY=100ms
+
+  db:
+    container_name: db_kyc
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    networks:
+      - networks_kyc
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_kyc
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${EMAIL_PGADMIN}  # Email para login
+      PGADMIN_DEFAULT_PASSWORD: ${PASSWORD_PGADMIN}          # Senha para login
+    ports:
+      - "8080:80"  # Porta para acessar o pgAdmin
+    depends_on:
+      - db
+    networks:
+      - networks_kyc
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    build:
+      context: .
+      dockerfile: DockerFile.migrate
+    container_name: migrate_kyc
+    networks:
+      - networks_kyc
+    depends_on:
+      - db
+    volumes:
+      - ./migrations:/app/migrations
+    command: [
+      "-path", "/app/migrations",
+      "-database", "postgres://${DB_USER}:${DB_PASSWORD}@db_kyc:5432/${DB_NAME}?sslmode=disable",
+      "up", # down
+    ] 
+
+
+    # Run down 1
+    # docker-compose run migrate migrate -path /app/migrations -database "postgres://DB_USER:DB_PASSWORD@db_kyc:5432/DB_NAME?sslmode=disable" down 1
+    # Run down todas
+    # docker-compose run migrate migrate -path /app/migrations -database "postgres://DB_USER:DB_PASSWORD@db_kyc:5432/DB_NAME?sslmode=disable" down
+    # Run Up
+    # docker-compose run migrate -path /app/migrations -database "postgres://$${DB_USER}:$${DB_PASSWORD}@db_kyc:5432/$${DB_NAME}?sslmode=disable" up
+
+networks:
+  networks_kyc:
+    driver: bridge

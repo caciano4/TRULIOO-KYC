@@ -1,0 +1,20 @@
+# Base image
+FROM golang:1.22.1-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy files
+COPY . .
+
+# Install Go dependencies
+RUN go mod tidy
+
+# Build the app
+RUN go build -o main ./cmd/main.go
+
+# Expose production port
+EXPOSE 80
+
+# Run the app
+CMD ["./main"]
