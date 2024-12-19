@@ -1,14 +1,13 @@
 package routes
 
 import (
-	"database/sql"
 	"fmt"
 	"net/http"
 	"trullio-kyc/config"
 	"trullio-kyc/controllers"
 )
 
-func InitRoutes(db *sql.DB) {
+func InitRoutes() {
 	// Serve static files
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
@@ -18,7 +17,7 @@ func InitRoutes(db *sql.DB) {
 
 	// Submit KYC request
 	http.HandleFunc("/kyc-request", func(w http.ResponseWriter, r *http.Request) {
-		controllers.StoreFile(db, w, r)
+		controllers.StoreFile(w, r)
 	})
 
 	StartServer()

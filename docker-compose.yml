@@ -1,5 +1,3 @@
-version: '1.0'
-
 services:
   app:
     container_name: app_kyc
@@ -35,6 +33,11 @@ services:
     volumes:
       - ./db/data:/var/lib/postgresql/data
       - ./db/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
@@ -48,11 +51,8 @@ services:
       - db
     networks:
       - networks_kyc
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    volumes:
+      - ./db/pgadmin-data:/var/lib/pgadmin
 
   migrate:
     build:
@@ -65,19 +65,14 @@ services:
       - db
     volumes:
       - ./migrations:/app/migrations
-    command: [
-      "-path", "/app/migrations",
-      "-database", "postgres://${DB_USER}:${DB_PASSWORD}@db_kyc:5432/${DB_NAME}?sslmode=disable",
-      "up", # down
-    ] 
-
-
-    # Run down 1
-    # docker-compose run migrate migrate -path /app/migrations -database "postgres://DB_USER:DB_PASSWORD@db_kyc:5432/DB_NAME?sslmode=disable" down 1
-    # Run down todas
-    # docker-compose run migrate migrate -path /app/migrations -database "postgres://DB_USER:DB_PASSWORD@db_kyc:5432/DB_NAME?sslmode=disable" down
-    # Run Up
-    # docker-compose run migrate -path /app/migrations -database "postgres://$${DB_USER}:$${DB_PASSWORD}@db_kyc:5432/$${DB_NAME}?sslmode=disable" up
+      - ./entrypoint/migrate.sh:/app/entrypoint.sh
+    environment:
+        - MIGRATION_ACTION=${MIGRATION_ACTION}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - DB_NAME=${DB_NAME}
+        - MIGRATION_STEPS=${MIGRATION_STEPS}
+    entrypoint: ["/app/entrypoint.sh"]
 
 networks:
   networks_kyc:

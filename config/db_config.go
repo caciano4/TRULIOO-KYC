@@ -22,7 +22,6 @@ func ConnectDB() *sql.DB {
 	if err != nil {
 		log.Fatalf("Unable to connect to database: %v", err)
 	}
-	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
@@ -31,4 +30,10 @@ func ConnectDB() *sql.DB {
 
 	log.Println("Successfully connected to the database!")
 	return db
+}
+
+func CloseConnectionDB(db *sql.DB) {
+	defer db.Close()
+
+	log.Print("Database connection Successfully Closed!")
 }

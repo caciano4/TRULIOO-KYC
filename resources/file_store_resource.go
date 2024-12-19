@@ -1,12 +1,14 @@
 package resources
 
 import (
-	"database/sql"
+	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"time"
+	"trullio-kyc/config"
 	"trullio-kyc/exceptions"
 	"trullio-kyc/utils"
 
@@ -39,6 +41,7 @@ type Record struct {
 	Response                 string    `json:"response"`
 	Notes                    string    `json:"notes"`
 	Match                    string    `json:"match"`
+	// packageID                string    `json:"package_id"`
 }
 
 func HandleCreateFile(w http.ResponseWriter, r *http.Request) (string, exceptions.ErrorResponse) {
@@ -74,20 +77,83 @@ func HandleCreateFile(w http.ResponseWriter, r *http.Request) (string, exception
 	return tempFile.Name(), exceptions.ErrorResponse{}
 }
 
-func StoreRecordsFromSpreadSheet(db *sql.DB, w http.ResponseWriter, r *http.Request, pathFile string) {
+func StoreRecordsFromSpreadSheet(w http.ResponseWriter, r *http.Request, pathFile string) {
 	// Mounting the Records
 	records := ReadAndGetContentFile(pathFile)
 
 	// Store Records From file
-	StoreRecords(db, records)
+	StoreRecords(records, w, r)
 }
 
-func StoreRecords(db *sql.DB, records []Record) {
+func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
+	var index int = 0
+	packageFileId, err := utils.GenerateULIDWithDash()
+	if err != nil {
+		fmt.Errorf("Failed to generate packageFileId %s", err.Error())
+		return
+	}
+	fmt.Print(packageFileId)
 
+	db := config.ConnectDB()
+	defer config.CloseConnectionDB(db)
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	for _, record := range records {
+		index++
+
+		query := `
+			INSERT INTO public.document_records 
+			(package_file_id, upload_by_id, client_reference_id, transfer_agent_responsible, type_of_transfer, email, 
+			user_id, first_name, middle_name, last_name, date_of_birth_day, personal_phone_number, 
+			street_address, city, postal, letter_state, letter_country, national_id, created_at, updated_at)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20);`
+		_, err := db.Exec(
+			query,
+			packageFileId, 1, record.ClientReferenceID, record.TransferAgentResponsible,
+			record.TypeOfTransfer, record.Email, record.UserID, record.FirstName,
+			record.MiddleName, record.LastName, record.DateOfBirthDay,
+			record.PersonalPhoneNumber, record.StreetAddress, record.City,
+			record.Postal, record.LetterState, record.LetterCountry, record.NationalID,
+			`NOW()`, `NOW()`,
+		)
+		if err != nil {
+			http.Error(w, "Failed to insert user", http.StatusInternalServerError)
+			log.Printf("Error inserting user: %v", err)
+			return
+		}
+
+		if err != nil {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusInternalServerError)
+
+			error := map[string]string{
+				"error":       err.Error(),
+				"failed_code": "Failed to insert User",
+			}
+
+			if jsonErr := json.NewEncoder(w).Encode(error); jsonErr != nil {
+				log.Printf("Error encoding JSON: %v", jsonErr)
+			}
+
+			log.Printf("Error inserting User: %v", err)
+			return
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	response := map[string]interface{}{
+		"message": fmt.Sprintf("%d Records inserted successfully", index),
+	}
+	json.NewEncoder(w).Encode(response)
 }
 
 func ReadAndGetContentFile(pathFile string) []Record {
 	fmt.Println("Reading File")
+
 	f, err := excelize.OpenFile(pathFile)
 	if err != nil {
 		fmt.Println(err)

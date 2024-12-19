@@ -1,14 +1,13 @@
 package controllers
 
 import (
-	"database/sql"
 	"net/http"
 	"trullio-kyc/exceptions"
 	"trullio-kyc/resources"
 	"trullio-kyc/validations"
 )
 
-func StoreFile(db *sql.DB, w http.ResponseWriter, r *http.Request) {
+func StoreFile(w http.ResponseWriter, r *http.Request) {
 	//validate palyload
 	validations.FileStoreValidate(r)
 
@@ -19,5 +18,5 @@ func StoreFile(db *sql.DB, w http.ResponseWriter, r *http.Request) {
 	}
 
 	// resources.Handle
-	resources.StoreRecordsFromSpreadSheet(db, w, r, pathFile)
+	resources.StoreRecordsFromSpreadSheet(w, r, pathFile)
 }

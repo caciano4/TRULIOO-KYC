@@ -4,6 +4,9 @@ FROM alpine:3.18
 # Install required tools
 RUN apk add --no-cache bash curl tar
 
+# Copy .env to image migrate
+COPY .env .
+
 # Install golang-migrate CLI
 RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xz && \
     mv migrate /usr/local/bin/migrate
@@ -13,3 +16,14 @@ WORKDIR /app
 
 # Default command to show usage
 ENTRYPOINT ["/usr/local/bin/migrate"]
+
+
+
+# Run down 1
+# docker-compose run migrate migrate -path /app/migrations -database "postgres://DB_USER:DB_PASSWORD@db_kyc:5432/DB_NAME?sslmode=disable" down 1
+# Run down todas
+# docker-compose run migrate migrate -path /app/migrations -database "postgres://DB_USER:DB_PASSWORD@db_kyc:5432/DB_NAME?sslmode=disable" down
+# Run Up
+# docker-compose run migrate -path /app/migrations -database "postgres://$${DB_USER}:$${DB_PASSWORD}@db_kyc:5432/$${DB_NAME}?sslmode=disable" up
+# Run command to check the version of migration
+# docker-compose run migrate -path /app/migrations -database "postgres://caciano4:123caciano@db_kyc:5432/trullio?sslmode=disable" version

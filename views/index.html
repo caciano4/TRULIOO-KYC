@@ -1,39 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Trullio KYC</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
-    integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <script src="/static/js/app.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNOW YOUR CLIENT</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+      integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/app.js" defer></script>
+    <script src="/static/js/sidebar.js" defer></script>
 </head>
 
 <body>
-  <div class="container">
-    <!-- Título -->
-    <h1 class="title is-3">TRULLIO KYC</h1>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>TRULLIO KYC</h2>
+            <ul>
+                <li><a href="#" onclick="showPage('dashboard')">DASHBOARD</a></li>
+                <li><a href="#" onclick="showPage('uploadKYC')">UPLOAD KYC</a></li>
+                <li><a href="#" onclick="showPage('checkPackages')">PACKAGES</a></li>
+                <li><a href="#" onclick="showPage('checkKYC')">KNOW YOU CLIENTS</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <div id="dashboard" class="page active">
+                <div class="message" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; font-size: 1.2rem; color: #555;">
+                    This section is under construction. We are working on building this part of the dashboard to serve you better. Stay tuned!
+                </div>
+            </div>
+            <div id="uploadKYC" class="page">
+                <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+                    <!-- Imagem -->
+                    <img src="/static/assets/go-project.png" alt="Placeholder Image" class="image"
+                        style="max-width: 100%; width: 300px; height: auto; margin-bottom: 1rem; border-radius: 5px;">
 
-    <!-- Imagem -->
-    <img src="/static/assets/go-project.png" alt="Placeholder Image" class="image"
-      style="max-width: 100%; width: 300px; height: auto; margin-bottom: 1rem; border-radius: 5px;">
+                    <!-- Input de Arquivo -->
+                    <div class="pure-form" style="max-width: 300px; text-align: center;">
+                        <label id="file-name" for="fileInput" class="pure-button pure-radio"
+                            style="border-radius: .3em; background: rgb(223, 117, 20); color: aliceblue;">
+                            <input id="fileInput" class="file-upload-input" type="file" style="display:none">
+                            Choose a file...
+                        </label>
 
-    <!-- Input de Arquivo -->
-    <div class="pure-form" style="max-width: 300px; margin: auto;">
-      <label id="file-name" for="fileInput" class="pure-button pure-radio" style="border-radius: .3em; background: rgb(223, 117, 20); color: aliceblue;">
-        <input id="fileInput" class="file-upload-input" type="file" style="display:none">
-        Choose a file...
-      </label>
+                        <!-- Botão de Enviar -->
+                        <label class="button pure-button is-primary pure-radio" id="uploadButton"
+                            style="margin-top: 1rem;">Submit</label>
+                    </div>
 
-      <!-- Botão de Enviar -->
-      <button class="button is-primary pure-radio" id="uploadButton" style="margin-top: 1rem; margin-left:auto; margin-right: auto;">Submit</button>
+
+                    <!-- Resultado -->
+                    <div id="result" style="margin-top: 1rem; color: #555;"></div>
+                </div>
+            </div>
+            <div id="checkPackages" class="page">
+                <h1>PACKAGES</h1>
+                <p>Here you can check available packages.</p>
+            </div>
+            <div id="checkKYC" class="page">
+                <h1>KYC</h1>
+                <p>Here you can check your KYC status.</p>
+            </div>
+        </main>
     </div>
-
-
-    <!-- Resultado -->
-    <div id="result" style="margin-top: 1rem; color: #555;"></div>
-  </div>
 </body>
 
 </html>

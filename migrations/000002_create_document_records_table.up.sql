@@ -1,0 +1,29 @@
+CREATE TABLE "document_records" (
+  "id" SERIAL PRIMARY KEY,
+  "package_file_id" varchar,
+  "upload_by_id" integer,
+  "client_reference_id" varchar UNIQUE,
+  "transfer_agent_responsible" varchar,
+  "type_of_transfer" varchar,
+  "email" varchar,
+  "user_id" varchar,
+  "first_name" varchar,
+  "middle_name" varchar,
+  "last_name" varchar,
+  "date_of_birth_day" date,
+  "personal_phone_number" varchar,
+  "street_address" varchar,
+  "city" varchar,
+  "postal" varchar,
+  "letter_state" varchar,
+  "letter_country" varchar,
+  "national_id" varchar,
+  "request" text,
+  "response" text,
+  "notes" text,
+  "match" varchar,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
+);
+
+ALTER TABLE "document_records" ADD FOREIGN KEY ("upload_by_id") REFERENCES "users" ("id");
