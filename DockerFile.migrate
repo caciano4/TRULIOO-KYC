@@ -2,7 +2,7 @@
 FROM alpine:3.18
 
 # Install required tools
-RUN apk add --no-cache bash curl tar
+RUN apk add --no-cache bash curl tar vim
 
 # Copy .env to image migrate
 COPY .env .

@@ -1,0 +1,4 @@
+APP_LOG: 2024/12/19 13:20:03 file_store_resource.go:49: Creating File
+APP_LOG: 2024/12/19 13:20:03 file_store_resource.go:77: Created file
+APP_LOG: 2024/12/19 13:20:03 file_store_resource.go:156: Reading File and mapping Records
+APP_LOG: 2024/12/19 13:20:03 file_store_resource.go:246: Finished to map Struct of Records

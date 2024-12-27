@@ -2,8 +2,7 @@ const fileInput = document.getElementById("fileInput");
 const fileName = document.getElementById("fileName");
 const uploadButton = document.getElementById("uploadButton");
 const result = document.getElementById("result");
-const label = document.getElementById("file-name")
-
+const label = document.getElementById("file-name");
 
 let selectedFile = null;
 
@@ -20,20 +19,20 @@ fileInput.addEventListener("change", (event) => {
 // Envia o arquivo ao clicar no botão
 uploadButton.addEventListener("click", async () => {
     if (!selectedFile) {
-        result.textContent = "Please select a file before uploading.";
+        Swal.fire({
+            icon: "error",
+            title: "No File Selected",
+            text: "Please select a file before uploading.",
+        });
         return;
     }
-
 
     const reader = new FileReader();
 
     reader.onload = async () => {
-
         const formData = new FormData();
         formData.append("file_name", selectedFile.name);
         formData.append("file", selectedFile);
-        // const base64File = reader.result.split(",")[1]; // Take only part base64
-        // formData.append("base_64", base64File); If you wanna send base64 stead a file
 
         try {
             const response = await fetch("http://localhost/kyc-request", {
@@ -42,14 +41,30 @@ uploadButton.addEventListener("click", async () => {
             });
 
             if (response.ok) {
-                result.textContent = "File uploaded successfully!";
+                let data = await response.json()
+                Swal.fire({
+                    icon: "success",
+                    title: "Upload Successful",
+                    text: data.message,
+                });
+                result.textContent = data.message;
             } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Upload Failed",
+                    text: "Failed to upload file. Please try again.",
+                });
                 result.textContent = "Failed to upload file.";
             }
         } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "An error occurred while uploading the file.",
+            });
             result.textContent = "Error while uploading file.";
         }
     };
 
-    reader.readAsDataURL(selectedFile); // Converte para Base64
+    reader.readAsDataURL(selectedFile);
 });

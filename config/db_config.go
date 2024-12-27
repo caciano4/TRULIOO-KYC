@@ -3,12 +3,13 @@ package config
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	_ "github.com/lib/pq"
 )
 
 func ConnectDB() *sql.DB {
+	AppLogger.Print("Starting connect DB")
+
 	host := GetEnv("DB_HOST", "db_kyc")
 	port := GetEnv("DB_PORT", "5432")
 	user := GetEnv("DB_USER", "caciano4")
@@ -20,20 +21,20 @@ func ConnectDB() *sql.DB {
 
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
-		log.Fatalf("Unable to connect to database: %v", err)
+		AppLogger.Fatalf("Unable to connect to database: %v", err)
 	}
 
 	err = db.Ping()
 	if err != nil {
-		log.Fatalf("Unable to ping database: %v", err)
+		AppLogger.Fatalf("Unable to ping database: %v", err)
 	}
 
-	log.Println("Successfully connected to the database!")
+	AppLogger.Println("Successfully connected to the database!")
 	return db
 }
 
 func CloseConnectionDB(db *sql.DB) {
 	defer db.Close()
 
-	log.Print("Database connection Successfully Closed!")
+	AppLogger.Print("Database connection Successfully Closed!")
 }

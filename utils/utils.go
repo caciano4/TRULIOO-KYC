@@ -2,6 +2,8 @@ package utils
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"time"
 
 	"github.com/google/uuid"
@@ -30,4 +32,20 @@ func GenerateULIDWithDash() (string, error) {
 	// Insere os hífens nas posições desejadas
 	formatted := newULID[:8] + "-" + newULID[8:17] + "-" + newULID[17:]
 	return formatted, nil
+}
+
+func FormatDate(input string) string {
+	parsedTime, err := time.Parse("2006-01-02T15:04:05Z", input) // Adjust the layout to match your input format
+	if err != nil {
+		log.Printf("Error parsing date: %v", err)
+		return input // Return the original string if parsing fails
+	}
+	return parsedTime.Format("2006-01-02") // Format the date as YYYY-MM-DD
+}
+
+func ChainMiddlewares(handler http.Handler, middlewares ...func(http.Handler) http.Handler) http.Handler {
+	for i := len(middlewares) - 1; i >= 0; i-- {
+		handler = middlewares[i](handler)
+	}
+	return handler
 }

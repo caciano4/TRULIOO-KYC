@@ -3,6 +3,7 @@ package exceptions
 import (
 	"encoding/json"
 	"net/http"
+	"trullio-kyc/config"
 )
 
 // ErrorResponse define o formato da resposta de erro
@@ -30,4 +31,5 @@ func SendErrorResponse(w http.ResponseWriter, errResponse ErrorResponse) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(errResponse.StatusCode)
 	json.NewEncoder(w).Encode(errResponse)
+	config.AppLogger.Printf("Error: %s, Status: %d", errResponse.Err.Error(), errResponse.StatusCode)
 }

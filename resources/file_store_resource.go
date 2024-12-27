@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"time"
@@ -21,7 +20,8 @@ var requestData struct {
 }
 
 type Record struct {
-	ClientReferenceID        string    `json:"client_reference_id"`
+	ClientReferenceID string `json:"client_reference_id"`
+	// PackageName              string    `json:"package_name"`
 	TransferAgentResponsible string    `json:"transfer_agent_responsible"`
 	TypeOfTransfer           string    `json:"type_of_transfer"`
 	Email                    string    `json:"email"`
@@ -45,7 +45,7 @@ type Record struct {
 }
 
 func HandleCreateFile(w http.ResponseWriter, r *http.Request) (string, exceptions.ErrorResponse) {
-	fmt.Println("Creating File")
+	config.AppLogger.Println("Creating File")
 
 	//Get Body
 	requestData.FileName = r.FormValue("file_name")
@@ -73,7 +73,7 @@ func HandleCreateFile(w http.ResponseWriter, r *http.Request) (string, exception
 		exceptions.NewErrorResponse("Failed to write to temporary file", http.StatusInternalServerError, err, w)
 	}
 
-	fmt.Println("Created file")
+	config.AppLogger.Println("Created file")
 	return tempFile.Name(), exceptions.ErrorResponse{}
 }
 
@@ -89,10 +89,10 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 	var index int = 0
 	packageFileId, err := utils.GenerateULIDWithDash()
 	if err != nil {
-		fmt.Errorf("Failed to generate packageFileId %s", err.Error())
+		config.AppLogger.Printf("Failed to generate packageFileId %s", err.Error())
 		return
 	}
-	fmt.Print(packageFileId)
+	config.AppLogger.Print(packageFileId)
 
 	db := config.ConnectDB()
 	defer config.CloseConnectionDB(db)
@@ -101,18 +101,21 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//!TODO Create validation to check if already has that package_name
+	// if so don't allow to upload again
+
 	for _, record := range records {
 		index++
 
 		query := `
 			INSERT INTO public.document_records 
-			(package_file_id, upload_by_id, client_reference_id, transfer_agent_responsible, type_of_transfer, email, 
+			(package_file_id, package_name, upload_by_id, client_reference_id, transfer_agent_responsible, type_of_transfer, email, 
 			user_id, first_name, middle_name, last_name, date_of_birth_day, personal_phone_number, 
 			street_address, city, postal, letter_state, letter_country, national_id, created_at, updated_at)
-			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20);`
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21);`
 		_, err := db.Exec(
 			query,
-			packageFileId, 1, record.ClientReferenceID, record.TransferAgentResponsible,
+			packageFileId, requestData.FileName, 1, record.ClientReferenceID, record.TransferAgentResponsible,
 			record.TypeOfTransfer, record.Email, record.UserID, record.FirstName,
 			record.MiddleName, record.LastName, record.DateOfBirthDay,
 			record.PersonalPhoneNumber, record.StreetAddress, record.City,
@@ -121,7 +124,7 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 		)
 		if err != nil {
 			http.Error(w, "Failed to insert user", http.StatusInternalServerError)
-			log.Printf("Error inserting user: %v", err)
+			config.AppLogger.Printf("Error inserting user: %v", err)
 			return
 		}
 
@@ -135,10 +138,10 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 			}
 
 			if jsonErr := json.NewEncoder(w).Encode(error); jsonErr != nil {
-				log.Printf("Error encoding JSON: %v", jsonErr)
+				config.AppLogger.Printf("Error encoding JSON: %v", jsonErr)
 			}
 
-			log.Printf("Error inserting User: %v", err)
+			config.AppLogger.Printf("Error inserting User: %v", err)
 			return
 		}
 	}
@@ -152,24 +155,24 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 }
 
 func ReadAndGetContentFile(pathFile string) []Record {
-	fmt.Println("Reading File")
+	config.AppLogger.Println("Reading File and mapping Records")
 
 	f, err := excelize.OpenFile(pathFile)
 	if err != nil {
-		fmt.Println(err)
+		config.AppLogger.Println(err)
 		return nil
 	}
 	defer func() {
 		// Close the spreadsheet.
 		if err := f.Close(); err != nil {
-			fmt.Println(err)
+			config.AppLogger.Println(err)
 		}
 	}()
 
 	// Get all the rows in the Sheet1.
 	rows, err := f.GetRows("Sheet_1")
 	if err != nil {
-		fmt.Println(err)
+		config.AppLogger.Println(err)
 		return nil
 	}
 
@@ -188,7 +191,10 @@ func ReadAndGetContentFile(pathFile string) []Record {
 
 		// Parse each row into a Record struct
 		record := Record{}
+
+		// Set the UUID for ClientReferenceId
 		record.ClientReferenceID = "manual-" + utils.GenerateUUID()
+
 		for key, colIndex := range headerMap {
 			if colIndex >= len(row) {
 				continue
@@ -239,5 +245,6 @@ func ReadAndGetContentFile(pathFile string) []Record {
 		records = append(records, record)
 	}
 
+	config.AppLogger.Print("Finished to map Struct of Records")
 	return records
 }
