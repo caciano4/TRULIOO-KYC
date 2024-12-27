@@ -1,6 +1,7 @@
 CREATE TABLE "document_records" (
   "id" SERIAL PRIMARY KEY,
   "package_file_id" varchar,
+  "package_name" varchar,
   "upload_by_id" integer,
   "client_reference_id" varchar UNIQUE,
   "transfer_agent_responsible" varchar,
@@ -22,8 +23,10 @@ CREATE TABLE "document_records" (
   "response" text,
   "notes" text,
   "match" varchar,
+  "complete_kyc" boolean DEFAULT false,
   "created_at" timestamp DEFAULT (now()),
-  "updated_at" timestamp DEFAULT (now())
+  "updated_at" timestamp DEFAULT (now()),
+  "deleted_at" timestamp
 );
 
 ALTER TABLE "document_records" ADD FOREIGN KEY ("upload_by_id") REFERENCES "users" ("id");

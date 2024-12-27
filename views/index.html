@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KNOW YOUR CLIENT</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
-      integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+        integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/app.js" defer></script>
     <script src="/static/js/sidebar.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="container">
         <aside class="sidebar">
-            <h2>TRULLIO KYC</h2>
+            <h2>KORE KYC</h2>
             <ul>
                 <li><a href="#" onclick="showPage('dashboard')">DASHBOARD</a></li>
                 <li><a href="#" onclick="showPage('uploadKYC')">UPLOAD KYC</a></li>
@@ -26,15 +27,18 @@
         </aside>
         <main class="content">
             <div id="dashboard" class="page active">
-                <div class="message" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; font-size: 1.2rem; color: #555;">
-                    This section is under construction. We are working on building this part of the dashboard to serve you better. Stay tuned!
+                <div class="message"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; font-size: 1.2rem; color: #555;">
+                    This section is under construction. We are working on building this part of the dashboard to serve
+                    you better. Stay tuned!
                 </div>
             </div>
             <div id="uploadKYC" class="page">
-                <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+                <div class="container"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
                     <!-- Imagem -->
-                    <img src="/static/assets/go-project.png" alt="Placeholder Image" class="image"
-                        style="max-width: 100%; width: 300px; height: auto; margin-bottom: 1rem; border-radius: 5px;">
+                    <img src="/static/assets/KoreTransfer_2024_08.png" alt="Placeholder Image" class="image"
+                        style="max-width: 100%; height: auto; margin-bottom: 1rem; border-radius: 5px;">
 
                     <!-- Input de Arquivo -->
                     <div class="pure-form" style="max-width: 300px; text-align: center;">
@@ -55,8 +59,27 @@
                 </div>
             </div>
             <div id="checkPackages" class="page">
-                <h1>PACKAGES</h1>
-                <p>Here you can check available packages.</p>
+                <div class="container"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+                    <table id="data-table" border="1">
+                        <thead>
+                            <tr>
+                                <th>PACKAGE ID</th>
+                                <th>TOTAL RECORDS</th>
+                                <th>PACKAGE NAME</th>
+                                <th>FULL NAME</th>
+                                <th>TRANSFER AGENT</th>
+                                <th>TYPE OF TRANSFER</th>
+                                <th>CREATED_AT</th>
+                                <th>UPDATED_AT</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <script src="/static/js/datatable.js"></script>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div id="checkKYC" class="page">
                 <h1>KYC</h1>

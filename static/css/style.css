@@ -88,3 +88,7 @@ body {
     margin-top: 1.5rem;
     font-size: 0.9rem;
 }
+
+th {
+    padding: 10px;
+}
