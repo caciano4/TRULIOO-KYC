@@ -128,6 +128,7 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		//TODO: Check implement of second ifs
 		if err != nil {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusInternalServerError)
