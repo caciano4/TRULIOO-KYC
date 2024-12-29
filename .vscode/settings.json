@@ -21,7 +21,7 @@
     "peacock.color": "#558ac6",
     // Definições gerais
     "workbench.sideBar.location": "right", // Move a aba lateral para o lado direito
-    "workbench.iconTheme": "vscode-icons", // Ícones diferenciados para arquivos e pastas
+    "workbench.iconTheme": "material-icon-theme", // Ícones diferenciados para arquivos e pastas
     "workbench.colorTheme": "Dracula Theme Soft", // Tema de cores (você pode ajustar conforme sua preferência)
     "explorer.compactFolders": false, // Mostra cada pasta aninhada separadamente
     "explorer.confirmDelete": false, // Desativa a confirmação de exclusão de arquivos/pastas
@@ -73,7 +73,7 @@
     // Melhorias de acessibilidade e leitura
     "editor.fontSize": 15, // Define o tamanho da fonte
     "editor.lineHeight": 20, // Define o espaçamento entre linhas
-    "editor.wordWrap": "on", // Ativa quebra de linha automática
+    "editor.wordWrap": "off", // Ativa quebra de linha automática
     "editor.formatOnSave": true, // Formata automaticamente o código ao salvar
     "editor.formatOnPaste": true, // Formata código automaticamente ao colar
     // Atalhos rápidos para terminais e outras ferramentas
@@ -85,7 +85,7 @@
     // Melhorias para projetos em grupo
     "workbench.editor.enablePreview": false, // Desativa preview de arquivos abertos
     "workbench.startupEditor": "newUntitledFile", // Abre um arquivo novo ao iniciar
-    "files.autoSave": "afterDelay", // Salva automaticamente após um pequeno atraso
+    "files.autoSave": "off", // Salva automaticamente após um pequeno atraso
     "files.autoSaveDelay": 1000, // Define o atraso para 1 segundo
     "vim.useSystemClipboard": true, // Permite copiar e colar diretamente do sistema
     "vim.cursorStylePerMode": true, // Configura diferentes estilos de cursor para cada modo

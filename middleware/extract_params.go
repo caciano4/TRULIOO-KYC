@@ -12,16 +12,15 @@ type ContextKey string
 const ParamsKey ContextKey = "param"
 const ParamIndex int = 2
 
-func ExtractParamMiddleware() func(http.Handler) http.Handler {
-	return func(next http.Handler) http.Handler {
-		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			extractParam(next, w, r)
-		})
-	}
+func ExtractParamMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		extractParam(next, w, r)
+	})
 }
 
 func extractParam(next http.Handler, w http.ResponseWriter, r *http.Request) {
 	pathParams := strings.Split(r.URL.Path, "/")
+
 	if len(pathParams) > ParamIndex {
 		// Extract param based on ParamIndex
 		param := pathParams[ParamIndex]
