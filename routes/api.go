@@ -9,6 +9,24 @@ import (
 	"trullio-kyc/utils"
 )
 
+// type Route struct {
+// 	Method string
+// 	Path   string
+// }
+
+// type CustomMux struct {
+// 	*http.ServeMux
+// 	Routes []Route
+// }
+
+// func newCustomMux() *CustomMux {
+// 	return &CustomMux{
+// 		ServeMux: http.NewServeMux(),
+// 	}
+// }
+
+// func (*CustomMux)
+
 func InitRoutes() {
 
 	// Serve static files
@@ -16,7 +34,14 @@ func InitRoutes() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Serve main page
-	http.HandleFunc("/", controllers.MainPage)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/" {
+			controllers.MainPage(w, r)
+		} else {
+			config.AppLogger.Print("deu Merda!")
+			http.NotFound(w, r)
+		}
+	})
 
 	// Get The list of PACKAGES and ADICIONAL INFORMATION
 	http.Handle(
@@ -44,10 +69,19 @@ func InitRoutes() {
 			http.HandlerFunc(controllers.InitTrulioo),
 			middleware.CorsMiddleware,
 			middleware.CheckMethodGet,
+			middleware.ExtractParamMiddleware(),
 		),
 	)
 
-	// TODO: Create route not found | Not exists
+	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	// 	config.AppLogger.Print("teste")
+	// 	w.WriteHeader(http.StatusNotFound)
+	// 	response := map[string]interface{}{
+	// 		"message": "Rsoute not found.",
+	// 	}
+
+	// 	json.NewEncoder(w).Encode(response)
+	// })
 
 	StartServer()
 }

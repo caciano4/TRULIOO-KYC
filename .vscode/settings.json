@@ -18,5 +18,91 @@
         "titleBar.inactiveBackground": "#558ac699",
         "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.color": "#558ac6"
+    "peacock.color": "#558ac6",
+    // Definições gerais
+    "workbench.sideBar.location": "right", // Move a aba lateral para o lado direito
+    "workbench.iconTheme": "vscode-icons", // Ícones diferenciados para arquivos e pastas
+    "workbench.colorTheme": "Dracula Theme Soft", // Tema de cores (você pode ajustar conforme sua preferência)
+    "explorer.compactFolders": false, // Mostra cada pasta aninhada separadamente
+    "explorer.confirmDelete": false, // Desativa a confirmação de exclusão de arquivos/pastas
+    "explorer.fileNesting.enabled": true, // Ativa aninhamento de arquivos na visualização do explorador
+    "explorer.fileNesting.patterns": {
+        "package.json": [
+            "package-lock.json",
+            "yarn.lock"
+        ],
+        "README.md": [
+            "*.md"
+        ],
+        "src": [
+            "*.js",
+            "*.vue",
+            "*.ts",
+            "components",
+            "utils"
+        ],
+        "tests": [
+            "*.test.js",
+            "__mocks__"
+        ]
+    },
+    // Melhorias no Explorer
+    "explorer.autoReveal": true, // Revela automaticamente arquivos abertos na estrutura de pastas
+    "explorer.openEditors.visible": 5, // Limita o número de arquivos abertos visíveis
+    "explorer.sortOrder": "mixed", // Ordena arquivos e pastas misturados
+    "explorer.decorations.colors": true, // Ativa decorações coloridas no explorer
+    // Pesquisa e exclusões
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/build": true,
+        "**/.git": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/dist": true
+    },
+    // Barra de status e ajustes de interface
+    "workbench.statusBar.visible": true, // Exibe a barra de status
+    "breadcrumbs.enabled": true, // Ativa breadcrumbs para navegação fácil entre arquivos
+    "editor.minimap.enabled": true, // Ativa o minimapa no editor
+    "editor.minimap.size": "fit", // Faz o minimapa ajustar-se ao editor
+    "editor.renderWhitespace": "all", // Exibe espaços em branco no editor
+    "editor.renderControlCharacters": true, // Mostra caracteres de controle
+    "editor.cursorBlinking": "smooth", // Cursor animado para facilitar o rastreamento
+    // Melhorias de acessibilidade e leitura
+    "editor.fontSize": 15, // Define o tamanho da fonte
+    "editor.lineHeight": 20, // Define o espaçamento entre linhas
+    "editor.wordWrap": "on", // Ativa quebra de linha automática
+    "editor.formatOnSave": true, // Formata automaticamente o código ao salvar
+    "editor.formatOnPaste": true, // Formata código automaticamente ao colar
+    // Atalhos rápidos para terminais e outras ferramentas
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.tabs.enabled": true, // Ativa abas para diferentes terminais
+    "terminal.integrated.cursorStyle": "underline", // Estilo de cursor no terminal
+    // Melhorias para projetos em grupo
+    "workbench.editor.enablePreview": false, // Desativa preview de arquivos abertos
+    "workbench.startupEditor": "newUntitledFile", // Abre um arquivo novo ao iniciar
+    "files.autoSave": "afterDelay", // Salva automaticamente após um pequeno atraso
+    "files.autoSaveDelay": 1000, // Define o atraso para 1 segundo
+    "vim.useSystemClipboard": true, // Permite copiar e colar diretamente do sistema
+    "vim.cursorStylePerMode": true, // Configura diferentes estilos de cursor para cada modo
+    "vim.statusBarColorControl": true, // Habilita cores no status bar para identificar modos
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ], // Atalho 'jk' para sair do modo de inserção
+    "vim.hlsearch": true, // Destaca buscas no modo normal
+    "vim.searchHighlightColor": "rgba(150, 150, 255, 0.3)", // Cor do destaque nas buscas
+    "vim.leader": " ", // Define a tecla de líder (espaço por padrão)
+    "vim.autoSwitchInputMethod.enable": true
 }
