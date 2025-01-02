@@ -51,7 +51,7 @@ func InitRoutes() {
 		"GET",
 		"/process-kyc/",
 		utils.ChainMiddlewares(
-			http.HandlerFunc(controllers.InitTrulioo),
+			http.HandlerFunc(controllers.TruliooProcessingRequest),
 			middleware.CorsMiddleware,
 			middleware.CheckMethodGet,
 			middleware.ExtractParamMiddleware,

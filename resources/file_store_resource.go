@@ -41,6 +41,7 @@ type Record struct {
 	Response                 string    `json:"response"`
 	Notes                    string    `json:"notes"`
 	Match                    string    `json:"match"`
+	Suburb                   *string   `json:"suburb"`
 	// packageID                string    `json:"package_id"`
 }
 

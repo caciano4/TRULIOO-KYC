@@ -3,12 +3,19 @@ package controllers
 import (
 	"net/http"
 	"trullio-kyc/config"
-	"trullio-kyc/middleware"
+	"trullio-kyc/resources"
 )
 
-func InitTrulioo(w http.ResponseWriter, r *http.Request) {
+func TruliooProcessingRequest(w http.ResponseWriter, r *http.Request) {
+	//Catch all records to process KYC
+	records, err := resources.HandleCatchKYCById(r)
+	if err != nil {
+		config.AppLogger.Fatal(err.Error())
+	}
 
-	param := r.Context().Value(middleware.ParamsKey)
-
-	config.AppLogger.Print(param)
+	for index, record := range records {
+		if index == 1 {
+			resources.HandleProcessAllKyc(w, r, record)
+		}
+	}
 }
