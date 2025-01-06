@@ -9,6 +9,7 @@ import (
 	"time"
 	"trullio-kyc/config"
 	"trullio-kyc/exceptions"
+	"trullio-kyc/models"
 	"trullio-kyc/utils"
 
 	"github.com/xuri/excelize/v2"
@@ -86,7 +87,7 @@ func StoreRecordsFromSpreadSheet(w http.ResponseWriter, r *http.Request, pathFil
 	StoreRecords(records, w, r)
 }
 
-func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
+func StoreRecords(records []models.Record, w http.ResponseWriter, r *http.Request) {
 	var index int = 0
 	packageFileId, err := utils.GenerateULIDWithDash()
 	if err != nil {
@@ -156,7 +157,7 @@ func StoreRecords(records []Record, w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func ReadAndGetContentFile(pathFile string) []Record {
+func ReadAndGetContentFile(pathFile string) []models.Record {
 	config.AppLogger.Println("Reading File and mapping Records")
 
 	f, err := excelize.OpenFile(pathFile)
@@ -180,7 +181,7 @@ func ReadAndGetContentFile(pathFile string) []Record {
 
 	// Map column headers to struct fields
 	headerMap := make(map[string]int)
-	var records []Record
+	var records []models.Record
 
 	for rowIndex, row := range rows {
 		if rowIndex == 0 {
@@ -192,10 +193,11 @@ func ReadAndGetContentFile(pathFile string) []Record {
 		}
 
 		// Parse each row into a Record struct
-		record := Record{}
+		record := models.Record{}
 
 		// Set the UUID for ClientReferenceId
-		record.ClientReferenceID = "manual-" + utils.GenerateUUID()
+		uuid := fmt.Sprintf("manual-%s", utils.GenerateUUID())
+		record.ClientReferenceID = &uuid
 
 		for key, colIndex := range headerMap {
 			if colIndex >= len(row) {
@@ -205,43 +207,53 @@ func ReadAndGetContentFile(pathFile string) []Record {
 
 			switch key {
 			case "TA Responsible":
-				record.TransferAgentResponsible = value
+				record.TransferAgentResponsible = &value
 			case "Type of Transfer":
-				record.TypeOfTransfer = value
+				record.TypeOfTransfer = &value
 			case "email":
-				record.Email = value
+				record.Email = &value
 			case "USER ID":
-				record.UserID = value
+				record.UserID = &value
 			case "First Name":
-				record.FirstName = value
+				record.FirstName = &value
 			case "Middle Name":
-				record.MiddleName = value
+				record.MiddleName = &value
 			case "Last Name":
-				record.LastName = value
+				record.LastName = &value
 			case "DOB (YYYY-MM-DD)":
 				if dob, err := time.Parse("2006-01-02", value); err == nil {
 					record.DateOfBirthDay = dob
 				}
 			case "Personal phone number":
-				record.PersonalPhoneNumber = value
+				record.PersonalPhoneNumber = &value
 			case "Street Address":
-				record.StreetAddress = value
+				record.StreetAddress = &value
 			case "City":
-				record.City = value
+				record.City = &value
 			case "Postal":
-				record.Postal = value
+				record.Postal = &value
 			case "2 Letter State":
-				record.LetterState = value
+				record.LetterState = &value
 			case "2 Letter Country":
-				record.LetterCountry = value
+				record.LetterCountry = &value
 			case "National ID":
-				record.NationalID = value
+				record.NationalID = &value
 			case "Request":
-				record.Request = value
+				record.Request = &value
 			case "Response":
-				record.Response = value
+				record.Response = &value
 			case "Notes":
-				record.Notes = value
+				record.Notes = &value
+			case "Voter ID":
+				record.VoterID = &value
+			case "Suburb":
+				record.Suburb = &value
+			case "Passport":
+				record.Passport = &value
+			case "Driver License":
+				record.DriverLicence = &value
+			case "Driver License Version":
+				record.DriverLicenceVersion = &value
 			}
 		}
 		records = append(records, record)

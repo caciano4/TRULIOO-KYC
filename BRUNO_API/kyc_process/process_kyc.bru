@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: http://localhost/process-kyc/parametro-walter
+  url: http://localhost/process-kyc/01JGVWXJ-DTZBK37B6-7KKKAFA6K
   body: none
   auth: none
 }
@@ -24,4 +24,60 @@ headers {
   sec-ch-ua: "Chromium";v="131", "Not_A Brand";v="24"
   sec-ch-ua-mobile: ?0
   sec-ch-ua-platform: "macOS"
+}
+
+body:json {
+  // step 4
+  func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record models.Record) {
+  	var clientDetails models.ClientDetailsResponse
+  	var request Req
+  	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
+  	db := config.ConnectDB()
+  	config.CloseConnectionDB(db)
+  
+  	request.URL = fmt.Sprintf("https://api.workflow.prod.trulioo.com/export/test/v2/query/client/%s?includeFullServiceDetails=true", xHfSession)
+  
+  	req, err := http.NewRequest("GET", request.URL, nil)
+  	if err != nil {
+  		config.AppLogger.Print(err.Error())
+  		return
+    }
+  
+  	req.Header.Add("authorization", fmt.Sprintf("Bearer %s", bearerToken))
+  
+  	client := &http.Client{}
+  	res, err := client.Do(req)
+  	if err != nil {
+  		config.AppLogger.Print(err.Error())
+  		return
+    }
+  	defer res.Body.Close()
+  
+  	body, err := io.ReadAll(res.Body)
+  	if err != nil {
+  		config.AppLogger.Print(err.Error())
+  		return
+    }
+  
+  	if err := json.Unmarshal(body, &clientDetails); err != nil {
+  		config.AppLogger.Print(err.Error())
+  		return
+    }
+  
+  	config.LogResponseTrulio(4, userName, clientDetails,
+    "response")
+  
+  	//! TODO CATCH MATCH DATA
+  	query := `UPDATE document_records 
+  				SET match = ?
+  			 WHERE id = ?`
+  
+  	result, err := db.Exec(query,
+    "teste", *&record.Id)
+  	if err != nil {
+  		config.AppLogger.Printf("error_message: %s", err.Error())
+    }
+  
+  	config.AppLogger.Print("DB Results: ", result.RowsAffected())
+  }
 }

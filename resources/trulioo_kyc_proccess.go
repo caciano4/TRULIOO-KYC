@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"trullio-kyc/config"
 	"trullio-kyc/middleware"
 	"trullio-kyc/models"
+	"trullio-kyc/utils"
 )
 
 type Req struct {
@@ -20,7 +22,7 @@ type Req struct {
 type TField struct {
 	ID     string
 	Name   string
-	TValeu string
+	TValue string
 }
 
 var xHfSession string
@@ -125,9 +127,14 @@ func HandleProcessAllKyc(w http.ResponseWriter, r *http.Request, record models.R
 	truliooDetailsFromClient(w, r, record)
 }
 
+// step 4
 func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record models.Record) {
+	config.AppLogger.Print("TRULIOO DETAILS FROM CLIENT: STEP 4")
 	var clientDetails models.ClientDetailsResponse
 	var request Req
+	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
+	db := config.ConnectDB()
+	defer config.CloseConnectionDB(db)
 
 	request.URL = fmt.Sprintf("https://api.workflow.prod.trulioo.com/export/test/v2/query/client/%s?includeFullServiceDetails=true", xHfSession)
 
@@ -137,8 +144,7 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 		return
 	}
 
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", bearerToken))
+	req.Header.Add("authorization", fmt.Sprintf("Bearer %s", bearerToken))
 
 	client := &http.Client{}
 	res, err := client.Do(req)
@@ -159,36 +165,50 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 		return
 	}
 
+	config.LogResponseTrulio(4, userName, clientDetails, "response")
+
 	//! TODO CATCH MATCH DATA
+	query := `UPDATE document_records
+				SET match = $1
+			 WHERE id = $2`
+
+	json, err := json.Marshal(clientDetails.FlowData)
+	if err != nil {
+		config.AppLogger.Print(fmt.Sprintf("Error serializing FlowData: %v", err))
+	}
+
+	result, err := db.Exec(query, json, *&record.Id)
+	if err != nil {
+		config.AppLogger.Print(err.Error())
+	}
+
+	config.AppLogger.Print(result)
 }
 
+// step 3
 func truliooGenerateBearerToken(record models.Record) {
+	config.AppLogger.Print("TRULIOO GENERATE BEARER TOKEN: STEP 3")
 	var request Req
-	config.AppLogger.Print(record)
 	var bearerTokenResponse models.BearerTokenReponse
+	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
 
+	//Using that type of body (x-www-form-urlencoded) because it's required as an oauth2 api
 	request.URL = "https://auth-api.trulioo.com/connect/token"
-	request.Body = map[string]interface{}{
-		"client_id":     config.GetEnv("CLIENT_ID", ""),
-		"client_secret": config.GetEnv("CLIENT_SECRET", ""),
-		"grant_type":    "client_credentials",
-	}
+	payload := strings.NewReader(
+		fmt.Sprintf(
+			"client_id=%s&client_secret=%s&grant_type=client_credentials",
+			config.GetEnv("CLIENT_ID", ""),
+			config.GetEnv("CLIENT_SECRET", ""),
+		),
+	)
 
-	bodyJson, err := json.Marshal(request.Body)
-	if err != nil {
-		config.AppLogger.Print(err.Error())
-		return
-	}
+	req, err := http.NewRequest("POST", request.URL, payload)
 
-	req, err := http.NewRequest("POST", request.URL, bytes.NewBuffer(bodyJson))
-	if err != nil {
-		config.AppLogger.Print(err.Error())
-	}
-
-	req.Header.Set("Content-Type", "application/json")
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+	req.Header.Add("cookie", "incap_ses_672_2454916=B5Qffro331hxKA5UpmxTCbpeeWcAAAAAy+cvmxfB6K02m855TXWcSQ==; visid_incap_2454916=y2SBkmdITHSDGY2dFArmi//3Y2cAAAAAQUIPAAAAAABxADON0lB0WMtw2kKg4f/O")
 
 	client := &http.Client{}
-	res, err := client.Do(req)
+	res, _ := client.Do(req)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
 		return
@@ -206,19 +226,27 @@ func truliooGenerateBearerToken(record models.Record) {
 		return
 	}
 
+	config.LogResponseTrulio(3, userName, bearerTokenResponse, "response")
+
 	bearerToken = bearerTokenResponse.AccessToken
 }
 
+// step 2
 func truliooBodySubmit(fields Fields, record models.Record) {
+	config.AppLogger.Print("TRULIOO SUBMIT: STEP 2")
 	var request Req
 	var truliooBodySubmitResponse models.DirectSubmitResponse
+	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
+	if request.Body == nil {
+		request.Body = make(map[string]interface{})
+	}
 
 	request.FlowId = config.GetEnv("FLOW_ID", "")
 	request.URL = fmt.Sprintf("https://api.workflow.prod.trulioo.com/interpreter-v2/test/submit/%s", request.FlowId)
 
 	for _, field := range fields {
-		if field.ID != "" && field.TValeu != "" {
-			request.Body[field.ID] = field.TValeu
+		if field.ID != "" && field.TValue != "" {
+			request.Body[field.ID] = field.TValue
 		}
 	}
 
@@ -229,6 +257,8 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 		return
 	}
 
+	config.LogResponseTrulio(2, userName, request.Body, "request")
+
 	req, err := http.NewRequest("POST", request.URL, bytes.NewBuffer(bodyJson))
 	if err != nil {
 		config.AppLogger.Printf(err.Error())
@@ -236,6 +266,7 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 
 	// Setting Header content type to json
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("x-hf-retry-on-pending", "true")
 
 	// Submiting KYC request step 2
 	client := &http.Client{}
@@ -245,7 +276,7 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 	}
 	defer res.Body.Close()
 
-	//! TODO GET RESPONSE FROM STEP 2o
+	//GET RESPONSE FROM STEP 2o
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
@@ -257,6 +288,8 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 		config.AppLogger.Print(err.Error())
 	}
 
+	config.LogResponseTrulio(2, userName, truliooBodySubmitResponse, "response")
+
 	//! TODO Add resposne return from trulioo in DB
 	//! TODO Update ROW with response text
 	// truliooBodySubmitResponse.Text
@@ -267,12 +300,14 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 
 // ! Step 1
 func truliooInit(w http.ResponseWriter, record models.Record) Fields {
-	config.AppLogger.Print("INIT TRULIOO REQUEST")
+	config.AppLogger.Print("INIT TRULIOO REQUEST: STEP 1")
+
 	// Variables
 	var request Req
 	var initTrulioo models.InitTrulioo
 	var fields Fields
 	var tField TField
+	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
 
 	// Preparing Req struct
 	request.FlowId = config.GetEnv("FLOW_ID", "")
@@ -307,66 +342,70 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 		return Fields{}
 	}
 
+	//Log The response
+	config.LogResponseTrulio(1, userName, initTrulioo, "response")
+
 	// Catch the IDS
 	for _, element := range initTrulioo.Elements {
 		if element.Role == "external_customer_id" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.ClientReferenceID
+			tField.TValue = utils.GetStringValue(record.ClientReferenceID, "")
 		}
 
 		if element.Role == "address_country" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.LetterCountry
+			tField.TValue = utils.GetStringValue(record.LetterCountry, "")
 		}
 
 		if element.Role == "first_name" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.FirstName
+			tField.TValue = utils.GetStringValue(record.FirstName, "")
 		}
 
 		if element.Role == "last_name" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.LastName
+			tField.TValue = utils.GetStringValue(record.LastName, "")
 		}
 
 		if record.MiddleName != nil {
 			if element.NormalizedName == "MiddleName" {
 				tField.ID = element.ID
 				tField.Name = element.NormalizedName
-				tField.TValeu = *record.MiddleName
+				tField.TValue = utils.GetStringValue(record.MiddleName, "")
 			}
 		}
 
 		if element.Role == "dob" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = record.DateOfBirthDay.Format("2006-01-02")
+			tField.TValue = record.DateOfBirthDay.Format("2006-01-02")
 		}
 
 		if element.Role == "address_1" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.StreetAddress
+			tField.TValue = utils.GetStringValue(record.StreetAddress, "")
 		}
 
 		if element.Role == "address_city" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.City
+			tField.TValue = utils.GetStringValue(record.City, "")
 		}
 
 		if element.NormalizedName == "Suburb" {
 			mandatoryCountryToSuburb := map[string]struct{}{
 				"AU": {}, "CA": {}, "DO": {}, "HK": {}, "KR": {}, "NO": {}, "PH": {}, "US": {}, "VE": {},
 			}
+
 			if _, exists := mandatoryCountryToSuburb[*record.LetterCountry]; exists {
 				tField.ID = element.ID
 				tField.Name = element.NormalizedName
-				tField.TValeu = *record.Suburb
+				tField.TValue = utils.GetStringValue(record.Suburb, "")
 			}
 		}
 
@@ -379,54 +418,51 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 			if _, exists := mandatoryCountryToState[*record.LetterCountry]; exists {
 				tField.ID = element.ID
 				tField.Name = element.Role
-				tField.TValeu = *record.LetterState
+				tField.TValue = utils.GetStringValue(record.LetterState, "")
 			}
 		}
 
 		if element.Role == "address_zip" {
 			tField.ID = element.ID
 			tField.Name = element.Role
-			tField.TValeu = *record.Postal
+			tField.TValue = utils.GetStringValue(record.Postal, "")
 		}
 
-		//! TODO add in the DB driverlicence
-		// if element.NormalizedName == "DriverLicenceNumber" {
-		// 	mandatoryCountryToDriverLicense := map[string]struct{}{
-		// 		"IN": {}, "NZ": {},
-		// 	}
+		if element.NormalizedName == "DriverLicenceNumber" {
+			mandatoryCountryToDriverLicense := map[string]struct{}{
+				"IN": {}, "NZ": {},
+			}
 
-		// 	if _, exists := mandatoryCountryToDriverLicense[*record.LetterCountry]; exists {
-		// 		tField.ID = element.ID
-		// 		tField.Name = element.NormalizedName
-		// 		tField.TValue = *record.DriverLicenseNumber
-		// 	}
-		// }
+			if _, exists := mandatoryCountryToDriverLicense[*record.LetterCountry]; exists {
+				tField.ID = element.ID
+				tField.Name = element.NormalizedName
+				tField.TValue = utils.GetStringValue(record.DriverLicence, "")
+			}
+		}
 
-		//! TODO: Add in the DB driverlicense number version
-		// if element.NormalizedName == "DriverLicenceVersionNumber" {
-		// 	mandatoryCountryToDriverLicenseVersionNumber := map[string]struct{}{
-		// 		"NZ": {},
-		// 	}
+		if element.NormalizedName == "DriverLicenceVersionNumber" {
+			mandatoryCountryToDriverLicenseVersionNumber := map[string]struct{}{
+				"NZ": {},
+			}
 
-		// 	if _, exists := mandatoryCountryToDriverLicenseVersionNumber[*record.LetterCountry]; exists {
-		// 		tField.ID = element.ID
-		// 		tField.Name = element.NormalizedName
-		// 		tField.TValue = *record.DriverLicenseVersionNumber
-		// 	}
-		// }
+			if _, exists := mandatoryCountryToDriverLicenseVersionNumber[*record.LetterCountry]; exists {
+				tField.ID = element.ID
+				tField.Name = element.NormalizedName
+				tField.TValue = utils.GetStringValue(record.DriverLicenceVersion, "")
+			}
+		}
 
-		//! TODO: Add in DB VoterID
-		// if element.Role == "VoterID" {
-		// 	mandatoryCountryToVoterID := map[string]struct{}{
-		// 		"IN": {}, "GH": {}, "NG": {},
-		// 	}
+		if element.Role == "VoterID" {
+			mandatoryCountryToVoterID := map[string]struct{}{
+				"IN": {}, "GH": {}, "NG": {},
+			}
 
-		// 	if _, exists := mandatoryCountryToVoterID[*record.LetterCountry]; exists {
-		// 		tField.ID = element.ID
-		// 		tField.Name = element.Role
-		// 		tField.TValue = *record.VoterID
-		// 	}
-		// }
+			if _, exists := mandatoryCountryToVoterID[*record.LetterCountry]; exists {
+				tField.ID = element.ID
+				tField.Name = element.Role
+				tField.TValue = utils.GetStringValue(record.VoterID, "")
+			}
+		}
 
 		if element.Role == "social_service_number" {
 			mandatoryCountryToSocialNumber := map[string]struct{}{
@@ -436,22 +472,21 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 			if _, exists := mandatoryCountryToSocialNumber[*record.LetterCountry]; exists {
 				tField.ID = element.ID
 				tField.Name = element.Role
-				tField.TValeu = *record.NationalID
+				tField.TValue = *record.NationalID
 			}
 		}
 
-		//! TODO: Add Passport number in DB
-		// if element.NormalizedName == "PassportNumber" {
-		// 	mandatoryCountryToPassportNumber := map[string]struct{}{
-		// 		"KE": {}, "GH": {},
-		// 	}
+		if element.NormalizedName == "PassportNumber" {
+			mandatoryCountryToPassportNumber := map[string]struct{}{
+				"KE": {}, "GH": {},
+			}
 
-		// 	if _, exists := mandatoryCountryToPassportNumber[*record.LetterCountry]; exists {
-		// 		tField.ID = element.ID
-		// 		tField.Name = element.NormalizedName
-		// 		tField.TValeu = *record.PassportNumber
-		// 	}
-		// }
+			if _, exists := mandatoryCountryToPassportNumber[*record.LetterCountry]; exists {
+				tField.ID = element.ID
+				tField.Name = element.NormalizedName
+				tField.TValue = utils.GetStringValue(record.Passport, "")
+			}
+		}
 
 		if element.Role == "national_id_nr" {
 			mandatoryCountryToNationalId := map[string]struct{}{
@@ -468,7 +503,7 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 			if _, exists := mandatoryCountryToNationalId[*record.LetterCountry]; exists {
 				tField.ID = element.ID
 				tField.Name = element.Role
-				tField.Name = *record.NationalID
+				tField.Name = utils.GetStringValue(record.NationalID, "")
 			}
 		}
 

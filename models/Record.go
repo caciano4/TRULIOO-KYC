@@ -28,6 +28,10 @@ type Record struct {
 	Notes                    *string    `json:"notes"`
 	Match                    *string    `json:"match"`
 	CompleteKYC              bool       `json:"complete_kyc"` // New field
+	VoterID                  *string    `json:"voter_id"`
+	Passport                 *string    `json:"passport"`
+	DriverLicence            *string    `json:"driver_license"`
+	DriverLicenceVersion     *string    `json:"driver_license_version"`
 	Suburb                   *string    `json:"suburb"`
 	CreatedAt                time.Time  `json:"created_at"`           // New field
 	UpdatedAt                time.Time  `json:"updated_at"`           // New field

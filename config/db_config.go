@@ -36,5 +36,5 @@ func ConnectDB() *sql.DB {
 func CloseConnectionDB(db *sql.DB) {
 	defer db.Close()
 
-	AppLogger.Print("Database connection Successfully Closed!")
+	AppLogger.Print("Database Closed!")
 }

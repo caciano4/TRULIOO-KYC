@@ -49,3 +49,11 @@ func ChainMiddlewares(handler http.Handler, middlewares ...func(http.Handler) ht
 	}
 	return handler
 }
+
+func GetStringValue(pointer *string, defaultValue string) string {
+	if pointer != nil {
+		return *pointer
+	}
+
+	return defaultValue
+}
