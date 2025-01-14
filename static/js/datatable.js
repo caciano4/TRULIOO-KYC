@@ -43,6 +43,7 @@ const renderTable = async () => {
             { key: "packageIdCell", value: item.package_id },
             { key: "totalRecordsCell", value: item.total_records },
             { key: "packageNameCell", value: item.package_name },
+            { key: "completed", value: item.completed },
             { key: "fullNameCell", value: item.full_name },
             { key: "transferAgentCell", value: item.transfer_agent },
             { key: "typeOfTransfer", value: item.type_of_transfer },
@@ -67,6 +68,23 @@ const renderTable = async () => {
                     button.textContent = buttonText; // Set button text dynamically
                     button.type = "button";
                     cell.appendChild(button);
+
+                    if (buttonText == "KYC") {
+                        button.id = "kyc-submit-button"
+
+                        button.addEventListener("click", async (e) => {
+                            try {
+                                response = await fetch(`http://localhost/process-kyc/${item.package_id}`)
+                                console.log("deu bom!")
+                            } catch (err) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "An error occurred while uploading the file.",
+                                });
+                            }
+                        })
+                    }
                 });
             } else {
                 cell.textContent = field.value || "-"; // Set field value or placeholder
@@ -76,6 +94,7 @@ const renderTable = async () => {
         });
     });
 };
+
 
 // Render the table when the script runs
 renderTable();

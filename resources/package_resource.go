@@ -17,6 +17,7 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 		SELECT 
 			COUNT(dr.id) AS total_records,
 			MAX(package_name) AS package_name,
+			(SELECT COUNT(complete_kyc) as completed FROM public.document_records WHERE complete_kyc = true) AS completed,
 			package_file_id AS package_id,
 			CONCAT(u.first_name, ' ', u.last_name) AS full_name,
 			MAX(transfer_agent_responsible) AS transfer_agent,
@@ -28,7 +29,8 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 			ON dr.upload_by_id = u.id
 		WHERE dr.deleted_at IS NULL
 		GROUP BY package_id, u.first_name, u.last_name
-		ORDER BY created ASC`
+		ORDER BY created ASC
+		`
 
 	rows, err := db.Query(query)
 	if err != nil {
@@ -43,11 +45,12 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 	// Iterate over rows and build the response
 	for rows.Next() {
 		var totalRecords int
-		var packageName, packageID, fullName, transferAgent, typeOfTransfer, created, updated string
+		var packageName, completed, packageID, fullName, transferAgent, typeOfTransfer, created, updated string
 
 		err := rows.Scan(
 			&totalRecords,
 			&packageName,
+			&completed,
 			&packageID,
 			&fullName,
 			&transferAgent,
@@ -66,6 +69,7 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 			"total_records":    totalRecords,
 			"package_name":     packageName,
 			"package_id":       packageID,
+			"completed":        completed,
 			"full_name":        fullName,
 			"transfer_agent":   transferAgent,
 			"type_of_transfer": typeOfTransfer,

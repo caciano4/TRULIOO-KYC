@@ -13,9 +13,13 @@ func TruliooProcessingRequest(w http.ResponseWriter, r *http.Request) {
 		config.AppLogger.Fatal(err.Error())
 	}
 
-	for index, record := range records {
-		if index == 1 {
-			resources.HandleProcessAllKyc(w, r, record)
+	// Iterate over records and enqueue each one for processing
+	for _, record := range records {
+		err := resources.HandleProcessAllKyc(w, r, record)
+		if err != nil {
+			config.AppLogger.Print("Failed to process record Id %v: %v", record.Id, err)
+		} else {
+			config.AppLogger.Print("Successfully queued record Id %v for processing", record.Id)
 		}
 	}
 }

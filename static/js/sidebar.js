@@ -8,4 +8,6 @@ function showPage(pageId) {
     if (activePage) {
         activePage.classList.add('active');
     }
+
 }
+

@@ -43,14 +43,15 @@ func HandleCatchKYCById(r *http.Request) ([]models.Record, error) {
 	defer config.CloseConnectionDB(db)
 
 	// Preparing query to fetch KYC by package_file_id
-	query := `SELECT 
-		id, package_file_id, package_name, upload_by_id, client_reference_id, transfer_agent_responsible, 
-		type_of_transfer, email, user_id, first_name, middle_name, last_name, date_of_birth_day, 
-		personal_phone_number, street_address, city, postal, letter_state, letter_country, 
-		national_id, request, response, notes, match, complete_kyc, created_at, updated_at, deleted_at
-	FROM public.document_records
-	WHERE package_file_id = $1
-	AND deleted_at IS NULL`
+	query := `	
+			SELECT 
+				id, package_file_id, package_name, upload_by_id, client_reference_id, transfer_agent_responsible, 
+				type_of_transfer, email, user_id, first_name, middle_name, last_name, date_of_birth_day, 
+				personal_phone_number, street_address, city, postal, letter_state, letter_country, 
+				national_id, request, response, notes, match, complete_kyc, created_at, updated_at, deleted_at
+			FROM public.document_records
+			WHERE package_file_id = $1 AND complete_kyc = true
+			AND deleted_at IS NULL`
 
 	// Use parameterized query to avoid SQL injection
 	rows, err := db.Query(query, param)
@@ -113,23 +114,39 @@ func HandleCatchKYCById(r *http.Request) ([]models.Record, error) {
 	return records, nil
 }
 
-func HandleProcessAllKyc(w http.ResponseWriter, r *http.Request, record models.Record) {
-	// Init and catch field IDS
-	fields := truliooInit(w, record)
+func HandleProcessAllKyc(w http.ResponseWriter, r *http.Request, record models.Record) error {
+	// Step 1: Init and catch field Ids
+	fields, err := truliooInit(w, record)
+	if err != nil {
+		return fmt.Errorf("failed to initialize Trulioo fields for record Id %v: %w", record.Id, err)
+	}
 
-	// Send body with IDS, and store the request sent
-	truliooBodySubmit(fields, record)
+	// Step 2: Send body with Ids, and store the request sent
+	err = truliooBodySubmit(fields, record)
+	if err != nil {
+		return fmt.Errorf("failed to submit Trulioo body for record Id %v: %w", record.Id, err)
+	}
 
-	// Retrieve Bearer Token
-	truliooGenerateBearerToken(record)
+	// Step 3: Retrieve Bearer Token
+	err = truliooGenerateBearerToken(record)
+	if err != nil {
+		return fmt.Errorf("failed to generate Bearer token for record Id %v: %w", record.Id, err)
+	}
 
-	// MatchApi Trulioo
-	truliooDetailsFromClient(w, r, record)
+	// Step 4: Match API Trulioo
+	err = truliooDetailsFromClient(w, r, record)
+	if err != nil {
+		return fmt.Errorf("failed to retrieve details from Trulioo client for record Id %v: %w", record.Id, err)
+	}
+
+	// If all steps succeed, return nil
+	return nil
 }
 
 // step 4
-func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record models.Record) {
+func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record models.Record) error {
 	config.AppLogger.Print("TRULIOO DETAILS FROM CLIENT: STEP 4")
+	var completed bool = false
 	var clientDetails models.ClientDetailsResponse
 	var request Req
 	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
@@ -141,7 +158,7 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 	req, err := http.NewRequest("GET", request.URL, nil)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
 	req.Header.Add("authorization", fmt.Sprintf("Bearer %s", bearerToken))
@@ -150,43 +167,48 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 	res, err := client.Do(req)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 	defer res.Body.Close()
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
 	if err := json.Unmarshal(body, &clientDetails); err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
+	completed = true
 	config.LogResponseTrulio(4, userName, clientDetails, "response")
 
 	//! TODO CATCH MATCH DATA
 	query := `UPDATE document_records
-				SET match = $1
+				SET match = $1, completed = $3
 			 WHERE id = $2`
 
 	json, err := json.Marshal(clientDetails.FlowData)
 	if err != nil {
 		config.AppLogger.Print(fmt.Sprintf("Error serializing FlowData: %v", err))
+		return err
 	}
 
-	result, err := db.Exec(query, json, *&record.Id)
+	result, err := db.Exec(query, json, *&record.Id, completed)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
+		return err
 	}
 
 	config.AppLogger.Print(result)
+
+	return nil
 }
 
 // step 3
-func truliooGenerateBearerToken(record models.Record) {
+func truliooGenerateBearerToken(record models.Record) error {
 	config.AppLogger.Print("TRULIOO GENERATE BEARER TOKEN: STEP 3")
 	var request Req
 	var bearerTokenResponse models.BearerTokenReponse
@@ -211,28 +233,30 @@ func truliooGenerateBearerToken(record models.Record) {
 	res, _ := client.Do(req)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 	defer res.Body.Close()
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
 	if err := json.Unmarshal(body, &bearerTokenResponse); err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
 	config.LogResponseTrulio(3, userName, bearerTokenResponse, "response")
 
 	bearerToken = bearerTokenResponse.AccessToken
+
+	return nil
 }
 
 // step 2
-func truliooBodySubmit(fields Fields, record models.Record) {
+func truliooBodySubmit(fields Fields, record models.Record) error {
 	config.AppLogger.Print("TRULIOO SUBMIT: STEP 2")
 	var request Req
 	var truliooBodySubmitResponse models.DirectSubmitResponse
@@ -254,7 +278,7 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 	bodyJson, err := json.Marshal(request.Body)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
 	config.LogResponseTrulio(2, userName, request.Body, "request")
@@ -262,6 +286,7 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 	req, err := http.NewRequest("POST", request.URL, bytes.NewBuffer(bodyJson))
 	if err != nil {
 		config.AppLogger.Printf(err.Error())
+		return err
 	}
 
 	// Setting Header content type to json
@@ -273,6 +298,7 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 	res, err := client.Do(req)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
+		return err
 	}
 	defer res.Body.Close()
 
@@ -280,12 +306,13 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
-		return
+		return err
 	}
 
 	// Decoding json HTTP
 	if err := json.Unmarshal(body, &truliooBodySubmitResponse); err != nil {
 		config.AppLogger.Print(err.Error())
+		return err
 	}
 
 	config.LogResponseTrulio(2, userName, truliooBodySubmitResponse, "response")
@@ -296,10 +323,11 @@ func truliooBodySubmit(fields Fields, record models.Record) {
 
 	// GETTING XHFSESSION
 	xHfSession = res.Header.Get("x-hf-session")
+	return err
 }
 
 // ! Step 1
-func truliooInit(w http.ResponseWriter, record models.Record) Fields {
+func truliooInit(w http.ResponseWriter, record models.Record) (Fields, error) {
 	config.AppLogger.Print("INIT TRULIOO REQUEST: STEP 1")
 
 	// Variables
@@ -317,6 +345,7 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 	req, err := http.NewRequest("GET", request.URL, nil)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
+		return Fields{}, nil
 	}
 
 	// Adding the header Params
@@ -333,13 +362,14 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
+		return Fields{}, nil
 	}
 
 	// Decoding Json response (se aplicável)
 	if err := json.Unmarshal(body, &initTrulioo); err != nil {
 		http.Error(w, "Error to decode json", http.StatusInternalServerError)
 		config.AppLogger.Print(err.Error())
-		return Fields{}
+		return Fields{}, nil
 	}
 
 	//Log The response
@@ -510,5 +540,5 @@ func truliooInit(w http.ResponseWriter, record models.Record) Fields {
 		fields = append(fields, tField)
 	}
 
-	return fields
+	return fields, nil
 }
