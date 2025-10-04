@@ -11,7 +11,6 @@ services:
     volumes:
       - .:/app:delegated
       - /app/tmp
-    restart: always
     networks:
       - networks_kyc
     depends_on:
@@ -43,10 +42,10 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin_kyc
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${EMAIL_PGADMIN}  # Email para login
-      PGADMIN_DEFAULT_PASSWORD: ${PASSWORD_PGADMIN}          # Senha para login
+      PGADMIN_DEFAULT_EMAIL: ${EMAIL_PGADMIN} # Email para login
+      PGADMIN_DEFAULT_PASSWORD: ${PASSWORD_PGADMIN} # Senha para login
     ports:
-      - "8080:80"  # Porta para acessar o pgAdmin
+      - "8080:80" # Porta para acessar o pgAdmin
     depends_on:
       - db
     networks:
@@ -67,11 +66,11 @@ services:
       - ./migrations:/app/migrations
       - ./entrypoint/migrate.sh:/app/entrypoint.sh
     environment:
-        - MIGRATION_ACTION=${MIGRATION_ACTION}
-        - DB_USER=${DB_USER}
-        - DB_PASSWORD=${DB_PASSWORD}
-        - DB_NAME=${DB_NAME}
-        - MIGRATION_STEPS=${MIGRATION_STEPS}
+      - MIGRATION_ACTION=${MIGRATION_ACTION}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - MIGRATION_STEPS=${MIGRATION_STEPS}
     entrypoint: ["/app/entrypoint.sh"]
 
 networks:

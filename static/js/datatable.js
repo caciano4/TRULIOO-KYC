@@ -43,7 +43,6 @@ const renderTable = async () => {
             { key: "packageIdCell", value: item.package_id },
             { key: "totalRecordsCell", value: item.total_records },
             { key: "packageNameCell", value: item.package_name },
-            { key: "completed", value: item.completed },
             { key: "fullNameCell", value: item.full_name },
             { key: "transferAgentCell", value: item.transfer_agent },
             { key: "typeOfTransfer", value: item.type_of_transfer },
@@ -95,6 +94,9 @@ const renderTable = async () => {
     });
 };
 
+export const rerenderTable = () => {
+    renderTable()
+}
 
 // Render the table when the script runs
 renderTable();

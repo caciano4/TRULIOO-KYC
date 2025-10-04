@@ -82,6 +82,7 @@ func HandleCreateFile(w http.ResponseWriter, r *http.Request) (string, exception
 func StoreRecordsFromSpreadSheet(w http.ResponseWriter, r *http.Request, pathFile string) {
 	// Mounting the Records
 	records := ReadAndGetContentFile(pathFile)
+	fmt.Print(records)
 
 	// Store Records From file
 	StoreRecords(records, w, r)

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/app.js" defer></script>
-    <script src="/static/js/sidebar.js" defer></script>
+    <script type="module" src="/static/js/sidebar.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -26,7 +26,7 @@
             </ul>
         </aside>
         <main class="content">
-            <div id="dashboard" class="page active">
+            <div id="dashboard" class="page">
                 <div class="message"
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; font-size: 1.2rem; color: #555;">
                     This section is under construction. We are working on building this part of the dashboard to serve
@@ -58,7 +58,7 @@
                     <div id="result" style="margin-top: 1rem; color: #555;"></div>
                 </div>
             </div>
-            <div id="checkPackages" class="page">
+            <div id="checkPackages" class="page active">
                 <div class="container"
                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
                     <table id="data-table" border="1">
@@ -66,8 +66,8 @@
                             <tr>
                                 <th>PACKAGE ID</th>
                                 <th>TOTAL RECORDS</th>
-                                <th>COMPLETED</th>
                                 <th>PACKAGE NAME</th>
+                                <th>COMPLETED</th>
                                 <th>FULL NAME</th>
                                 <th>TRANSFER AGENT</th>
                                 <th>TYPE OF TRANSFER</th>
@@ -77,14 +77,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <script src="/static/js/datatable.js"></script>
+                            <script type="module" src="/static/js/datatable.js"></script>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div id="checkKYC" class="page">
-                <h1>KYC</h1>
-                <p>Here you can check your KYC status.</p>
+                <div class="container"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+                    <table id="data-table" border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>TOTAL RECORDS</th>
+                                <th>PACKAGE NAME</th>
+                                <th>COMPLETED</th>
+                                <th>FULL NAME</th>
+                                <th>TRANSFER AGENT</th>
+                                <th>TYPE OF TRANSFER</th>
+                                <th>CREATED_AT</th>
+                                <th>UPDATED_AT</th>
+                                <th>ACTIONs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <script type="module" src="/static/js/datatable.js"></script>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>

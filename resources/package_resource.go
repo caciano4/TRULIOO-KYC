@@ -1,6 +1,7 @@
 package resources
 
 import (
+	"database/sql"
 	"encoding/json"
 	"net/http"
 	"trullio-kyc/config"
@@ -9,7 +10,6 @@ import (
 
 func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 	config.AppLogger.Println("Starting Search packages ...")
-
 	db := config.ConnectDB()
 	defer config.CloseConnectionDB(db)
 
@@ -17,7 +17,7 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 		SELECT 
 			COUNT(dr.id) AS total_records,
 			MAX(package_name) AS package_name,
-			(SELECT COUNT(complete_kyc) as completed FROM public.document_records WHERE complete_kyc = true) AS completed,
+			SUM(CASE WHEN complete_kyc = true THEN 1 ELSE 0 END) AS completed,
 			package_file_id AS package_id,
 			CONCAT(u.first_name, ' ', u.last_name) AS full_name,
 			MAX(transfer_agent_responsible) AS transfer_agent,
@@ -42,11 +42,12 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 
 	var packages []map[string]interface{}
 
+	// Define nullable variables for scanning
+	var totalRecords int
+	var packageName, packageID, fullName, transferAgent, typeOfTransfer, completed, created, updated sql.NullString
+
 	// Iterate over rows and build the response
 	for rows.Next() {
-		var totalRecords int
-		var packageName, completed, packageID, fullName, transferAgent, typeOfTransfer, created, updated string
-
 		err := rows.Scan(
 			&totalRecords,
 			&packageName,
@@ -60,22 +61,24 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 		)
 		if err != nil {
 			config.AppLogger.Printf("Error scanning row: %v", err)
-			http.Error(w, "Error processing packages", http.StatusInternalServerError)
+			http.Error(w, "Error processing packages, Error message: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		// Add row to response
-		packages = append(packages, map[string]interface{}{
+		// Convert nullable values to regular strings, using empty string for NULL values
+		packageData := map[string]interface{}{
 			"total_records":    totalRecords,
-			"package_name":     packageName,
-			"package_id":       packageID,
-			"completed":        completed,
-			"full_name":        fullName,
-			"transfer_agent":   transferAgent,
-			"type_of_transfer": typeOfTransfer,
-			"created":          utils.FormatDate(created),
-			"updated":          utils.FormatDate(updated),
-		})
+			"package_name":     getValue(packageName),
+			"package_id":       getValue(packageID),
+			"completed":        getValue(completed),
+			"full_name":        getValue(fullName),
+			"transfer_agent":   getValue(transferAgent),
+			"type_of_transfer": getValue(typeOfTransfer),
+			"created":          utils.FormatDate(getValue(created)),
+			"updated":          utils.FormatDate(getValue(updated)),
+		}
+
+		packages = append(packages, packageData)
 	}
 
 	// Check for errors in rows iteration
@@ -96,5 +99,12 @@ func HandleGetPackageList(w http.ResponseWriter, r *http.Request) {
 	encoder := json.NewEncoder(w)
 	encoder.SetIndent("", "   ")
 	encoder.Encode(response)
+}
 
+// Helper function to handle NULL values
+func getValue(n sql.NullString) string {
+	if n.Valid {
+		return n.String
+	}
+	return ""
 }

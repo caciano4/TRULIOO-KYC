@@ -1,28 +1,28 @@
 {
     "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#ebdfeb",
-        "activityBar.background": "#ebdfeb",
-        "activityBar.foreground": "#15202b",
-        "activityBar.inactiveForeground": "#15202b99",
-        "activityBarBadge.background": "#9d9d62",
+        "activityBar.activeBackground": "#818129",
+        "activityBar.background": "#818129",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#56c9c9",
         "activityBarBadge.foreground": "#15202b",
-        "commandCenter.border": "#15202b99",
-        "sash.hoverBorder": "#ebdfeb",
-        "statusBar.background": "#d8bfd8",
-        "statusBar.foreground": "#15202b",
-        "statusBarItem.hoverBackground": "#c59fc5",
-        "statusBarItem.remoteBackground": "#d8bfd8",
-        "statusBarItem.remoteForeground": "#15202b",
-        "titleBar.activeBackground": "#d8bfd8",
-        "titleBar.activeForeground": "#15202b",
-        "titleBar.inactiveBackground": "#d8bfd899",
-        "titleBar.inactiveForeground": "#15202b99"
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#818129",
+        "statusBar.background": "#5a5a1d",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#818129",
+        "statusBarItem.remoteBackground": "#5a5a1d",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#5a5a1d",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#5a5a1d99",
+        "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#D8BFD8",
+    "peacock.color": "#5a5a1d",
     // Definições gerais
     "workbench.sideBar.location": "right", // Move a aba lateral para o lado direito
     "workbench.iconTheme": "material-icon-theme", // Ícones diferenciados para arquivos e pastas
-    "workbench.colorTheme": "Dracula Theme Soft", // Tema de cores (você pode ajustar conforme sua preferência)
+    "workbench.colorTheme": "Dark", // Tema de cores (você pode ajustar conforme sua preferência)
     "explorer.compactFolders": false, // Mostra cada pasta aninhada separadamente
     "explorer.confirmDelete": false, // Desativa a confirmação de exclusão de arquivos/pastas
     "explorer.fileNesting.enabled": true, // Ativa aninhamento de arquivos na visualização do explorador
