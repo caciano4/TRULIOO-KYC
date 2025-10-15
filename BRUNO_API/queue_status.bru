@@ -1,0 +1,55 @@
+meta {
+  name: Queue Status
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{host}}/queue-status
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  ~host: http://localhost
+}
+
+script:post-response {
+  const response = res.body;
+
+  if (res.status === 200) {
+    console.log('✅ Queue Status Retrieved');
+    console.log(`📊 Status: ${response.status}`);
+    console.log('📈 Queue Statistics:');
+    console.log(`   - Workers: ${response.queue_stats.workers}`);
+    console.log(`   - Jobs in Queue: ${response.queue_stats.jobs_in_queue}`);
+    console.log(`   - Results Pending: ${response.queue_stats.results_pending}`);
+    console.log(`   - Total Jobs Processed: ${response.queue_stats.total_jobs}`);
+  } else {
+    console.log('❌ Failed to get queue status');
+  }
+}
+
+docs {
+  # Queue Status Monitoring
+
+  Monitor the current status of the KYC processing queue.
+
+  ## Response Fields:
+  - **status**: Current queue status (active/inactive)
+  - **queue_stats.workers**: Number of active workers
+  - **queue_stats.jobs_in_queue**: Jobs waiting to be processed
+  - **queue_stats.results_pending**: Completed jobs awaiting result processing
+  - **queue_stats.total_jobs**: Total number of jobs processed since startup
+
+  ## Use Cases:
+  - Monitor queue health and performance
+  - Check if workers are processing jobs
+  - Identify bottlenecks in the processing pipeline
+  - Ensure queue is not overloaded
+}

@@ -1,0 +1,915 @@
+{
+  "canGoBack": false,
+  "elements": [
+    {
+      "id": "67228aef1e5e2108d84020a2",
+      "name": "Client Reference ",
+      "prefillOptions": "non_prefillable",
+      "role": "external_customer_id",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d81",
+      "name": "Country of residence",
+      "prefillOptions": "non_prefillable",
+      "role": "address_country",
+      "type": "country_select",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d82",
+      "name": "First name",
+      "prefillOptions": "non_prefillable",
+      "role": "first_name",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "674dcb7ce686813288f9045f",
+      "name": "Middle Name",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [],
+        "type": "and"
+      },
+      "normalizedName": "MiddleName"
+    },
+    {
+      "id": "6716b75a1287d277472c8d83",
+      "name": "Last name",
+      "prefillOptions": "non_prefillable",
+      "role": "last_name",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6744fad399661447b4b59011",
+      "name": "Second last name",
+      "prefillOptions": "non_prefillable",
+      "role": "second_last_name",
+      "type": "text",
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d84",
+      "name": "Date of birth",
+      "prefillOptions": "non_prefillable",
+      "role": "dob",
+      "type": "date_picker",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      },
+      "dateFormat": "dd-mm-yyyy"
+    },
+    {
+      "id": "6716b75a1287d277472c8d86",
+      "name": "Full address",
+      "prefillOptions": "non_prefillable",
+      "role": "address_1",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d8c",
+      "name": "City",
+      "prefillOptions": "non_prefillable",
+      "role": "address_city",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d85",
+      "name": "Suburb/Municipality/County",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "AU",
+                "CA",
+                "DO",
+                "HK",
+                "KR",
+                "NO",
+                "PH",
+                "US",
+                "VE"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "Suburb"
+    },
+    {
+      "id": "6716b75a1287d277472c8d88",
+      "name": "State/Province/District",
+      "prefillOptions": "non_prefillable",
+      "role": "address_state",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "AR",
+                "AU",
+                "BR",
+                "CA",
+                "CL",
+                "CO",
+                "CR",
+                "DO",
+                "EC",
+                "GR",
+                "HK",
+                "IN",
+                "IT",
+                "KR",
+                "MY",
+                "MX"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d87",
+      "name": "ZIP or Postal Code",
+      "prefillOptions": "non_prefillable",
+      "role": "address_zip",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "671807991b28e545fdf0671e",
+      "name": "Government IDs",
+      "type": "plain_text",
+      "condition": {
+        "rules": [],
+        "type": "and"
+      },
+      "content": "Please entered the following details based on your government-issued ID, if indicated and relevant. "
+    },
+    {
+      "id": "6716b75a1287d277472c8d89",
+      "name": "Driver Licence Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "IN",
+                "NZ"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "DriverLicenceNumber"
+    },
+    {
+      "id": "6744f6ae6ac95a33a5d53422",
+      "name": "Driver Licence Version Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "NZ"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "DriverLicenceVersionNumber"
+    },
+    {
+      "id": "6716b75a1287d277472c8d8a",
+      "name": "Voter ID",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "IN",
+                "GH",
+                "NG"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "VoterID"
+    },
+    {
+      "id": "6744facf99661447b4b58ff7",
+      "name": "Social service number",
+      "prefillOptions": "non_prefillable",
+      "role": "social_service_number",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "CA",
+                "US",
+                "PH"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6744facf99661447b4b58ff8",
+      "name": "Passport Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "KE",
+                "GH"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "PassportNumber"
+    },
+    {
+      "id": "6744facf99661447b4b58ff9",
+      "name": "Bank Account Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "CN"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "BankAccountNumber"
+    },
+    {
+      "id": "6744f5fb6ac95a33a5d53401",
+      "name": "National ID number",
+      "prefillOptions": "non_prefillable",
+      "role": "national_id_nr",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "AR",
+                "BH",
+                "BD",
+                "BR",
+                "CN",
+                "CO",
+                "CR",
+                "DK",
+                "DO",
+                "EC",
+                "EG",
+                "SV",
+                "GR",
+                "IS",
+                "IN",
+                "IT",
+                "JO",
+                "KE",
+                "KW",
+                "LV",
+                "LB",
+                "MT",
+                "MY",
+                "MX",
+                "NG",
+                "OM",
+                "PE",
+                "QA",
+                "RO",
+                "SA",
+                "ZA",
+                "ES",
+                "SE",
+                "TH",
+                "UA",
+                "UY",
+                "VE"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "placeholder": "e.g. TaxID, NRIC, CodiceFiscale, CURPID, MxRFC,"
+    }
+  ],
+  "id": "67167c3c1287d277472c76a0",
+  "subtitle": "Please entered the following details based on your government-issued ID.",
+  "title": "Onboarding Form",
+  "type": "form"
+}{
+  "canGoBack": false,
+  "elements": [
+    {
+      "id": "67228aef1e5e2108d84020a2",
+      "name": "Client Reference ",
+      "prefillOptions": "non_prefillable",
+      "role": "external_customer_id",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d81",
+      "name": "Country of residence",
+      "prefillOptions": "non_prefillable",
+      "role": "address_country",
+      "type": "country_select",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d82",
+      "name": "First name",
+      "prefillOptions": "non_prefillable",
+      "role": "first_name",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "674dcb7ce686813288f9045f",
+      "name": "Middle Name",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [],
+        "type": "and"
+      },
+      "normalizedName": "MiddleName"
+    },
+    {
+      "id": "6716b75a1287d277472c8d83",
+      "name": "Last name",
+      "prefillOptions": "non_prefillable",
+      "role": "last_name",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6744fad399661447b4b59011",
+      "name": "Second last name",
+      "prefillOptions": "non_prefillable",
+      "role": "second_last_name",
+      "type": "text",
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d84",
+      "name": "Date of birth",
+      "prefillOptions": "non_prefillable",
+      "role": "dob",
+      "type": "date_picker",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      },
+      "dateFormat": "dd-mm-yyyy"
+    },
+    {
+      "id": "6716b75a1287d277472c8d86",
+      "name": "Full address",
+      "prefillOptions": "non_prefillable",
+      "role": "address_1",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d8c",
+      "name": "City",
+      "prefillOptions": "non_prefillable",
+      "role": "address_city",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d85",
+      "name": "Suburb/Municipality/County",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "AU",
+                "CA",
+                "DO",
+                "HK",
+                "KR",
+                "NO",
+                "PH",
+                "US",
+                "VE"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "Suburb"
+    },
+    {
+      "id": "6716b75a1287d277472c8d88",
+      "name": "State/Province/District",
+      "prefillOptions": "non_prefillable",
+      "role": "address_state",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "AR",
+                "AU",
+                "BR",
+                "CA",
+                "CL",
+                "CO",
+                "CR",
+                "DO",
+                "EC",
+                "GR",
+                "HK",
+                "IN",
+                "IT",
+                "KR",
+                "MY",
+                "MX"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6716b75a1287d277472c8d87",
+      "name": "ZIP or Postal Code",
+      "prefillOptions": "non_prefillable",
+      "role": "address_zip",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": null,
+        "type": ""
+      }
+    },
+    {
+      "id": "671807991b28e545fdf0671e",
+      "name": "Government IDs",
+      "type": "plain_text",
+      "condition": {
+        "rules": [],
+        "type": "and"
+      },
+      "content": "Please entered the following details based on your government-issued ID, if indicated and relevant. "
+    },
+    {
+      "id": "6716b75a1287d277472c8d89",
+      "name": "Driver Licence Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "IN",
+                "NZ"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "DriverLicenceNumber"
+    },
+    {
+      "id": "6744f6ae6ac95a33a5d53422",
+      "name": "Driver Licence Version Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "NZ"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "DriverLicenceVersionNumber"
+    },
+    {
+      "id": "6716b75a1287d277472c8d8a",
+      "name": "Voter ID",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "IN",
+                "GH",
+                "NG"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "VoterID"
+    },
+    {
+      "id": "6744facf99661447b4b58ff7",
+      "name": "Social service number",
+      "prefillOptions": "non_prefillable",
+      "role": "social_service_number",
+      "type": "text",
+      "validations": [
+        {
+          "type": "required"
+        }
+      ],
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "CA",
+                "US",
+                "PH"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      }
+    },
+    {
+      "id": "6744facf99661447b4b58ff8",
+      "name": "Passport Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "KE",
+                "GH"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "PassportNumber"
+    },
+    {
+      "id": "6744facf99661447b4b58ff9",
+      "name": "Bank Account Number",
+      "prefillOptions": "non_prefillable",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "CN"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "normalizedName": "BankAccountNumber"
+    },
+    {
+      "id": "6744f5fb6ac95a33a5d53401",
+      "name": "National ID number",
+      "prefillOptions": "non_prefillable",
+      "role": "national_id_nr",
+      "type": "text",
+      "condition": {
+        "rules": [
+          {
+            "action": "show",
+            "comparable": {
+              "type": "static",
+              "value": [
+                "AR",
+                "BH",
+                "BD",
+                "BR",
+                "CN",
+                "CO",
+                "CR",
+                "DK",
+                "DO",
+                "EC",
+                "EG",
+                "SV",
+                "GR",
+                "IS",
+                "IN",
+                "IT",
+                "JO",
+                "KE",
+                "KW",
+                "LV",
+                "LB",
+                "MT",
+                "MY",
+                "MX",
+                "NG",
+                "OM",
+                "PE",
+                "QA",
+                "RO",
+                "SA",
+                "ZA",
+                "ES",
+                "SE",
+                "TH",
+                "UA",
+                "UY",
+                "VE"
+              ]
+            },
+            "fieldId": "6716b75a1287d277472c8d81",
+            "operator": "in"
+          }
+        ],
+        "type": "and"
+      },
+      "placeholder": "e.g. TaxID, NRIC, CodiceFiscale, CURPID, MxRFC,"
+    }
+  ],
+  "id": "67167c3c1287d277472c76a0",
+  "subtitle": "Please entered the following details based on your government-issued ID.",
+  "title": "Onboarding Form",
+  "type": "form"
+}

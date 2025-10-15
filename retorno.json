@@ -1,0 +1,415 @@
+{
+    "id": "68e773022b0000170050e625",
+    "ownerIds": [],
+    "created": 1759998722,
+    "lastModified": 1759998724,
+    "profileType": "NORMAL",
+    "status": "ACCEPTED",
+    "statusManuallyChanged": false,
+    "flowData": {
+        "674e0ec2678bea7ec730fd98": {
+            "id": "674e0ec2678bea7ec730fd98",
+            "completed": true,
+            "fieldData": {
+                "6716b75a1287d277472c8d84": {
+                    "id": "6716b75a1287d277472c8d84",
+                    "name": "Date of birth",
+                    "value": [
+                        "1972-02-15"
+                    ],
+                    "role": "dob"
+                },
+                "67228aef1e5e2108d84020a2": {
+                    "id": "67228aef1e5e2108d84020a2",
+                    "name": "Client Reference ",
+                    "value": [
+                        "manual-2025-09-11-526481"
+                    ],
+                    "role": "external_customer_id"
+                },
+                "6716b75a1287d277472c8d81": {
+                    "id": "6716b75a1287d277472c8d81",
+                    "name": "Country of residence",
+                    "value": [
+                        "US"
+                    ],
+                    "role": "address_country"
+                },
+                "6716b75a1287d277472c8d87": {
+                    "id": "6716b75a1287d277472c8d87",
+                    "name": "ZIP or Postal Code",
+                    "value": [
+                        "78735"
+                    ],
+                    "role": "address_zip"
+                },
+                "6716b75a1287d277472c8d8c": {
+                    "id": "6716b75a1287d277472c8d8c",
+                    "name": "City",
+                    "value": [
+                        "Austin"
+                    ],
+                    "role": "address_city"
+                },
+                "6716b75a1287d277472c8d82": {
+                    "id": "6716b75a1287d277472c8d82",
+                    "name": "First name",
+                    "value": [
+                        "Joseph"
+                    ],
+                    "role": "first_name"
+                },
+                "6716b75a1287d277472c8d86": {
+                    "id": "6716b75a1287d277472c8d86",
+                    "name": "Full address",
+                    "value": [
+                        "8715 W HIGHWAY 71 #3206"
+                    ],
+                    "role": "address_1"
+                },
+                "6744facf99661447b4b58ff7": {
+                    "id": "6744facf99661447b4b58ff7",
+                    "name": "Social service number",
+                    "value": [
+                        "452152252"
+                    ],
+                    "role": "social_service_number"
+                },
+                "6716b75a1287d277472c8d83": {
+                    "id": "6716b75a1287d277472c8d83",
+                    "name": "Last name",
+                    "value": [
+                        "Zinsmeyer"
+                    ],
+                    "role": "last_name"
+                },
+                "6716b75a1287d277472c8d88": {
+                    "id": "6716b75a1287d277472c8d88",
+                    "name": "State/Province/District",
+                    "value": [
+                        "TX"
+                    ],
+                    "role": "address_state"
+                }
+            },
+            "fileData": {},
+            "enhancedFileData": {},
+            "serviceData": [
+                {
+                    "timestamp": 1759998724,
+                    "serviceStatus": "COMPLETED",
+                    "nodeId": "67167c6266043333e4b64f01",
+                    "nodeTitle": "Person Watchlist Screening",
+                    "nodeType": "trulioo_person_wl",
+                    "match": true,
+                    "transactionInfo": {
+                        "accountName": "KoreConX Inc.-PWS-Person Watchlist Screening-2",
+                        "accountIdentifier": "c4f28d3e-7048-48f2-b7bd-74db1f128f05",
+                        "countryCode": "US",
+                        "date": "2025-10-09T08:32:04.485+00:00",
+                        "transactionId": "8c774a0c-d3a1-4f93-a8db-82883ff87189",
+                        "transactionRecordId": "203a1ff1-6b85-672e-1f06-0a424c9c526a",
+                        "userName": "KoreConX-Inc.-Service-Worker-1725580690"
+                    },
+                    "fullServiceDetails": {
+                        "TransactionID": "8c774a0c-d3a1-4f93-a8db-82883ff87189",
+                        "UploadedDt": "2025-10-09T08:32:02.344Z",
+                        "CompletedDt": "2025-10-09T08:32:04.485+00:00",
+                        "CountryCode": "US",
+                        "ProductName": "Identity Verification",
+                        "Record": {
+                            "TransactionRecordID": "203a1ff1-6b85-672e-1f06-0a424c9c526a",
+                            "RecordStatus": "match",
+                            "DatasourceResults": [
+                                {
+                                    "DatasourceName": "Advanced Watchlist",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "WatchlistFullName",
+                                            "Data": "Joseph Zinsmeyer"
+                                        },
+                                        {
+                                            "FieldName": "WatchlistState",
+                                            "Data": "No Hit"
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                }
+                            ],
+                            "Errors": [],
+                            "Rule": {
+                                "RuleName": "RuleScript - WatchlistRules_v1",
+                                "Note": "Watchlist Clear on either International or Advanced Watchlist"
+                            },
+                            "SupplementaryRules": []
+                        },
+                        "CustomerReferenceID": "manual-2025-09-11-526481",
+                        "Errors": [],
+                        "UserGUID": "166596",
+                        "AccountIdentifier": "c4f28d3e-7048-48f2-b7bd-74db1f128f05",
+                        "InputFields": [
+                            {
+                                "FieldName": "FirstName",
+                                "Value": "Joseph"
+                            },
+                            {
+                                "FieldName": "LastName",
+                                "Value": "Zinsmeyer"
+                            },
+                            {
+                                "FieldName": "Country",
+                                "Value": "US"
+                            },
+                            {
+                                "FieldName": "YearOfBirth",
+                                "Value": "1972"
+                            },
+                            {
+                                "FieldName": "MonthOfBirth",
+                                "Value": "2"
+                            },
+                            {
+                                "FieldName": "DayOfBirth",
+                                "Value": "15"
+                            }
+                        ]
+                    },
+                    "watchlistResults": {
+                        "Advanced Watchlist": {
+                            "watchlistStatus": "No Hit",
+                            "watchlistHitDetails": {
+                                "wlHitsNumber": 0,
+                                "amHitsNumber": 0,
+                                "pepHitsNumber": 0
+                            }
+                        }
+                    }
+                },
+                {
+                    "timestamp": 1759998723,
+                    "serviceStatus": "COMPLETED",
+                    "nodeId": "6716b4361287d277472c8a5e",
+                    "nodeTitle": "Person Match",
+                    "nodeType": "trulioo_eidv",
+                    "match": true,
+                    "transactionInfo": {
+                        "accountName": "KoreConX Inc.-PM-PersonMatchLive-3",
+                        "accountIdentifier": "8194a6db-2d8d-4609-898f-3b579dee3438",
+                        "countryCode": "US",
+                        "date": "2025-10-09T08:32:03.156+00:00",
+                        "transactionId": "89f56d48-3994-43b5-aeae-d4a6e7404fe0",
+                        "transactionRecordId": "202e05c6-b1f9-03a0-9b18-4d2449ade598",
+                        "userName": "KoreConX-Inc.-Service-Worker-1725580690"
+                    },
+                    "fullServiceDetails": {
+                        "TransactionID": "89f56d48-3994-43b5-aeae-d4a6e7404fe0",
+                        "UploadedDt": "2025-10-09T08:32:02.557Z",
+                        "CompletedDt": "2025-10-09T08:32:03.156+00:00",
+                        "CountryCode": "US",
+                        "ProductName": "Identity Verification",
+                        "Record": {
+                            "TransactionRecordID": "202e05c6-b1f9-03a0-9b18-4d2449ade598",
+                            "RecordStatus": "match",
+                            "DatasourceResults": [
+                                {
+                                    "DatasourceName": "Address Validation",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "Address1",
+                                            "Data": "8715 W Highway 71, Apt 3206"
+                                        },
+                                        {
+                                            "FieldName": "HouseNumber",
+                                            "Data": "8715"
+                                        },
+                                        {
+                                            "FieldName": "UnitNumber",
+                                            "Data": "Apt 3206"
+                                        },
+                                        {
+                                            "FieldName": "StreetName",
+                                            "Data": "W Highway 71"
+                                        },
+                                        {
+                                            "FieldName": "City",
+                                            "Data": "Austin"
+                                        },
+                                        {
+                                            "FieldName": "State",
+                                            "Data": "TX"
+                                        },
+                                        {
+                                            "FieldName": "PostalCode",
+                                            "Data": "78735-0035"
+                                        },
+                                        {
+                                            "FieldName": "Country",
+                                            "Data": "US"
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                },
+                                {
+                                    "DatasourceName": "Citizen 2",
+                                    "DatasourceFields": [
+                                        {
+                                            "FieldName": "FirstSurName",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "FirstGivenName",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "Address1",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "StateProvinceCode",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "PostalCode",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "DayOfBirth",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "MonthOfBirth",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "YearOfBirth",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "socialservice",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "City",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "UnitNumber",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "BuildingNumber",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "StreetName",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "StreetType",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "FirstInitial",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "MiddleName",
+                                            "Status": "missing"
+                                        }
+                                    ],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "AddressAssociation",
+                                            "Data": "PreviousAddress"
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                }
+                            ],
+                            "Errors": [],
+                            "Rule": {
+                                "RuleName": "RuleScript - NameADDDOBID_v204",
+                                "Note": "1 Record Match (Name_v8 AND ID_v14 AND (DoB_v1 OR FullAddress1_v10))"
+                            },
+                            "SupplementaryRules": []
+                        },
+                        "CustomerReferenceID": "manual-2025-09-11-526481",
+                        "Errors": [],
+                        "UserGUID": "166596",
+                        "AccountIdentifier": "8194a6db-2d8d-4609-898f-3b579dee3438",
+                        "InputFields": [
+                            {
+                                "FieldName": "LastName",
+                                "Value": "Zinsmeyer"
+                            },
+                            {
+                                "FieldName": "FirstName",
+                                "Value": "Joseph"
+                            },
+                            {
+                                "FieldName": "PostalCode",
+                                "Value": "78735"
+                            },
+                            {
+                                "FieldName": "Address1",
+                                "Value": "8715 W HIGHWAY 71 #3206"
+                            },
+                            {
+                                "FieldName": "State",
+                                "Value": "TX"
+                            },
+                            {
+                                "FieldName": "SocialSecurityNumber",
+                                "Value": "452152252"
+                            },
+                            {
+                                "FieldName": "City",
+                                "Value": "Austin"
+                            },
+                            {
+                                "FieldName": "YearOfBirth",
+                                "Value": "1972"
+                            },
+                            {
+                                "FieldName": "MonthOfBirth",
+                                "Value": "2"
+                            },
+                            {
+                                "FieldName": "DayOfBirth",
+                                "Value": "15"
+                            },
+                            {
+                                "FieldName": "UnitNumber",
+                                "Value": "71"
+                            },
+                            {
+                                "FieldName": "HouseNumber",
+                                "Value": "8715"
+                            },
+                            {
+                                "FieldName": "StreetName",
+                                "Value": "W"
+                            },
+                            {
+                                "FieldName": "StreetType",
+                                "Value": "HIGHWAY"
+                            },
+                            {
+                                "FieldName": "FirstInitial",
+                                "Value": "J"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "notes": [],
+    "tasks": [],
+    "user": "7ef809bf-4f7d-4db7-90ca-8810da91ed70"
+}

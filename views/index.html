@@ -4,87 +4,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KNOW YOUR CLIENT</title>
+    <title>KORE KYC Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
         integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/app.js" defer></script>
-    <script src="/static/js/sidebar.js" defer></script>
+    <link rel="stylesheet" href="/static/css/style.css?v=2.0">
+    <script src="/static/js/app.js?v=2.0" defer></script>
+    <script src="/static/js/sidebar.js?v=2.0" defer></script>
+    <script src="/static/js/kyc-clients.js?v=4.0" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 </head>
 
 <body>
     <div class="container">
         <aside class="sidebar">
-            <h2>KORE KYC</h2>
+            <h2>🚀 KORE KYC</h2>
             <ul>
-                <li><a href="#" onclick="showPage('dashboard')">DASHBOARD</a></li>
-                <li><a href="#" onclick="showPage('uploadKYC')">UPLOAD KYC</a></li>
-                <li><a href="#" onclick="showPage('checkPackages')">PACKAGES</a></li>
-                <li><a href="#" onclick="showPage('checkKYC')">KNOW YOU CLIENTS</a></li>
+                <li><a href="#" onclick="showPage('dashboard')">
+                    <span style="margin-right: 0.5rem;">📊</span>DASHBOARD
+                </a></li>
+                <li><a href="#" onclick="showPage('uploadKYC')">
+                    <span style="margin-right: 0.5rem;">📤</span>UPLOAD KYC
+                </a></li>
+                <li><a href="#" onclick="showPage('checkPackages')">
+                    <span style="margin-right: 0.5rem;">📦</span>PACOTES
+                </a></li>
+                <li><a href="#" onclick="showPage('checkKYC')">
+                    <span style="margin-right: 0.5rem;">👥</span>CLIENTES
+                </a></li>
             </ul>
+            <div style="margin-top: auto; padding-top: 2rem; text-align: center; color: var(--gray-400); font-size: 0.75rem;">
+                <p>v1.0.0</p>
+                <p>Alt + 1-4 para navegação rápida</p>
+            </div>
         </aside>
         <main class="content">
+            <!-- Dashboard Page -->
             <div id="dashboard" class="page active">
-                <div class="message"
-                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; font-size: 1.2rem; color: #555;">
-                    This section is under construction. We are working on building this part of the dashboard to serve
-                    you better. Stay tuned!
+                <div class="dashboard-container">
+                    <div class="dashboard-message">
+                        <h2>🚧 Dashboard em Construção</h2>
+                        <p>Estamos trabalhando para criar uma experiência incrível para você. Esta seção do painel estará disponível em breve com métricas detalhadas, relatórios e insights sobre seus processos KYC.</p>
+                        <p class="mt-3"><strong>Em breve:</strong> Gráficos em tempo real, estatísticas de verificação e muito mais!</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Upload KYC Page -->
             <div id="uploadKYC" class="page">
-                <div class="container"
-                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
-                    <!-- Imagem -->
-                    <img src="/static/assets/KoreTransfer_2024_08.png" alt="Placeholder Image" class="image"
-                        style="max-width: 100%; height: auto; margin-bottom: 1rem; border-radius: 5px;">
+                <div class="upload-container">
+                    <div class="upload-card">
+                        <img src="/static/assets/KoreTransfer_2024_08.png" alt="KORE Transfer Logo" class="upload-logo">
 
-                    <!-- Input de Arquivo -->
-                    <div class="pure-form" style="max-width: 300px; text-align: center;">
-                        <label id="file-name" for="fileInput" class="pure-button pure-radio"
-                            style="border-radius: .3em; background: rgb(223, 117, 20); color: aliceblue;">
-                            <input id="fileInput" class="file-upload-input" type="file" style="display:none">
-                            Choose a file...
-                        </label>
+                        <h2 class="mb-3" style="color: var(--gray-800); font-weight: 600;">Upload de Documentos KYC</h2>
+                        <p class="mb-4" style="color: var(--gray-600);">Selecione um arquivo Excel (.xlsx) com os dados dos clientes para processamento KYC</p>
 
-                        <!-- Botão de Enviar -->
-                        <label class="button pure-button is-primary pure-radio" id="uploadButton"
-                            style="margin-top: 1rem;">Submit</label>
+                        <div class="file-upload-area" id="dropZone">
+                            <div class="text-center">
+                                <svg style="width: 48px; height: 48px; color: var(--gray-400); margin: 0 auto 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                </svg>
+                                <p style="color: var(--gray-600); margin-bottom: 1rem;">Arraste e solte seu arquivo aqui ou</p>
+                                <label for="fileInput" class="file-upload-label">
+                                    <input id="fileInput" class="file-upload-input" type="file" accept=".xlsx,.xls">
+                                    📁 Escolher Arquivo
+                                </label>
+                                <p id="file-name" class="mt-3" style="color: var(--gray-500); font-size: 0.875rem;"></p>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="uploadButton" disabled>
+                            <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 12l2 2 4-4"></path>
+                            </svg>
+                            Enviar Arquivo
+                        </button>
+
+                        <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Packages Page -->
+            <div id="checkPackages" class="page">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h2>📦 Pacotes KYC</h2>
+                        <p style="margin: 0.5rem 0 0 0; opacity: 0.9; font-size: 0.9rem;">Gerencie e monitore todos os pacotes de verificação</p>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID do Pacote</th>
+                                    <th>Total Registros</th>
+                                    <th>Completos</th>
+                                    <th>Nome do Pacote</th>
+                                    <th>Nome Completo</th>
+                                    <th>Agente</th>
+                                    <th>Tipo Transferência</th>
+                                    <th>Criado em</th>
+                                    <th>Atualizado em</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <script src="/static/js/datatable.js?v=2.0"></script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KYC Status Page -->
+            <div id="checkKYC" class="page">
+                <div class="form-container">
+                    <h2>👥 Clientes KYC</h2>
+                    <p style="margin-bottom: 2rem; color: var(--gray-600);">
+                        Lista completa de clientes processados com opções de download de relatório PDF
+                    </p>
+
+                    <!-- Filter Controls -->
+                    <div class="filter-controls" style="margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <input type="text" id="clientSearch" placeholder="Buscar por nome ou ID..."
+                                   style="width: 100%; padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 0.9rem;">
+                        </div>
+                        <div>
+                            <select id="statusFilter" style="padding: 0.75rem; border: 1px solid var(--gray-300); border-radius: 8px; font-size: 0.9rem;">
+                                <option value="">Todos os Status</option>
+                                <option value="pending">Pendente</option>
+                                <option value="completed">Processado</option>
+                                <option value="accepted">Aceito</option>
+                                <option value="rejected">Rejeitado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button onclick="loadKYCClients()" class="btn-primary" style="padding: 0.75rem 1.5rem;">
+                                🔄 Atualizar
+                            </button>
+                        </div>
                     </div>
 
+                    <!-- Results Table -->
+                    <div id="clientsTableContainer">
+                        <div id="loadingClients" style="text-align: center; padding: 3rem; color: var(--gray-500);">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⏳</div>
+                            <p>Carregando dados dos clientes...</p>
+                        </div>
 
-                    <!-- Resultado -->
-                    <div id="result" style="margin-top: 1rem; color: #555;"></div>
+                        <div id="clientsTableContent" style="display: none;">
+                            <div style="overflow-x: auto; border: 1px solid var(--gray-200); border-radius: 12px; background: white;">
+                                <table id="clientsTable" style="width: 100%; border-collapse: collapse;">
+                                    <thead style="background: var(--gray-50); border-bottom: 2px solid var(--gray-200);">
+                                        <tr>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">ID</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Nome</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Ref. Cliente</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Email</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Status</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Match Details</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Reports</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">All Reports</th>
+                                            <th style="padding: 1rem; text-align: left; font-weight: 600; color: var(--gray-700);">Data</th>
+                                            <th style="padding: 1rem; text-align: center; font-weight: 600; color: var(--gray-700);">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="clientsTableBody">
+                                        <!-- Dynamic content will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="noClientsMessage" style="display: none; text-align: center; padding: 3rem; color: var(--gray-500);">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">👤</div>
+                                <p>Nenhum cliente encontrado com os filtros aplicados.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Summary -->
+                    <div id="clientsStats" style="margin-top: 2rem; display: none;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--gray-200); text-align: center;">
+                                <div style="font-size: 2rem; font-weight: 600; color: var(--primary-color);" id="totalClients">0</div>
+                                <div style="color: var(--gray-600); font-size: 0.9rem;">Total de Clientes</div>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--gray-200); text-align: center;">
+                                <div style="font-size: 2rem; font-weight: 600; color: #10b981;" id="completedClients">0</div>
+                                <div style="color: var(--gray-600); font-size: 0.9rem;">Processados</div>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--gray-200); text-align: center;">
+                                <div style="font-size: 2rem; font-weight: 600; color: #f59e0b;" id="pendingClients">0</div>
+                                <div style="color: var(--gray-600); font-size: 0.9rem;">Pendentes</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="checkPackages" class="page">
-                <div class="container"
-                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
-                    <table id="data-table" border="1">
-                        <thead>
-                            <tr>
-                                <th>PACKAGE ID</th>
-                                <th>TOTAL RECORDS</th>
-                                <th>COMPLETED</th>
-                                <th>PACKAGE NAME</th>
-                                <th>FULL NAME</th>
-                                <th>TRANSFER AGENT</th>
-                                <th>TYPE OF TRANSFER</th>
-                                <th>CREATED_AT</th>
-                                <th>UPDATED_AT</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <script src="/static/js/datatable.js"></script>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div id="checkKYC" class="page">
-                <h1>KYC</h1>
-                <p>Here you can check your KYC status.</p>
             </div>
         </main>
     </div>

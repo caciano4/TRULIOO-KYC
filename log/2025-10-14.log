@@ -1,0 +1,155 @@
+APP_LOG: 2025/10/14 22:39:01 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 22:39:01 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 22:39:01 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 22:39:01 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 22:39:01 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 22:39:01 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 22:39:01 api.go:67: Server running on port 80
+APP_LOG: 2025/10/14 22:40:55 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 22:40:55 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 22:40:55 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 22:40:55 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 22:40:55 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 22:40:55 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 22:40:55 api.go:67: Server running on port 80
+APP_LOG: 2025/10/14 23:38:01 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 23:38:01 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 23:38:01 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 23:38:01 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 23:38:01 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 23:38:01 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 23:38:01 api.go:67: Server running on port 80
+APP_LOG: 2025/10/14 23:39:07 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 23:39:07 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 23:39:07 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 23:39:07 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 23:39:07 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 23:39:07 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 23:39:07 api.go:67: Server running on port 80
+APP_LOG: 2025/10/14 23:39:18 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 23:39:18 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 23:39:18 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 23:39:18 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 23:39:18 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 23:39:18 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 23:39:18 api.go:67: Server running on port 80
+APP_LOG: 2025/10/14 23:39:31 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 23:39:31 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 23:39:31 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 23:39:31 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 23:39:31 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 23:39:31 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 23:39:31 api.go:67: Server running on port 8080
+APP_LOG: 2025/10/14 23:39:34 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/14 23:39:34 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/14 23:39:34 custom_mux.go:50: GET /
+APP_LOG: 2025/10/14 23:39:34 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/14 23:39:34 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/14 23:39:34 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/14 23:39:34 api.go:67: Server running on port 8080
+APP_LOG: 2025/10/14 23:39:37 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/14 23:39:37 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/14 23:39:37 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/14 23:39:37 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/14 23:39:38 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/14 23:39:38 custom_mux.go:25: /favicon.ico
+APP_LOG: 2025/10/14 23:39:59 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/14 23:39:59 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/14 23:39:59 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/14 23:39:59 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/14 23:39:59 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/14 23:39:59 custom_mux.go:25: /favicon.ico
+APP_LOG: 2025/10/14 23:40:47 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/14 23:40:47 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/14 23:40:48 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/14 23:40:48 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/14 23:52:25 file_store_resource.go:50: Creating File
+APP_LOG: 2025/10/14 23:52:25 general_fail.go:34: Error: open /app/uploads/upload-4251809878.xlsx: no such file or directory, Status: 500
+APP_LOG: 2025/10/14 23:52:25 general_fail.go:34: Error: invalid argument, Status: 500
+APP_LOG: 2025/10/14 23:52:25 file_store_resource.go:78: Created file
+APP_LOG: 2025/10/14 23:52:31 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/14 23:52:31 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:05:09 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:05:09 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:05:09 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:05:09 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:05:09 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:05:09 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:05:40 file_store_resource.go:50: Creating File
+APP_LOG: 2025/10/15 00:05:40 file_store_resource.go:78: Created file
+APP_LOG: 2025/10/15 00:05:40 file_store_resource.go:161: Reading File and mapping Records
+APP_LOG: 2025/10/15 00:05:40 file_store_resource.go:165: zip: not a valid zip file
+APP_LOG: 2025/10/15 00:05:40 file_store_resource.go:97: 01K7JJZM-CNBDDKNX5-7TPED4285
+APP_LOG: 2025/10/15 00:05:40 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:05:40 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:05:40 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:05:48 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:05:48 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:05:48 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:05:48 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:05:48 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:05:48 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:08:57 file_store_resource.go:50: Creating File
+APP_LOG: 2025/10/15 00:08:57 file_store_resource.go:78: Created file
+APP_LOG: 2025/10/15 00:08:57 file_store_resource.go:161: Reading File and mapping Records
+APP_LOG: 2025/10/15 00:08:57 file_store_resource.go:262: Finished to map Struct of Records
+APP_LOG: 2025/10/15 00:08:57 file_store_resource.go:97: 01K7JK5M-JNQHQ35RN-18WBH0XTB
+APP_LOG: 2025/10/15 00:08:57 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:08:57 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:08:57 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:09:05 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:09:05 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:09:05 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:09:05 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:09:05 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:09:05 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:11:07 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:11:07 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:11:07 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:11:07 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:11:07 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:11:07 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:16:23 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:16:23 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:16:23 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:16:23 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:16:24 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:16:24 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:17:27 file_store_resource.go:50: Creating File
+APP_LOG: 2025/10/15 00:17:27 file_store_resource.go:78: Created file
+APP_LOG: 2025/10/15 00:17:27 file_store_resource.go:161: Reading File and mapping Records
+APP_LOG: 2025/10/15 00:17:27 file_store_resource.go:262: Finished to map Struct of Records
+APP_LOG: 2025/10/15 00:17:27 file_store_resource.go:97: 01K7JKN6-V7XJ6RV30-KZQSSWY34
+APP_LOG: 2025/10/15 00:17:27 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:17:27 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:17:27 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:17:37 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:17:37 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:17:37 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:17:37 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:17:37 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:17:37 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:21:41 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:21:41 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:21:41 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:21:41 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:21:41 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:21:41 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:23:59 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:23:59 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:23:59 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:23:59 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:23:59 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:23:59 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:27:39 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:27:39 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:27:40 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:27:40 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:27:40 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:27:40 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 00:29:48 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 00:29:48 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 00:29:48 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 00:29:48 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 00:29:48 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 00:29:48 db_config.go:39: Database Closed!

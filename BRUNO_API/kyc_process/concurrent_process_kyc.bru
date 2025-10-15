@@ -1,0 +1,56 @@
+meta {
+  name: Concurrent Process KYC
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/process-kyc/01K7JK5M-JNQHQ35RN-18WBH0XTB
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  ~host: http://localhost
+}
+
+script:post-response {
+  const response = res.body;
+
+  if (res.status === 202) {
+    console.log('✅ KYC Jobs successfully queued');
+    console.log(`📊 Total Jobs: ${response.total_jobs}`);
+    console.log(`🆔 Job IDs: ${JSON.stringify(response.job_ids)}`);
+    console.log(`📈 Queue Stats:`, response.queue_stats);
+  } else {
+    console.log('❌ Failed to queue KYC jobs');
+  }
+}
+
+docs {
+  # Concurrent KYC Processing
+
+  This endpoint processes multiple KYC records concurrently using a worker queue system.
+
+  ## Features:
+  - **Concurrent Processing**: Multiple workers process KYC requests in parallel
+  - **Rate Limiting**: Controls API calls to Trulioo to prevent overload
+  - **Job Tracking**: Returns job IDs for monitoring progress
+  - **Queue Stats**: Shows current queue status and worker information
+
+  ## Response:
+  - **Status 202**: Jobs successfully queued for processing
+  - **job_ids**: Array of job identifiers for tracking
+  - **queue_stats**: Current queue status and worker metrics
+
+  ## Configuration:
+  Environment variables control concurrency:
+  - `WORKER_POOL_SIZE`: Number of concurrent workers (default: 5)
+  - `JOB_QUEUE_SIZE`: Maximum jobs in queue (default: 100)
+  - `TRULIOO_RATE_LIMIT`: API calls per second (default: 10)
+}

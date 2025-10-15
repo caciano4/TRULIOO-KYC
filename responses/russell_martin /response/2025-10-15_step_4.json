@@ -1,0 +1,206 @@
+{
+  "id": "68eeff192b00003b0053665f",
+  "ownerIds": [],
+  "created": 1760493337,
+  "lastModified": 1760493338,
+  "profileType": "NORMAL",
+  "status": "ACCEPTED",
+  "statusManuallyChanged": false,
+  "flowData": {
+    "674e0ec2678bea7ec730fd98": {
+      "id": "674e0ec2678bea7ec730fd98",
+      "completed": true,
+      "fieldData": {
+        "6716b75a1287d277472c8d84": {
+          "id": "6716b75a1287d277472c8d84",
+          "name": "Date of birth",
+          "value": [
+            "1962-07-23"
+          ],
+          "role": "dob"
+        },
+        "67228aef1e5e2108d84020a2": {
+          "id": "67228aef1e5e2108d84020a2",
+          "name": "Client Reference ",
+          "value": [
+            "1"
+          ],
+          "role": "external_customer_id"
+        },
+        "6716b75a1287d277472c8d81": {
+          "id": "6716b75a1287d277472c8d81",
+          "name": "Country of residence",
+          "value": [
+            "US"
+          ],
+          "role": "address_country"
+        },
+        "6716b75a1287d277472c8d87": {
+          "id": "6716b75a1287d277472c8d87",
+          "name": "ZIP or Postal Code",
+          "value": [
+            "79532"
+          ],
+          "role": "address_zip"
+        },
+        "6716b75a1287d277472c8d8c": {
+          "id": "6716b75a1287d277472c8d8c",
+          "name": "City",
+          "value": [
+            "Loraine"
+          ],
+          "role": "address_city"
+        },
+        "6716b75a1287d277472c8d82": {
+          "id": "6716b75a1287d277472c8d82",
+          "name": "First name",
+          "value": [
+            "Russell"
+          ],
+          "role": "first_name"
+        },
+        "6716b75a1287d277472c8d86": {
+          "id": "6716b75a1287d277472c8d86",
+          "name": "Full address",
+          "value": [
+            "3838 N FM 644"
+          ],
+          "role": "address_1"
+        },
+        "6744facf99661447b4b58ff7": {
+          "id": "6744facf99661447b4b58ff7",
+          "name": "Social service number",
+          "value": [
+            "452211429"
+          ],
+          "role": "social_service_number"
+        },
+        "6716b75a1287d277472c8d83": {
+          "id": "6716b75a1287d277472c8d83",
+          "name": "Last name",
+          "value": [
+            "Martin"
+          ],
+          "role": "last_name"
+        },
+        "6716b75a1287d277472c8d88": {
+          "id": "",
+          "name": "",
+          "value": null,
+          "role": ""
+        },
+        "6716b75a1287d277472c8d85": {
+          "id": "",
+          "name": "",
+          "value": null,
+          "normalizedName": ""
+        }
+      },
+      "fileData": {},
+      "enhancedFileData": {},
+      "serviceData": [
+        {
+          "timestamp": 1760493338,
+          "serviceStatus": "COMPLETED",
+          "nodeId": "67167c6266043333e4b64f01",
+          "nodeTitle": "Person Watchlist Screening",
+          "nodeType": "trulioo_person_wl",
+          "match": true,
+          "transactionInfo": {
+            "accountName": "account-name",
+            "accountIdentifier": "a87c3efe-7a0a-4b05-a0e0-e7f901390772",
+            "countryCode": "US",
+            "date": "2022-11-22T12:00:00Z",
+            "transactionId": "test_transaction_id",
+            "transactionRecordId": "test_transaction_record_id",
+            "userName": "username"
+          },
+          "fullServiceDetails": {
+            "TransactionID": "",
+            "UploadedDt": "",
+            "CompletedDt": "",
+            "CountryCode": "",
+            "ProductName": "",
+            "Record": {
+              "TransactionRecordID": "",
+              "RecordStatus": "",
+              "DatasourceResults": null,
+              "Errors": null,
+              "Rule": {
+                "RuleName": "",
+                "Note": ""
+              },
+              "SupplementaryRules": null
+            },
+            "Errors": null,
+            "UserGUID": "",
+            "AccountIdentifier": "",
+            "InputFields": null
+          },
+          "watchlistResults": {
+            "Advanced Watchlist": {
+              "watchlistStatus": "No Hit",
+              "watchlistHitDetails": {
+                "wlHitsNumber": 0,
+                "amHitsNumber": 0,
+                "pepHitsNumber": 0
+              }
+            }
+          }
+        },
+        {
+          "timestamp": 1760493338,
+          "serviceStatus": "COMPLETED",
+          "nodeId": "6716b4361287d277472c8a5e",
+          "nodeTitle": "Person Match",
+          "nodeType": "trulioo_eidv",
+          "match": true,
+          "transactionInfo": {
+            "accountName": "account-name",
+            "accountIdentifier": "a87c3efe-7a0a-4b05-a0e0-e7f901390772",
+            "countryCode": "US",
+            "date": "2022-11-22T12:00:00Z",
+            "transactionId": "test_transaction_id",
+            "transactionRecordId": "test_transaction_record_id",
+            "userName": "username"
+          },
+          "fullServiceDetails": {
+            "TransactionID": "",
+            "UploadedDt": "",
+            "CompletedDt": "",
+            "CountryCode": "",
+            "ProductName": "",
+            "Record": {
+              "TransactionRecordID": "",
+              "RecordStatus": "",
+              "DatasourceResults": null,
+              "Errors": null,
+              "Rule": {
+                "RuleName": "",
+                "Note": ""
+              },
+              "SupplementaryRules": null
+            },
+            "Errors": null,
+            "UserGUID": "",
+            "AccountIdentifier": "",
+            "InputFields": null
+          },
+          "watchlistResults": {
+            "Advanced Watchlist": {
+              "watchlistStatus": "",
+              "watchlistHitDetails": {
+                "wlHitsNumber": 0,
+                "amHitsNumber": 0,
+                "pepHitsNumber": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "notes": [],
+  "tasks": [],
+  "user": "7ef809bf-4f7d-4db7-90ca-8810da91ed70"
+}

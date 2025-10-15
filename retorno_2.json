@@ -1,0 +1,384 @@
+{
+    "id": "68e774cb2d00003b009cbcf1",
+    "ownerIds": [],
+    "created": 1759999179,
+    "lastModified": 1759999184,
+    "profileType": "NORMAL",
+    "status": "REJECTED",
+    "statusManuallyChanged": false,
+    "flowData": {
+        "674e0ec2678bea7ec730fd98": {
+            "id": "674e0ec2678bea7ec730fd98",
+            "completed": true,
+            "fieldData": {
+                "6716b75a1287d277472c8d84": {
+                    "id": "6716b75a1287d277472c8d84",
+                    "name": "Date of birth",
+                    "value": [
+                        "1993-06-28"
+                    ],
+                    "role": "dob"
+                },
+                "67228aef1e5e2108d84020a2": {
+                    "id": "67228aef1e5e2108d84020a2",
+                    "name": "Client Reference ",
+                    "value": [
+                        "manual-2025-09-11-645687"
+                    ],
+                    "role": "external_customer_id"
+                },
+                "6716b75a1287d277472c8d81": {
+                    "id": "6716b75a1287d277472c8d81",
+                    "name": "Country of residence",
+                    "value": [
+                        "US"
+                    ],
+                    "role": "address_country"
+                },
+                "674dcb7ce686813288f9045f": {
+                    "id": "674dcb7ce686813288f9045f",
+                    "name": "Middle Name",
+                    "value": [
+                        "Michael"
+                    ],
+                    "normalizedName": "MiddleName"
+                },
+                "6716b75a1287d277472c8d87": {
+                    "id": "6716b75a1287d277472c8d87",
+                    "name": "ZIP or Postal Code",
+                    "value": [
+                        "80004"
+                    ],
+                    "role": "address_zip"
+                },
+                "6716b75a1287d277472c8d8c": {
+                    "id": "6716b75a1287d277472c8d8c",
+                    "name": "City",
+                    "value": [
+                        "Arvada"
+                    ],
+                    "role": "address_city"
+                },
+                "6716b75a1287d277472c8d82": {
+                    "id": "6716b75a1287d277472c8d82",
+                    "name": "First name",
+                    "value": [
+                        "Ryan"
+                    ],
+                    "role": "first_name"
+                },
+                "6716b75a1287d277472c8d86": {
+                    "id": "6716b75a1287d277472c8d86",
+                    "name": "Full address",
+                    "value": [
+                        "12964 W 64th Drive"
+                    ],
+                    "role": "address_1"
+                },
+                "6744facf99661447b4b58ff7": {
+                    "id": "6744facf99661447b4b58ff7",
+                    "name": "Social service number",
+                    "value": [
+                        "523096930"
+                    ],
+                    "role": "social_service_number"
+                },
+                "6716b75a1287d277472c8d83": {
+                    "id": "6716b75a1287d277472c8d83",
+                    "name": "Last name",
+                    "value": [
+                        "Nelson"
+                    ],
+                    "role": "last_name"
+                },
+                "6716b75a1287d277472c8d88": {
+                    "id": "6716b75a1287d277472c8d88",
+                    "name": "State/Province/District",
+                    "value": [
+                        "CO"
+                    ],
+                    "role": "address_state"
+                }
+            },
+            "fileData": {},
+            "enhancedFileData": {},
+            "serviceData": [
+                {
+                    "timestamp": 1759999184,
+                    "serviceStatus": "COMPLETED",
+                    "nodeId": "67167c6266043333e4b64f01",
+                    "nodeTitle": "Person Watchlist Screening",
+                    "nodeType": "trulioo_person_wl",
+                    "match": false,
+                    "transactionInfo": {
+                        "accountName": "KoreConX Inc.-PWS-Person Watchlist Screening-2",
+                        "accountIdentifier": "c4f28d3e-7048-48f2-b7bd-74db1f128f05",
+                        "countryCode": "US",
+                        "date": "2025-10-09T08:39:44.391+00:00",
+                        "transactionId": "4489319c-a820-4aab-b9bb-13074b54b615",
+                        "transactionRecordId": "204d7249-b6c6-f19f-8ec1-84edd48009a0",
+                        "userName": "KoreConX-Inc.-Service-Worker-1725580690"
+                    },
+                    "fullServiceDetails": {
+                        "TransactionID": "4489319c-a820-4aab-b9bb-13074b54b615",
+                        "UploadedDt": "2025-10-09T08:39:39.588Z",
+                        "CompletedDt": "2025-10-09T08:39:44.391+00:00",
+                        "CountryCode": "US",
+                        "ProductName": "Identity Verification",
+                        "Record": {
+                            "TransactionRecordID": "204d7249-b6c6-f19f-8ec1-84edd48009a0",
+                            "RecordStatus": "nomatch",
+                            "DatasourceResults": [
+                                {
+                                    "DatasourceName": "Advanced Watchlist",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "WatchlistFullName",
+                                            "Data": "Ryan Nelson"
+                                        },
+                                        {
+                                            "FieldName": "WatchlistState",
+                                            "Data": "Potential Hit"
+                                        },
+                                        {
+                                            "FieldName": "WatchlistData",
+                                            "Data": {
+                                                "num_WL_hits": 0,
+                                                "num_AM_hits": 5,
+                                                "num_PEP_hits": 0
+                                            }
+                                        },
+                                        {
+                                            "FieldName": "WatchlistHitDetails",
+                                            "Data": {
+                                                "WL_results": [],
+                                                "AM_results": [
+                                                    {
+                                                        "score": 1,
+                                                        "subjectMatched": "Ryan Nelson",
+                                                        "text": "3:31pm May 4, 2025 Cincinnati police fatally shot an armed 18-year-old. The next day, his father killed a sheriff's deputy, authorities say A Cincinnati sheriff's deputy was fatally struck by a car driven by the father of an armed 18-year-old man who was shot and killed by police a day earlier, authorities say. The driver \"in a way that was calculated and premeditated lined up his car, deliberately accelerated his car and purposely caused the death of an on-duty deputy sheriff,\" prosecuting attorney Ryan Nelson said on Saturday morning at the father's arraignment. \"It appeared from everybody who was on the scene that he deliberately struck the deputy in an attempt to kill him,\" Nelson said. The man suspected of driving into a Hamilton County sheriff's deputy and killing him made his first appearance in court (Blake Sheely/WCPO via CNN Newsource) Prosecutors are seeking an indictment for aggravated murder, Nelson said. The defendant, Rodney Hinton Jr., 38, is the father of a man who was fatally shot by Cincinnati police on Thursday morning, Cincinnati Police Chief Teresa Theetge said. On Friday night, police identified the 18-year-old as Ryan Hinton, according to CNN affiliate WCPO. Authorities have not said whether the suspect had any connection to the deputy. Ryan Hinton turned 18 a few weeks ago, family attorney Michael Wright said, who described him as a \"fun, loving and good kid,\" adding, \"The circumstances surrounding his interaction with the police there, you know, they [the family] are surprised that occurred.\" Hinton Jr.'s son was armed and fleeing from a stolen vehicle when a responding officer fatally shot him, police said. Police body cam footage does not clearly show whether the fleeing man pointed a gun at the officer. The family reviewed the footage between 10am and 11am on Friday, and the father was \"very distraught,\" according to Wright, the Cincinnati Enquirer reported. Wright told CNN that he has filed a public records request and is asking for additional information. \"At this point, we are still investigating the circumstances of Ryan being shot and killed by the Cincinnati Police Department,\" Wright said, adding that he has met with the Chief of Police. \"The family's pretty upset, pretty distraught about what happened to their son.\" Police said the deputy was killed at about 1pm on Friday. Public defender Tom Ewing acknowledged an \"emotionally charged situation\" at the arraignment in a Hamilton County courtroom packed with law enforcement officers. \"I understand that there's a lot of sadness and a lot of anger in this room right now an in the community at large,\" he said, before requesting a \"reasonable bond.\" The judge ordered Hinton Jr. to be held without bond until a hearing on Tuesday. The deputy was hit while directing traffic near the University of Cincinnati, where commencement was taking place, Theetge said. \"The officer was just out doing his job … for what was supposed to be a glorious day for many,\" Theetge said. Responding police and fire officials transported the deputy to the university's medical centre, where he later died, according to a police statement. The deputy, whom authorities are not naming in accordance with an Ohio law protecting crime victims' rights, had recently retired but \"continued on in service as a special deputy,\" Theetge said. Ohio Gov. Mike DeWine condemned the Hamilton County deputy's killing. \"I have been briefed on the ongoing investigation and am sickened by what appears to be an intentional act of violence. We offer our sincere condolences to the deputy's family, friends and colleagues,\" DeWine wrote on social media . Members of the sheriff's department packed the courtroom to show their support for their late colleague. (Krizia Williams/WCPO via CNN Newsource) Police shooting happened in 'six quick seconds' In a news conference on Friday, Theetge detailed the police encounter on Thursday that resulted in the 18-year-old's death, showing footage from the body cam of the officer who fired the fatal shots. The man was among four suspects discovered in a stolen vehicle in a parking lot in Cincinnati's East Price Hill neighbourhood, Theetge said. All four fled when uniformed officers arrived, and the 18-year-old was seen holding a handgun, the chief said. One of the officers shot the 18-year-old as he emerged from between two dumpsters, the body cam video showed. On the footage, moments before the shooting another officer can be heard yelling, \"He's got a gun! He's got a gun! On your right! On your right!\" The officer said after the shooting that the 18-year-old appeared to point the gun at him, according to Theetge. \"When the individual came out between the dumpsters, he had the firearm in front of him. It was in like a bladed position, and it was pointed at the officer, and he (the officer) felt threatened for his life and that's why he discharged his firearm,\" the chief said. Theetge said the officer is believed to have fired four to five shots, two of which are believed to have hit the teen. The police body cam footage played at the news conference does not clearly show the fleeing man point a gun at the officer. Theetge acknowledged the footage is a \"very blurred image, unfortunately\" because the body cam was \"kind of jolting as the officer is running.\" Police recovered a handgun with an extended clip they say the 18-year-old was carrying. Theetge said the gun had not been fired. The officer who opened fire has been with the Cincinnati Police Department for more than 10 years and was assigned to the Fugitive Apprehension Squad in the department's Special Investigations Section, Theetge said. The chief said the officers tried \"to save this gentleman's life\" by administering \"different variations of medical aid\" until other emergency officials arrived. She defended the officer's actions, stressing how quickly the scene unfolded. \"I want to point out…from the time they bailed from the vehicle and police were chasing them to the time the individual was shot – six seconds. Six quick seconds,\" Theetge said, calling it \"unreasonable\" to expect the officers \"to process and determine a different course of action\" in such a short time. The shooting remains under investigation by the department's homicide unit. 'A tremendous loss we have all suffered' Hamilton County Sheriff Charmaine McGuffey described the fallen deputy as a beloved figure who had dedicated decades of his life to public service. \"He was so well-liked and so well-known, we could fill this building with the law enforcement agencies that respect him, love him, his friends, his family,\" McGuffey said, adding, \"What a tremendous loss we have all suffered.\" Theetge urged Cincinnati residents to remain patient as the city grapples with two critical incidents that unfolded over two days. \"I do have a plea to everybody. Let the processes play out. Let the investigations play out. Keep calm, take care of one another and I can assure you, as the chief of police for Cincinatti, I will ensure you transparency and a thorough and accurate investigation,\" Theetge said. The department held a procession on Friday night to honour the deputy, CNN affiliate WLWT reported . \"He will not be alone,\" McGuffey said. \"There will be someone with him until the day that he transitions to higher ground.\" The family of the slain 18-year-old called the killing of the officer a \"tremendous tragedy,\" according to Wright, their attorney, and said they are sorry for the loss of the officer and offer their condolences to the officer's family. \"This is a horrific tragedy on both sides. This family lost their son, and this police officer lost his life,\" Wright said. The Cincinnati Police Department is serving as the lead agency in the investigation into the deputy's death, officials said.",
+                                                        "URL": "https://www.9news.com.au/world/usa-police-cincinnati-police-fatally-shot-an-armed-18yearold-the-next-day-his-father-killed-a-sheriffs-deputy-authorities-say/e5d29ddb-fc55-42cb-8416-cd518171f2c4"
+                                                    },
+                                                    {
+                                                        "score": 1,
+                                                        "subjectMatched": "Ryan Nelson",
+                                                        "text": "3:31pm May 4, 2025 Cincinnati police fatally shot an armed 18-year-old. The next day, his father killed a sheriff's deputy, authorities say A Cincinnati sheriff's deputy was fatally struck by a car driven by the father of an armed 18-year-old man who was shot and killed by police a day earlier, authorities say. The driver \"in a way that was calculated and premeditated lined up his car, deliberately accelerated his car and purposely caused the death of an on-duty deputy sheriff,\" prosecuting attorney Ryan Nelson said on Saturday morning at the father's arraignment. \"It appeared from everybody who was on the scene that he deliberately struck the deputy in an attempt to kill him,\" Nelson said. The man suspected of driving into a Hamilton County sheriff's deputy and killing him made his first appearance in court (Blake Sheely/WCPO via CNN Newsource) Prosecutors are seeking an indictment for aggravated murder, Nelson said. The defendant, Rodney Hinton Jr., 38, is the father of a man who was fatally shot by Cincinnati police on Thursday morning, Cincinnati Police Chief Teresa Theetge said. On Friday night, police identified the 18-year-old as Ryan Hinton, according to CNN affiliate WCPO. Authorities have not said whether the suspect had any connection to the deputy. Ryan Hinton turned 18 a few weeks ago, family attorney Michael Wright said, who described him as a \"fun, loving and good kid,\" adding, \"The circumstances surrounding his interaction with the police there, you know, they [the family] are surprised that occurred.\" Hinton Jr.'s son was armed and fleeing from a stolen vehicle when a responding officer fatally shot him, police said. Police body cam footage does not clearly show whether the fleeing man pointed a gun at the officer. The family reviewed the footage between 10am and 11am on Friday, and the father was \"very distraught,\" according to Wright, the Cincinnati Enquirer reported. Wright told CNN that he has filed a public records request and is asking for additional information. \"At this point, we are still investigating the circumstances of Ryan being shot and killed by the Cincinnati Police Department,\" Wright said, adding that he has met with the Chief of Police. \"The family's pretty upset, pretty distraught about what happened to their son.\" Police said the deputy was killed at about 1pm on Friday. Public defender Tom Ewing acknowledged an \"emotionally charged situation\" at the arraignment in a Hamilton County courtroom packed with law enforcement officers. \"I understand that there's a lot of sadness and a lot of anger in this room right now an in the community at large,\" he said, before requesting a \"reasonable bond.\" The judge ordered Hinton Jr. to be held without bond until a hearing on Tuesday. The deputy was hit while directing traffic near the University of Cincinnati, where commencement was taking place, Theetge said. \"The officer was just out doing his job … for what was supposed to be a glorious day for many,\" Theetge said. Responding police and fire officials transported the deputy to the university's medical centre, where he later died, according to a police statement. The deputy, whom authorities are not naming in accordance with an Ohio law protecting crime victims' rights, had recently retired but \"continued on in service as a special deputy,\" Theetge said. Ohio Gov. Mike DeWine condemned the Hamilton County deputy's killing. \"I have been briefed on the ongoing investigation and am sickened by what appears to be an intentional act of violence. We offer our sincere condolences to the deputy's family, friends and colleagues,\" DeWine wrote on social media . Members of the sheriff's department packed the courtroom to show their support for their late colleague. (Krizia Williams/WCPO via CNN Newsource) Police shooting happened in 'six quick seconds' In a news conference on Friday, Theetge detailed the police encounter on Thursday that resulted in the 18-year-old's death, showing footage from the body cam of the officer who fired the fatal shots. The man was among four suspects discovered in a stolen vehicle in a parking lot in Cincinnati's East Price Hill neighbourhood, Theetge said. All four fled when uniformed officers arrived, and the 18-year-old was seen holding a handgun, the chief said. One of the officers shot the 18-year-old as he emerged from between two dumpsters, the body cam video showed. On the footage, moments before the shooting another officer can be heard yelling, \"He's got a gun! He's got a gun! On your right! On your right!\" The officer said after the shooting that the 18-year-old appeared to point the gun at him, according to Theetge. \"When the individual came out between the dumpsters, he had the firearm in front of him. It was in like a bladed position, and it was pointed at the officer, and he (the officer) felt threatened for his life and that's why he discharged his firearm,\" the chief said. Theetge said the officer is believed to have fired four to five shots, two of which are believed to have hit the teen. The police body cam footage played at the news conference does not clearly show the fleeing man point a gun at the officer. Theetge acknowledged the footage is a \"very blurred image, unfortunately\" because the body cam was \"kind of jolting as the officer is running.\" Police recovered a handgun with an extended clip they say the 18-year-old was carrying. Theetge said the gun had not been fired. The officer who opened fire has been with the Cincinnati Police Department for more than 10 years and was assigned to the Fugitive Apprehension Squad in the department's Special Investigations Section, Theetge said. The chief said the officers tried \"to save this gentleman's life\" by administering \"different variations of medical aid\" until other emergency officials arrived. She defended the officer's actions, stressing how quickly the scene unfolded. \"I want to point out…from the time they bailed from the vehicle and police were chasing them to the time the individual was shot – six seconds. Six quick seconds,\" Theetge said, calling it \"unreasonable\" to expect the officers \"to process and determine a different course of action\" in such a short time. The shooting remains under investigation by the department's homicide unit. 'A tremendous loss we have all suffered' Hamilton County Sheriff Charmaine McGuffey described the fallen deputy as a beloved figure who had dedicated decades of his life to public service. \"He was so well-liked and so well-known, we could fill this building with the law enforcement agencies that respect him, love him, his friends, his family,\" McGuffey said, adding, \"What a tremendous loss we have all suffered.\" Theetge urged Cincinnati residents to remain patient as the city grapples with two critical incidents that unfolded over two days. \"I do have a plea to everybody. Let the processes play out. Let the investigations play out. Keep calm, take care of one another and I can assure you, as the chief of police for Cincinatti, I will ensure you transparency and a thorough and accurate investigation,\" Theetge said. The department held a procession on Friday night to honour the deputy, CNN affiliate WLWT reported . \"He will not be alone,\" McGuffey said. \"There will be someone with him until the day that he transitions to higher ground.\" The family of the slain 18-year-old called the killing of the officer a \"tremendous tragedy,\" according to Wright, their attorney, and said they are sorry for the loss of the officer and offer their condolences to the officer's family. \"This is a horrific tragedy on both sides. This family lost their son, and this police officer lost his life,\" Wright said. The Cincinnati Police Department is serving as the lead agency in the investigation into the deputy's death, officials said.",
+                                                        "URL": "https://www.9news.com.au/world/usa-police-cincinnati-police-fatally-shot-an-armed-18yearold-the-next-day-his-father-killed-a-sheriffs-deputy-authorities-say/e5d29ddb-fc55-42cb-8416-cd518171f2c4"
+                                                    },
+                                                    {
+                                                        "score": 1,
+                                                        "subjectMatched": "Ryan Nelson",
+                                                        "text": "NBCUniversal Media, LLC It’s Friday, May 20 th - and NBC 6 has the top stories for the day. No. 1 - A day after Miami-Dade prosecutors released disturbing surveillance video of group home employees wrestling a patient to the ground, family members are speaking out about the man's death. Family members identified the man as 36-year-old Edward Ware, who was living with autism. The incident, which happened in December at the Family Tree Concept Inc. group home on NE 138th Street in North Miami, was captured on video. The Miami-Dade State Attorney’s Office released the video of three employees restraining Ware on Wednesday as they announced a new working group aimed at preventing elderly and vulnerable populations from being abused. Ware’s father, Edward Taylor, told NBC 6 that he was on the phone with his son at the time of the incident. Click here for what he said in a report from NBC 6’s Ryan Nelson No. 2 - A Miami middle school teacher has been arrested after authorities said he carried on a \"romantic pursuit\" of a former student. Stay informed about local news and weather. Get the NBC 6 South Florida app for iOS or Android and pick your alerts . Sean David Loret de Mola, 37, a teacher at Glades Middle School, was arrested Wednesday on a charge of offenses against students by authority figures. According to an arrest report, Loret de Mola had been engaged in conversations with the former student on Instagram for the past year, but in the past couple months the conversations changed to him pursuing her \"in a romantic manner.\" Loret de Mora then went to the victim's work to \"court her,\" bringing her a card and candy and telling her how beautiful she is, the report said. He also \"engaged in conversations over Instagram with a friend of the victim in hopes that the friend will help him facilitate his romantic pursuit of the victim,\" the report said. No. 3 - Kids ages 5 to 11 should get a booster dose of Pfizer’s COVID-19 vaccine, advisers to the U.S. government said Thursday. The Center for Disease Control and Prevention quickly adopted the panel’s recommendation, opening a third COVID-19 shot to healthy elementary-age kids — just like what is already recommended for everybody 12 and older. The hope is that an extra shot will shore up protection for kids ages 5 to 11 as infections once again are on the rise. “Vaccination with a primary series among this age group has lagged behind other age groups leaving them vulnerable to serious illness,” said CDC Director Dr. Rochelle Walensky, in a statement. Local Broward 11 hours ago Family Displaced After Fire Destroys Davie Trailer Home Florida 14 hours ago Florida's Jobless Rate Falls to Lowest Level in 2 Years Get updates on COVID-19 in your inbox. Click here to sign up for our weekly coronavirus newsletter. No. 4 - At just three months old, little Dylan Moskowitz relies on a special hypoallergenic baby formula to thrive. But when his mom opens up the cabinet to make his meals, she worries. “Knowing this is a week’s worth, maybe a little more is heartbreaking, scary,” said Alexandra Moskowitz, as she looks at the four remaining cans on her shelf. Moskowitz feels the recent baby formula shortage is only getting worse. Her husband used to find at least one can of formula after visiting three or four stores, now sometimes he goes to twice that many and comes home empty handed. Doctors at Nicklaus Children’s Hospital and pediatricians in Fort Lauderdale are reporting even their stock of sample formula they hand out to parents is running low. Moskowitz is turning to other mom’s on social media to share information about where to find Dylan’s food, a move pediatrician’s approve. Click here to find out what alternatives are being suggested in a report from NBC 6’s Marissa Bagg. No. 6 - The scene Wednesday played out live for South Florida on NBC 6. From Chopper 6, viewers saw a dark car that police believe had been stolen racing on the highway, dodging drivers as they sped by. And above in the Broward Sheriff's Office helicopter were Pilot Carl Spear and Tactical Flight Officer George Carbocci. Carbocci and Spear watched as the car went into Miami-Dade County and then came back into Broward — all the while staying in touch with deputies on the ground and supervisors in a communications center. The report of a stolen car is not enough for deputies on the ground to start following them. BSO rules only allow that when there’s something like a kidnapping, attempted murder, or murder and an ongoing danger to the public. Miami-Dade Police has a similar policy. Click here for more in a report from NBC 6 investigator Willard Shepard you’ll see Only on 6. No. 6 - It was a rough night for both the Miami Heat and Florida Panthers in each Game 2 of their playoff series. With a full squad in the lineup, the Boston Celtics made a major statement in Game 2 of the Eastern Conference Finals. Jayson Tatum led the Celtics with 27 points and helped Boston to the 127-102 blowout win over the Heat inside the FTX Arena, tying the series at one win for each team. In the final seconds, Tampa Bay's Ross Colton scored with 3.8 seconds left in the third period to give the Lightning a 2-1 victory Thursday night in Game 2 of the Eastern Conference second round matchup with the Florida Panthers. The Lightning now take a 2-0 series lead into Game 3 and 4 at home, which will be played Sunday and Monday. Sign up for our Breaking newsletter to get the most urgent news stories in your inbox. This article tagged under: News You Should Know Miami-Dade Broward",
+                                                        "URL": "https://www.nbcmiami.com/news/local/6-to-know-top-stories-of-the-day-146/2765519/"
+                                                    },
+                                                    {
+                                                        "score": 1,
+                                                        "subjectMatched": "Ryan Nelson",
+                                                        "text": "NewsMan with knife threatened to jump from bridge at Warwickshire beauty spotAs Ryan Nelson was arrested, he kicked out at police officers, a court was toldcoventrytelegraphShare CommentsByPaul BeardEnda Mullen05:00, 29 JUL 2021NewsRyan Nelson took a knife and went to Jephson Gardens, where he threatened to jump off a bridgeOur free email updates are the best way to get Warwickshire headlines direct to your inboxInvalid EmailSomething went wrong, please try again later.SubscribeWe use your sign-up to provide content in ways you've consented to and to improve our understanding of you. This may include adverts from us and 3rd parties based on our understanding. You can unsubscribe at any time.More infoThank you for subscribingWe have more newslettersShow meSee ourprivacy noticeA young man who kicked police officers as he was arrested for causing damage at the hostel where he was living has escaped being jailed â€“ because of the time he has already been in custody. But Ryan Nelson was warned by a judge at Warwick Crown Court that if he breaches the suspended sentence, that time will not count towards any sentence he is then given. Nelson, 19, of Newbold Street, Leamington, had pleaded guilty to causing damage, having a bladed article in public and three charges of common assault on emergency workers. READ MORE: Coventry man jailed for six years for attacking friend with his false leg and a machete He was given a 15-month prison sentence suspended for two years and was ordered to do 150 hours of unpaid work â€“ with a further 150 hours for breaching an earlier suspended sentence. Prosecutor Gary Cook said that in November last year Nelson became agitated over a post he had read on social media about his girlfriend and another man. He was living at the Newbold Lodge hostel in Leamington at the time, and took out his anger by kicking the front door and a pay-phone, causing it to come off the wall. What happened? He then went outside and damaged a fence panel before staff tried to calm him down and he returned to his room. But Nelson then came down with a knife and made his way to Jephson Gardens in Leamington, threatening to jump from a bridge and to take his own life. The police were alerted, and after he had returned to the hostel officers attended and he was arrested. Warwick Crown Court As they were taking him outside, Nelson became agitated and kicked out at two officers behind him, striking them both to their legs. There was a struggle as they then tried to restrain him, during which a third officer suffered reddening to his arm as they stumbled down the stairs. Mr Cook said that when Nelson was interviewed he said he had mental health difficulties, but did not seek to justify his behaviour and apologised. Mr Cook added that Nelson had previous convictions for causing damage, assaulting an emergency worker and possessing a bladed article, and at the time was subject to two community orders and a suspended sentence. \"Your problems cannot become society's problems\" Joshua Purser, defending, said: â€œThe strongest mitigation is that he pleaded guilty at the first opportunity and indicated his remorse prior to that in the police interview. â€œHe has now been remanded in custody since the 14th of November, so has served the equivalent of a 16-month sentence. â€œThe question is whether the sentence is to be an immediate one, or whether itâ€™s an opportunity for the court to provide support for this defendant.â€\u009d Find out who's been before the courts in our free email alerts You can get your Coventry and Warwickshire news straight to your email inbox - and it's FREE! All you need to do is sign up here. The emails come out twice a day, in the morning and in the evening, with the latest news, court stories, what's on and sport from across the region. Mr Purser added that Nelson was on medication at the time of the incident, and while in custody the dosage has been adjusted to a level which is benefiting him. Recorder Balraj Bhatia QC said: â€œIt is aggravated by the fact that these were three emergency workers doing a difficult job in difficult times.â€\u009d He told Nelson: â€œI acknowledge that you have had difficulties. A lot of that was to do with a lack of care in terms of the medication you require. â€œYou have now been in custody for the equivalent of a 16-month sentence, and during that time you have had some proper care from the mental health service, which means your medication has been properly regulated. â€œI appreciate you have had a difficult background, but your problems cannot become societyâ€™s problems. â€œThe police do a very difficult and challenging job in very difficult and challenging conditions. When most people keep two metres away from each-other they are on the front line, and they need to be protected. â€œYou need to learn that. Every time you are there working for the community you should be reminded of why you are there.â€\u009d And of the time Nelson has spent in custody, Recorder Bhatia warned him: â€œThat is not something you can count again if you breach this order.â€\u009d Get the latest stories from across Warwickshire by signing up to our free email updates Read More Related Articles Drug-dealing scientist was caught with cannabis and Â£480 cash stashed in her underwear by cops Read More Related Articles Violent thug beat up pregnant girlfriend while pinning her down by her neck FOLLOW USlivecoventryFollow @live_coventryCOMMENTSAdd CommentMore OnCourtsCrimeLeamington SpaWarwickshire",
+                                                        "URL": "https://www.coventrytelegraph.net/news/local-news/man-knife-threatened-jump-bridge-21166456"
+                                                    },
+                                                    {
+                                                        "score": 1,
+                                                        "subjectMatched": "Ryan Nelson",
+                                                        "text": "As Ryan Nelson was arrested, he kicked out at police officers, a court was told A young man who kicked police officers as he was arrested for causing damage at the hostel where he was living has escaped being jailed – because of the time he has already been in custody. But Ryan Nelson was warned by a judge at Warwick Crown Court that if he breaches the suspended sentence, that time will not count towards any sentence he is then given. Nelson, 19, of Newbold Street, Leamington, had pleaded guilty to causing damage, having a bladed article in public and three charges of common assault on emergency workers. READ MORE: Coventry man jailed for six years for attacking friend with his false leg and a machete He was given a 15-month prison sentence suspended for two years and was ordered to do 150 hours of unpaid work – with a further 150 hours for breaching an earlier suspended sentence. Prosecutor Gary Cook said that in November last year Nelson became agitated over a post he had read on social media about his girlfriend and another man. He was living at the Newbold Lodge hostel in Leamington at the time, and took out his anger by kicking the front door and a pay-phone, causing it to come off the wall. What happened? He then went outside and damaged a fence panel before staff tried to calm him down and he returned to his room. But Nelson then came down with a knife and made his way to Jephson Gardens in Leamington, threatening to jump from a bridge and to take his own life. The police were alerted, and after he had returned to the hostel officers attended and he was arrested. Warwick Crown Court As they were taking him outside, Nelson became agitated and kicked out at two officers behind him, striking them both to their legs. There was a struggle as they then tried to restrain him, during which a third officer suffered reddening to his arm as they stumbled down the stairs. Mr Cook said that when Nelson was interviewed he said he had mental health difficulties, but did not seek to justify his behaviour and apologised. Mr Cook added that Nelson had previous convictions for causing damage, assaulting an emergency worker and possessing a bladed article, and at the time was subject to two community orders and a suspended sentence. \"Your problems cannot become society's problems\" Joshua Purser, defending, said: “The strongest mitigation is that he pleaded guilty at the first opportunity and indicated his remorse prior to that in the police interview. “He has now been remanded in custody since the 14th of November, so has served the equivalent of a 16-month sentence. “The question is whether the sentence is to be an immediate one, or whether it’s an opportunity for the court to provide support for this defendant.” Find out who's been before the courts in our free email alerts You can get your Coventry and Warwickshire news straight to your email inbox - and it's FREE! All you need to do is sign up here . The emails come out twice a day, in the morning and in the evening, with the latest news, court stories, what's on and sport from across the region. Mr Purser added that Nelson was on medication at the time of the incident, and while in custody the dosage has been adjusted to a level which is benefiting him. Recorder Balraj Bhatia QC said: “It is aggravated by the fact that these were three emergency workers doing a difficult job in difficult times.” He told Nelson: “I acknowledge that you have had difficulties. A lot of that was to do with a lack of care in terms of the medication you require. “You have now been in custody for the equivalent of a 16-month sentence, and during that time you have had some proper care from the mental health service, which means your medication has been properly regulated. “I appreciate you have had a difficult background, but your problems cannot become society’s problems. “The police do a very difficult and challenging job in very difficult and challenging conditions. When most people keep two metres away from each-other they are on the front line, and they need to be protected. “You need to learn that. Every time you are there working for the community you should be reminded of why you are there.” And of the time Nelson has spent in custody, Recorder Bhatia warned him: “That is not something you can count again if you breach this order.” Get the latest stories from across Warwickshire by signing up to our free email updates Read More Related Articles Drug-dealing scientist was caught with cannabis and £480 cash stashed in her underwear by cops Read More Related Articles Violent thug beat up pregnant girlfriend while pinning her down by her neck",
+                                                        "URL": "https://www.coventrytelegraph.net/news/local-news/man-knife-threatened-jump-bridge-21166456"
+                                                    }
+                                                ],
+                                                "PEP_results": []
+                                            }
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                }
+                            ],
+                            "Errors": [],
+                            "Rule": {
+                                "RuleName": "RuleScript - WatchlistRules_v1",
+                                "Note": "Watchlist Clear on either International or Advanced Watchlist"
+                            },
+                            "SupplementaryRules": []
+                        },
+                        "CustomerReferenceID": "manual-2025-09-11-645687",
+                        "Errors": [],
+                        "UserGUID": "166596",
+                        "AccountIdentifier": "c4f28d3e-7048-48f2-b7bd-74db1f128f05",
+                        "InputFields": [
+                            {
+                                "FieldName": "FirstName",
+                                "Value": "Ryan"
+                            },
+                            {
+                                "FieldName": "LastName",
+                                "Value": "Nelson"
+                            },
+                            {
+                                "FieldName": "Country",
+                                "Value": "US"
+                            },
+                            {
+                                "FieldName": "YearOfBirth",
+                                "Value": "1993"
+                            },
+                            {
+                                "FieldName": "MonthOfBirth",
+                                "Value": "6"
+                            },
+                            {
+                                "FieldName": "DayOfBirth",
+                                "Value": "28"
+                            }
+                        ]
+                    },
+                    "watchlistResults": {
+                        "Advanced Watchlist": {
+                            "watchlistStatus": "Potential Hit",
+                            "watchlistHitDetails": {
+                                "wlHitsNumber": 0,
+                                "amHitsNumber": 5,
+                                "pepHitsNumber": 0
+                            }
+                        }
+                    }
+                },
+                {
+                    "timestamp": 1759999180,
+                    "serviceStatus": "COMPLETED",
+                    "nodeId": "6716b4361287d277472c8a5e",
+                    "nodeTitle": "Person Match",
+                    "nodeType": "trulioo_eidv",
+                    "match": false,
+                    "transactionInfo": {
+                        "accountName": "KoreConX Inc.-PM-PersonMatchLive-3",
+                        "accountIdentifier": "8194a6db-2d8d-4609-898f-3b579dee3438",
+                        "countryCode": "US",
+                        "date": "2025-10-09T08:39:40.19+00:00",
+                        "transactionId": "8be0163c-ddb9-4ad9-9c9d-74bde38c27aa",
+                        "transactionRecordId": "2065a9db-b368-f721-d0db-b91cf11e4925",
+                        "userName": "KoreConX-Inc.-Service-Worker-1725580690"
+                    },
+                    "fullServiceDetails": {
+                        "TransactionID": "8be0163c-ddb9-4ad9-9c9d-74bde38c27aa",
+                        "UploadedDt": "2025-10-09T08:39:39.703Z",
+                        "CompletedDt": "2025-10-09T08:39:40.19+00:00",
+                        "CountryCode": "US",
+                        "ProductName": "Identity Verification",
+                        "Record": {
+                            "TransactionRecordID": "2065a9db-b368-f721-d0db-b91cf11e4925",
+                            "RecordStatus": "nomatch",
+                            "DatasourceResults": [
+                                {
+                                    "DatasourceName": "Address Validation",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "Address1",
+                                            "Data": "12964 W 64th Dr"
+                                        },
+                                        {
+                                            "FieldName": "HouseNumber",
+                                            "Data": "12964"
+                                        },
+                                        {
+                                            "FieldName": "StreetName",
+                                            "Data": "W 64th"
+                                        },
+                                        {
+                                            "FieldName": "StreetType",
+                                            "Data": "Dr"
+                                        },
+                                        {
+                                            "FieldName": "City",
+                                            "Data": "Arvada"
+                                        },
+                                        {
+                                            "FieldName": "State",
+                                            "Data": "CO"
+                                        },
+                                        {
+                                            "FieldName": "PostalCode",
+                                            "Data": "80004-6023"
+                                        },
+                                        {
+                                            "FieldName": "Country",
+                                            "Data": "US"
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                },
+                                {
+                                    "DatasourceName": "Citizen 2",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                }
+                            ],
+                            "Errors": [],
+                            "Rule": {
+                                "RuleName": "RuleScript - NameADDDOBID_v204",
+                                "Note": "1 Record Match (Name_v8 AND ID_v14 AND (DoB_v1 OR FullAddress1_v10))"
+                            },
+                            "SupplementaryRules": []
+                        },
+                        "CustomerReferenceID": "manual-2025-09-11-645687",
+                        "Errors": [],
+                        "UserGUID": "166596",
+                        "AccountIdentifier": "8194a6db-2d8d-4609-898f-3b579dee3438",
+                        "InputFields": [
+                            {
+                                "FieldName": "LastName",
+                                "Value": "Nelson"
+                            },
+                            {
+                                "FieldName": "FirstName",
+                                "Value": "Ryan"
+                            },
+                            {
+                                "FieldName": "PostalCode",
+                                "Value": "80004"
+                            },
+                            {
+                                "FieldName": "Address1",
+                                "Value": "12964 W 64th Drive"
+                            },
+                            {
+                                "FieldName": "State",
+                                "Value": "CO"
+                            },
+                            {
+                                "FieldName": "SocialSecurityNumber",
+                                "Value": "523096930"
+                            },
+                            {
+                                "FieldName": "City",
+                                "Value": "Arvada"
+                            },
+                            {
+                                "FieldName": "YearOfBirth",
+                                "Value": "1993"
+                            },
+                            {
+                                "FieldName": "MonthOfBirth",
+                                "Value": "6"
+                            },
+                            {
+                                "FieldName": "DayOfBirth",
+                                "Value": "28"
+                            },
+                            {
+                                "FieldName": "MiddleName",
+                                "Value": "Michael"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "notes": [],
+    "tasks": [],
+    "user": "7ef809bf-4f7d-4db7-90ca-8810da91ed70"
+}

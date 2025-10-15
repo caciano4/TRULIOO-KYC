@@ -7,11 +7,83 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 	"trullio-kyc/config"
 	"trullio-kyc/middleware"
 	"trullio-kyc/models"
 	"trullio-kyc/utils"
 )
+
+// extractReportsData extracts and counts reports from Trulioo response
+func extractReportsData(clientDetails models.ClientDetailsResponse) (int, int, int, string) {
+	amCount, wlCount, pepCount := 0, 0, 0
+	allReports := make(map[string][]interface{})
+
+	// Parse the response as generic interface to handle dynamic structure
+	responseBytes, err := json.Marshal(clientDetails)
+	if err != nil {
+		return 0, 0, 0, ""
+	}
+
+	var responseData map[string]interface{}
+	if err := json.Unmarshal(responseBytes, &responseData); err != nil {
+		return 0, 0, 0, ""
+	}
+
+	if flowData, ok := responseData["flowData"].(map[string]interface{}); ok {
+		for _, flow := range flowData {
+			if flowMap, ok := flow.(map[string]interface{}); ok {
+				if serviceData, ok := flowMap["serviceData"].([]interface{}); ok {
+					for _, service := range serviceData {
+						if serviceMap, ok := service.(map[string]interface{}); ok {
+							if fullDetails, ok := serviceMap["fullServiceDetails"].(map[string]interface{}); ok {
+								if record, ok := fullDetails["Record"].(map[string]interface{}); ok {
+									if datasourceResults, ok := record["DatasourceResults"].([]interface{}); ok {
+										for _, datasource := range datasourceResults {
+											if dsMap, ok := datasource.(map[string]interface{}); ok {
+												if fields, ok := dsMap["DatasourceFields"].([]interface{}); ok {
+													for _, field := range fields {
+														if fieldMap, ok := field.(map[string]interface{}); ok {
+															if fieldMap["FieldName"] == "WatchlistHitDetails" {
+																if data, ok := fieldMap["Data"].(map[string]interface{}); ok {
+																	if amResults, ok := data["AM_results"].([]interface{}); ok && len(amResults) > 0 {
+																		amCount += len(amResults)
+																		allReports["AM_results"] = append(allReports["AM_results"], amResults...)
+																	}
+																	if wlResults, ok := data["WL_results"].([]interface{}); ok && len(wlResults) > 0 {
+																		wlCount += len(wlResults)
+																		allReports["WL_results"] = append(allReports["WL_results"], wlResults...)
+																	}
+																	if pepResults, ok := data["PEP_results"].([]interface{}); ok && len(pepResults) > 0 {
+																		pepCount += len(pepResults)
+																		allReports["PEP_results"] = append(allReports["PEP_results"], pepResults...)
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	reportsJson := ""
+	if len(allReports) > 0 {
+		if jsonData, err := json.Marshal(allReports); err == nil {
+			reportsJson = string(jsonData)
+		}
+	}
+
+	return amCount, wlCount, pepCount, reportsJson
+}
 
 type Req struct {
 	FlowId string
@@ -25,10 +97,37 @@ type TField struct {
 	TValue string
 }
 
-var xHfSession string
-var bearerToken string
+type TruliooSession struct {
+	XHfSession  string
+	BearerToken string
+	JobID       string
+}
 
 type Fields []TField
+
+// getTruliooBaseURL returns the base URL based on environment
+func getTruliooBaseURL() string {
+	env := config.GetEnv("TRULIOO_ENV", "test")
+	config.AppLogger.Printf("Using Trulioo environment: %s", env)
+	if env == "prod" {
+		return "https://api.workflow.prod.trulioo.com/interpreter-v2"
+	}
+	return "https://api.workflow.prod.trulioo.com/interpreter-v2/test"
+}
+
+// getTruliooExportURL returns the export URL based on environment
+func getTruliooExportURL() string {
+	env := config.GetEnv("TRULIOO_ENV", "test")
+	if env == "prod" {
+		return "https://api.workflow.prod.trulioo.com/export/v2"
+	}
+	return "https://api.workflow.prod.trulioo.com/export/test/v2"
+}
+
+// getTruliooAuthURL returns the auth URL (same for both environments)
+func getTruliooAuthURL() string {
+	return "https://auth-api.trulioo.com/connect/token"
+}
 
 func HandleCatchKYCById(r *http.Request) ([]models.Record, error) {
 	// Track Log
@@ -42,15 +141,15 @@ func HandleCatchKYCById(r *http.Request) ([]models.Record, error) {
 	db := config.ConnectDB()
 	defer config.CloseConnectionDB(db)
 
-	// Preparing query to fetch KYC by package_file_id
-	query := `	
-			SELECT 
-				id, package_file_id, package_name, upload_by_id, client_reference_id, transfer_agent_responsible, 
-				type_of_transfer, email, user_id, first_name, middle_name, last_name, date_of_birth_day, 
-				personal_phone_number, street_address, city, postal, letter_state, letter_country, 
+	// Preparing query to fetch KYC by package_file_id (only pending records)
+	query := `
+			SELECT
+				id, package_file_id, package_name, upload_by_id, client_reference_id, transfer_agent_responsible,
+				type_of_transfer, email, user_id, first_name, middle_name, last_name, date_of_birth_day,
+				personal_phone_number, street_address, city, postal, letter_state, letter_country,
 				national_id, request, response, notes, match, complete_kyc, created_at, updated_at, deleted_at
 			FROM public.document_records
-			WHERE package_file_id = $1 AND complete_kyc = true
+			WHERE package_file_id = $1 AND complete_kyc = false
 			AND deleted_at IS NULL`
 
 	// Use parameterized query to avoid SQL injection
@@ -115,6 +214,13 @@ func HandleCatchKYCById(r *http.Request) ([]models.Record, error) {
 }
 
 func HandleProcessAllKyc(w http.ResponseWriter, r *http.Request, record models.Record) error {
+	// Create isolated session for this job
+	session := &TruliooSession{
+		JobID: fmt.Sprintf("kyc-%d-%d", record.Id, time.Now().Unix()),
+	}
+
+	config.AppLogger.Printf("🔐 Starting isolated KYC session %s for record ID %d", session.JobID, record.Id)
+
 	// Step 1: Init and catch field Ids
 	fields, err := truliooInit(w, record)
 	if err != nil {
@@ -122,29 +228,32 @@ func HandleProcessAllKyc(w http.ResponseWriter, r *http.Request, record models.R
 	}
 
 	// Step 2: Send body with Ids, and store the request sent
-	err = truliooBodySubmit(fields, record)
+	err = truliooBodySubmit(fields, record, session)
 	if err != nil {
 		return fmt.Errorf("failed to submit Trulioo body for record Id %v: %w", record.Id, err)
 	}
+	config.AppLogger.Printf("🔑 Session %s acquired XHfSession: %s", session.JobID, session.XHfSession)
 
 	// Step 3: Retrieve Bearer Token
-	err = truliooGenerateBearerToken(record)
+	err = truliooGenerateBearerToken(record, session)
 	if err != nil {
 		return fmt.Errorf("failed to generate Bearer token for record Id %v: %w", record.Id, err)
 	}
+	config.AppLogger.Printf("🎫 Session %s acquired Bearer Token: %s...", session.JobID, session.BearerToken[:20])
 
 	// Step 4: Match API Trulioo
-	err = truliooDetailsFromClient(w, r, record)
+	err = truliooDetailsFromClient(w, r, record, session)
 	if err != nil {
 		return fmt.Errorf("failed to retrieve details from Trulioo client for record Id %v: %w", record.Id, err)
 	}
 
 	// If all steps succeed, return nil
+	config.AppLogger.Printf("✅ Session %s completed successfully for record ID %d", session.JobID, record.Id)
 	return nil
 }
 
 // step 4
-func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record models.Record) error {
+func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record models.Record, session *TruliooSession) error {
 	config.AppLogger.Print("TRULIOO DETAILS FROM CLIENT: STEP 4")
 	var completed bool = false
 	var clientDetails models.ClientDetailsResponse
@@ -153,7 +262,7 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 	db := config.ConnectDB()
 	defer config.CloseConnectionDB(db)
 
-	request.URL = fmt.Sprintf("https://api.workflow.prod.trulioo.com/export/test/v2/query/client/%s?includeFullServiceDetails=true", xHfSession)
+	request.URL = fmt.Sprintf("%s/query/client/%s?includeFullServiceDetails=true", getTruliooExportURL(), session.XHfSession)
 
 	req, err := http.NewRequest("GET", request.URL, nil)
 	if err != nil {
@@ -161,7 +270,7 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 		return err
 	}
 
-	req.Header.Add("authorization", fmt.Sprintf("Bearer %s", bearerToken))
+	req.Header.Add("authorization", fmt.Sprintf("Bearer %s", session.BearerToken))
 
 	client := &http.Client{}
 	res, err := client.Do(req)
@@ -185,37 +294,41 @@ func truliooDetailsFromClient(w http.ResponseWriter, r *http.Request, record mod
 	completed = true
 	config.LogResponseTrulio(4, userName, clientDetails, "response")
 
-	//! TODO CATCH MATCH DATA
+	// Extract reports data
+	amCount, wlCount, pepCount, reportsData := extractReportsData(clientDetails)
+
+	// Update record with match data and mark as completed
 	query := `UPDATE document_records
-				SET match = $1, completed = $3
+				SET match = $1, complete_kyc = $3, response = $4, 
+					am_reports_count = $5, wl_reports_count = $6, pep_reports_count = $7, reports_data = $8,
+					updated_at = NOW()
 			 WHERE id = $2`
 
-	json, err := json.Marshal(clientDetails.FlowData)
+	flowDataJson, err := json.Marshal(clientDetails.FlowData)
 	if err != nil {
 		config.AppLogger.Print(fmt.Sprintf("Error serializing FlowData: %v", err))
 		return err
 	}
 
-	result, err := db.Exec(query, json, *&record.Id, completed)
+	_, err = db.Exec(query, "true", record.Id, completed, string(flowDataJson), amCount, wlCount, pepCount, reportsData)
 	if err != nil {
 		config.AppLogger.Print(err.Error())
 		return err
 	}
 
-	config.AppLogger.Print(result)
-
+	config.AppLogger.Printf("✅ Record %d updated with reports: AM=%d, WL=%d, PEP=%d", record.Id, amCount, wlCount, pepCount)
 	return nil
 }
 
 // step 3
-func truliooGenerateBearerToken(record models.Record) error {
+func truliooGenerateBearerToken(record models.Record, session *TruliooSession) error {
 	config.AppLogger.Print("TRULIOO GENERATE BEARER TOKEN: STEP 3")
 	var request Req
 	var bearerTokenResponse models.BearerTokenReponse
 	userName := fmt.Sprintf("%s_%s", *record.FirstName, *record.LastName)
 
 	//Using that type of body (x-www-form-urlencoded) because it's required as an oauth2 api
-	request.URL = "https://auth-api.trulioo.com/connect/token"
+	request.URL = getTruliooAuthURL()
 	payload := strings.NewReader(
 		fmt.Sprintf(
 			"client_id=%s&client_secret=%s&grant_type=client_credentials",
@@ -250,13 +363,13 @@ func truliooGenerateBearerToken(record models.Record) error {
 
 	config.LogResponseTrulio(3, userName, bearerTokenResponse, "response")
 
-	bearerToken = bearerTokenResponse.AccessToken
+	session.BearerToken = bearerTokenResponse.AccessToken
 
 	return nil
 }
 
 // step 2
-func truliooBodySubmit(fields Fields, record models.Record) error {
+func truliooBodySubmit(fields Fields, record models.Record, session *TruliooSession) error {
 	config.AppLogger.Print("TRULIOO SUBMIT: STEP 2")
 	var request Req
 	var truliooBodySubmitResponse models.DirectSubmitResponse
@@ -266,7 +379,7 @@ func truliooBodySubmit(fields Fields, record models.Record) error {
 	}
 
 	request.FlowId = config.GetEnv("FLOW_ID", "")
-	request.URL = fmt.Sprintf("https://api.workflow.prod.trulioo.com/interpreter-v2/test/submit/%s", request.FlowId)
+	request.URL = fmt.Sprintf("%s/submit/%s", getTruliooBaseURL(), request.FlowId)
 
 	for _, field := range fields {
 		if field.ID != "" && field.TValue != "" {
@@ -322,7 +435,7 @@ func truliooBodySubmit(fields Fields, record models.Record) error {
 	// truliooBodySubmitResponse.Text
 
 	// GETTING XHFSESSION
-	xHfSession = res.Header.Get("x-hf-session")
+	session.XHfSession = res.Header.Get("x-hf-session")
 	return err
 }
 
@@ -339,7 +452,7 @@ func truliooInit(w http.ResponseWriter, record models.Record) (Fields, error) {
 
 	// Preparing Req struct
 	request.FlowId = config.GetEnv("FLOW_ID", "")
-	request.URL = fmt.Sprintf("https://api.workflow.prod.trulioo.com/interpreter-v2/test/flow/%s", request.FlowId)
+	request.URL = fmt.Sprintf("%s/flow/%s", getTruliooBaseURL(), request.FlowId)
 
 	// Instance new Request
 	req, err := http.NewRequest("GET", request.URL, nil)

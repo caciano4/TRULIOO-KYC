@@ -5,12 +5,13 @@ tmp_dir = "tmp"
   cmd = "go build -o ./tmp/main ./cmd"
   bin = "tmp/main"
   full_bin = "tmp/main"
-  include_ext = ["go", "tpl", "tmpl", "html"]
-  exclude_dir = ["tmp", "vendor"]
-  include_dir = ["cmd", "."]
+  include_ext = ["go", "html", "tmpl"]
+  exclude_dir = ["tmp", "vendor", "db", "BRUNO_API"]
+  include_dir = ["cmd", "controllers", "models", "services", "routes", "middleware", "config", "utils", "validations"]
+  delay = 100
 
 [log]
-  level = "debug"
+  level = "info"
 
 [misc]
   clean_on_exit = true

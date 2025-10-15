@@ -33,6 +33,10 @@ type Record struct {
 	DriverLicence            *string    `json:"driver_license"`
 	DriverLicenceVersion     *string    `json:"driver_license_version"`
 	Suburb                   *string    `json:"suburb"`
+	AMReportsCount           *int       `json:"am_reports_count"`  // New field
+	WLReportsCount           *int       `json:"wl_reports_count"`  // New field
+	PEPReportsCount          *int       `json:"pep_reports_count"` // New field
+	ReportsData              *string    `json:"reports_data"`      // New field
 	CreatedAt                time.Time  `json:"created_at"`           // New field
 	UpdatedAt                time.Time  `json:"updated_at"`           // New field
 	DeletedAt                *time.Time `json:"deleted_at,omitempty"` // New field

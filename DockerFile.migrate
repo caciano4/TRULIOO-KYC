@@ -1,21 +1,14 @@
 # Base image
-FROM alpine:3.18
+FROM alpine:latest
 
 # Install required tools
-RUN apk add --no-cache bash curl tar vim
+RUN apk add --no-cache bash docker-cli
 
 # Copy .env to image migrate
 COPY .env .
 
-# Install golang-migrate CLI
-RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xz && \
-    mv migrate /usr/local/bin/migrate
-
 # Set the working directory
 WORKDIR /app
-
-# Default command to show usage
-ENTRYPOINT ["/usr/local/bin/migrate"]
 
 
 

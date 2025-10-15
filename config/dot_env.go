@@ -11,7 +11,6 @@ import (
 func LoadEnv() {
 	if err := godotenv.Load(); err != nil {
 		log.Println("No .env file found. Loading environment variables from OS.")
-		os.Exit(1)
 	}
 }
 
@@ -53,4 +52,10 @@ func GetEnvAsBool(key string, defaultValue bool) bool {
 		return defaultValue
 	}
 	return value
+}
+
+// GetEnvInt retrieves an environment variable as an integer.
+// Alias for GetEnvAsInt for consistency with queue package usage.
+func GetEnvInt(key string, defaultValue int) int {
+	return GetEnvAsInt(key, defaultValue)
 }

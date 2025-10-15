@@ -1,46 +1,58 @@
 #!/bin/bash
 
-# Function to build the migrate command
-build_command() {
-  CMD="-path /app/migrations -database 'postgres://${DB_USER}:${DB_PASSWORD}@db_kyc:5432/${DB_NAME}?sslmode=disable'"
+echo "Migration action: $MIGRATION_ACTION"
+
+# Wait for database to be ready
+echo "Waiting for database to be ready..."
+until docker exec db_kyc pg_isready -U ${DB_USER} -d ${DB_NAME} > /dev/null 2>&1; do
+  sleep 1
+done
+echo "Database is ready!"
+
+# Function to check if table exists
+table_exists() {
+  local table_name=$1
+  docker exec db_kyc psql -U ${DB_USER} -d ${DB_NAME} -tAc "SELECT 1 FROM information_schema.tables WHERE table_name='$table_name';" | grep -q 1
 }
 
-# Prompt user for migration options
-echo "We have some options to migrate, Select from 1 to 4:"
-echo "1: Migrate all"
-echo "2: Rollback a specific number of migrations"
-echo "3: Rollback all migrations"
-echo "4: Check the current migration version"
-
-# Read user input
-read -p "Enter your choice: " number
-
-# Build the base command
-build_command
-
-echo $MIGRATION_ACTION
-
-# Handle user choice
+# Handle migration action
 case $MIGRATION_ACTION in
-  1)
-    echo "Running: migrate $CMD up"
-    migrate -path /app/migrations -database 'postgres://caciano4:123caciano@db_kyc:5432/trullio?sslmode=disable' up
+  up)
+    echo "Running migrations up..."
+    for file in /app/migrations/*.up.sql; do
+      if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        table_name=$(echo "$filename" | grep -o 'create_[^_]*' | sed 's/create_//')
+        
+        if [ -n "$table_name" ] && table_exists "$table_name"; then
+          echo "Skipping: $filename (table '$table_name' already exists)"
+        else
+          echo "Executing: $filename"
+          docker exec -i db_kyc psql -U ${DB_USER} -d ${DB_NAME} < "$file"
+        fi
+      fi
+    done
+    echo "All migrations completed successfully!"
     ;;
-  2)
-    echo "Running: migrate $CMD down"
-    migrate -path /app/migrations -database 'postgres://caciano4:123caciano@db_kyc:5432/trullio?sslmode=disable' down -all
+  down)
+    echo "Running migrations down..."
+    STEPS=${MIGRATION_STEPS:-1}
+    files=($(ls -r /app/migrations/*.down.sql 2>/dev/null))
+    for ((i=0; i<$STEPS && i<${#files[@]}; i++)); do
+      file=${files[$i]}
+      if [ -f "$file" ]; then
+        echo "Executing: $(basename $file)"
+        docker exec -i db_kyc psql -U ${DB_USER} -d ${DB_NAME} < "$file"
+      fi
+    done
+    echo "Migration rollback completed!"
     ;;
-  3)
-    echo "Running: migrate $CMD down -all"
-    migrate -path /app/migrations -database 'postgres://caciano4:123caciano@db_kyc:5432/trullio?sslmode=disable' down $MIGRATION_STEPS
-    ;;
-  4)
-    echo "Running: $CMD version"
-    migrate -path /app/migrations -database 'postgres://caciano4:123caciano@db_kyc:5432/trullio?sslmode=disable' version
+  version)
+    echo "Checking database tables..."
+    docker exec db_kyc psql -U ${DB_USER} -d ${DB_NAME} -c "\dt"
     ;;
   *)
-    echo "Invalid optinos"
+    echo "Invalid migration action: $MIGRATION_ACTION"
+    echo "Valid actions: up, down, version"
+    exit 1
 esac
-
-# Keep the container running
-exec tail -f /dev/null

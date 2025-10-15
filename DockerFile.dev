@@ -1,26 +1,16 @@
-# Base image
 FROM golang:1.23-alpine
 
-# Install dependencies
 RUN apk add --no-cache git
+RUN go install github.com/air-verse/air@v1.61.1
 
-# Install Air
-RUN go install github.com/air-verse/air@latest
-
-# Set working directory
 WORKDIR /app
 
-# Copy files
+COPY go.mod go.sum ./
+RUN go mod download
+
 COPY . .
+RUN mkdir -p tmp
 
-# Create tmp directory with appropriate permissions
-RUN mkdir -p /app/tmp && chmod -R 777 /app/tmp
-
-# Install Go dependencies
-RUN go mod tidy
-
-# Expose development port
 EXPOSE 8080
 
-# Run Air
-CMD ["air", "-c", ".air.toml"]
+CMD ["air"]

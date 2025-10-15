@@ -6,6 +6,8 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"regexp"
+	"strings"
 	"time"
 	"trullio-kyc/config"
 	"trullio-kyc/exceptions"
@@ -157,6 +159,50 @@ func StoreRecords(records []models.Record, w http.ResponseWriter, r *http.Reques
 	json.NewEncoder(w).Encode(response)
 }
 
+// isRowEmpty checks if a row is empty or contains only whitespace
+func isRowEmpty(row []string) bool {
+	for _, cell := range row {
+		if strings.TrimSpace(cell) != "" {
+			return false
+		}
+	}
+	return true
+}
+
+// isDateOnlyRow checks if the first column contains only a date pattern (like "October 8" or date formats)
+func isDateOnlyRow(row []string) bool {
+	if len(row) == 0 {
+		return false
+	}
+
+	firstCell := strings.TrimSpace(row[0])
+	if firstCell == "" {
+		return false
+	}
+
+	// Check for month name patterns like "October 8", "November 15", etc.
+	monthDatePattern := regexp.MustCompile(`^(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}$`)
+	if monthDatePattern.MatchString(firstCell) {
+		return true
+	}
+
+	// Check for common date formats
+	datePatterns := []*regexp.Regexp{
+		regexp.MustCompile(`^\d{1,2}/\d{1,2}/\d{2,4}$`),   // MM/DD/YYYY or M/D/YY
+		regexp.MustCompile(`^\d{1,2}-\d{1,2}-\d{2,4}$`),   // MM-DD-YYYY or M-D-YY
+		regexp.MustCompile(`^\d{4}-\d{1,2}-\d{1,2}$`),     // YYYY-MM-DD
+		regexp.MustCompile(`^\d{1,2}\.\d{1,2}\.\d{2,4}$`), // MM.DD.YYYY or M.D.YY
+	}
+
+	for _, pattern := range datePatterns {
+		if pattern.MatchString(firstCell) {
+			return true
+		}
+	}
+
+	return false
+}
+
 func ReadAndGetContentFile(pathFile string) []models.Record {
 	config.AppLogger.Println("Reading File and mapping Records")
 
@@ -172,8 +218,8 @@ func ReadAndGetContentFile(pathFile string) []models.Record {
 		}
 	}()
 
-	// Get all the rows in the Sheet1.
-	rows, err := f.GetRows("Sheet_1")
+	// Get all the rows in the Walter KYC request sheet.
+	rows, err := f.GetRows("Walter KYC request")
 	if err != nil {
 		config.AppLogger.Println(err)
 		return nil
@@ -189,6 +235,18 @@ func ReadAndGetContentFile(pathFile string) []models.Record {
 			for colIndex, header := range row {
 				headerMap[header] = colIndex
 			}
+			continue
+		}
+
+		// Skip empty rows
+		if isRowEmpty(row) {
+			config.AppLogger.Printf("Skipping empty row at index %d", rowIndex)
+			continue
+		}
+
+		// Skip rows that contain only dates in the first column
+		if isDateOnlyRow(row) {
+			config.AppLogger.Printf("Skipping date-only row at index %d: %s", rowIndex, row[0])
 			continue
 		}
 

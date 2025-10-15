@@ -3,21 +3,20 @@ services:
     container_name: app_kyc
     build:
       context: .
-      dockerfile: ${DOCKERFILE}
+      dockerfile: DockerFile.dev
     ports:
-      - "${PORT}:80"
+      - "80:8080"
     env_file:
       - .env
     volumes:
-      - .:/app:delegated
+      - .:/app
       - /app/tmp
-    restart: always
     networks:
       - networks_kyc
     depends_on:
-      - db
-    environment:
-      - AIR_WATCH_DELAY=100ms
+      db:
+        condition: service_healthy
+    command: air
 
   db:
     container_name: db_kyc
@@ -66,6 +65,7 @@ services:
     volumes:
       - ./migrations:/app/migrations
       - ./entrypoint/migrate.sh:/app/entrypoint.sh
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
         - MIGRATION_ACTION=${MIGRATION_ACTION}
         - DB_USER=${DB_USER}
