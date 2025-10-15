@@ -1034,3 +1034,49 @@ APP_LOG: 2025/10/15 08:31:41 custom_mux.go:50: GET /queue-status
 APP_LOG: 2025/10/15 08:31:41 custom_mux.go:50: GET /kyc-pdf/
 APP_LOG: 2025/10/15 08:31:41 custom_mux.go:50: GET /api/kyc-clients
 APP_LOG: 2025/10/15 08:31:41 api.go:101: Server running on port 80
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /queue-status
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /kyc-pdf/
+APP_LOG: 2025/10/15 08:37:52 custom_mux.go:50: GET /api/kyc-clients
+APP_LOG: 2025/10/15 08:37:52 api.go:101: Server running on port 80
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /queue-status
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /kyc-pdf/
+APP_LOG: 2025/10/15 08:39:08 custom_mux.go:50: GET /api/kyc-clients
+APP_LOG: 2025/10/15 08:39:08 api.go:101: Server running on port 8080
+APP_LOG: 2025/10/15 08:39:21 custom_mux.go:24: Route not found!
+APP_LOG: 2025/10/15 08:39:21 custom_mux.go:25: /.well-known/appspecific/com.chrome.devtools.json
+APP_LOG: 2025/10/15 08:39:21 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/15 08:39:21 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 08:39:21 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 08:39:21 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 08:39:37 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/15 08:39:37 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 08:39:37 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 08:39:37 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/15 08:39:37 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 08:39:56 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/15 08:39:56 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 08:39:56 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 08:39:56 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/15 08:39:56 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 08:39:56 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/15 08:39:56 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 08:39:56 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 08:39:56 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/15 08:39:56 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 08:40:07 pdf_controller.go:26: Generating PDF report for record ID: 5
+APP_LOG: 2025/10/15 08:40:07 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/15 08:40:07 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/15 08:40:07 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/15 08:40:07 pdf_controller.go:68: Successfully generated PDF report for record 5

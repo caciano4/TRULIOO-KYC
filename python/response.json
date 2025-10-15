@@ -1,0 +1,402 @@
+{
+    "id": "68e774392e00003c00af07f6",
+    "ownerIds": [],
+    "created": 1759999033,
+    "lastModified": 1759999036,
+    "profileType": "NORMAL",
+    "status": "REJECTED",
+    "statusManuallyChanged": false,
+    "flowData": {
+        "674e0ec2678bea7ec730fd98": {
+            "id": "674e0ec2678bea7ec730fd98",
+            "completed": true,
+            "fieldData": {
+                "6716b75a1287d277472c8d84": {
+                    "id": "6716b75a1287d277472c8d84",
+                    "name": "Date of birth",
+                    "value": [
+                        "1962-07-23"
+                    ],
+                    "role": "dob"
+                },
+                "67228aef1e5e2108d84020a2": {
+                    "id": "67228aef1e5e2108d84020a2",
+                    "name": "Client Reference ",
+                    "value": [
+                        "manual-2025-09-11-648486"
+                    ],
+                    "role": "external_customer_id"
+                },
+                "6716b75a1287d277472c8d81": {
+                    "id": "6716b75a1287d277472c8d81",
+                    "name": "Country of residence",
+                    "value": [
+                        "US"
+                    ],
+                    "role": "address_country"
+                },
+                "6716b75a1287d277472c8d87": {
+                    "id": "6716b75a1287d277472c8d87",
+                    "name": "ZIP or Postal Code",
+                    "value": [
+                        "79532"
+                    ],
+                    "role": "address_zip"
+                },
+                "6716b75a1287d277472c8d8c": {
+                    "id": "6716b75a1287d277472c8d8c",
+                    "name": "City",
+                    "value": [
+                        "Loraine"
+                    ],
+                    "role": "address_city"
+                },
+                "6716b75a1287d277472c8d82": {
+                    "id": "6716b75a1287d277472c8d82",
+                    "name": "First name",
+                    "value": [
+                        "Russell"
+                    ],
+                    "role": "first_name"
+                },
+                "6716b75a1287d277472c8d86": {
+                    "id": "6716b75a1287d277472c8d86",
+                    "name": "Full address",
+                    "value": [
+                        "3838 N FM 644"
+                    ],
+                    "role": "address_1"
+                },
+                "6744facf99661447b4b58ff7": {
+                    "id": "6744facf99661447b4b58ff7",
+                    "name": "Social service number",
+                    "value": [
+                        "452211429"
+                    ],
+                    "role": "social_service_number"
+                },
+                "6716b75a1287d277472c8d83": {
+                    "id": "6716b75a1287d277472c8d83",
+                    "name": "Last name",
+                    "value": [
+                        "Martin II"
+                    ],
+                    "role": "last_name"
+                },
+                "6716b75a1287d277472c8d88": {
+                    "id": "6716b75a1287d277472c8d88",
+                    "name": "State/Province/District",
+                    "value": [
+                        "TX"
+                    ],
+                    "role": "address_state"
+                }
+            },
+            "fileData": {},
+            "enhancedFileData": {},
+            "serviceData": [
+                {
+                    "timestamp": 1759999036,
+                    "serviceStatus": "COMPLETED",
+                    "nodeId": "67167c6266043333e4b64f01",
+                    "nodeTitle": "Person Watchlist Screening",
+                    "nodeType": "trulioo_person_wl",
+                    "match": true,
+                    "transactionInfo": {
+                        "accountName": "KoreConX Inc.-PWS-Person Watchlist Screening-2",
+                        "accountIdentifier": "c4f28d3e-7048-48f2-b7bd-74db1f128f05",
+                        "countryCode": "US",
+                        "date": "2025-10-09T08:37:16.502+00:00",
+                        "transactionId": "97555d79-3ae6-4512-8b0f-a518a44e1e1d",
+                        "transactionRecordId": "202dc556-1651-d7c0-bb4a-2c36d4e13c43",
+                        "userName": "KoreConX-Inc.-Service-Worker-1725580690"
+                    },
+                    "fullServiceDetails": {
+                        "TransactionID": "97555d79-3ae6-4512-8b0f-a518a44e1e1d",
+                        "UploadedDt": "2025-10-09T08:37:14.292Z",
+                        "CompletedDt": "2025-10-09T08:37:16.502+00:00",
+                        "CountryCode": "US",
+                        "ProductName": "Identity Verification",
+                        "Record": {
+                            "TransactionRecordID": "202dc556-1651-d7c0-bb4a-2c36d4e13c43",
+                            "RecordStatus": "match",
+                            "DatasourceResults": [
+                                {
+                                    "DatasourceName": "Advanced Watchlist",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "WatchlistFullName",
+                                            "Data": "Russell Martin II"
+                                        },
+                                        {
+                                            "FieldName": "WatchlistState",
+                                            "Data": "No Hit"
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                }
+                            ],
+                            "Errors": [],
+                            "Rule": {
+                                "RuleName": "RuleScript - WatchlistRules_v1",
+                                "Note": "Watchlist Clear on either International or Advanced Watchlist"
+                            },
+                            "SupplementaryRules": []
+                        },
+                        "CustomerReferenceID": "manual-2025-09-11-648486",
+                        "Errors": [],
+                        "UserGUID": "166596",
+                        "AccountIdentifier": "c4f28d3e-7048-48f2-b7bd-74db1f128f05",
+                        "InputFields": [
+                            {
+                                "FieldName": "FirstName",
+                                "Value": "Russell"
+                            },
+                            {
+                                "FieldName": "LastName",
+                                "Value": "Martin II"
+                            },
+                            {
+                                "FieldName": "Country",
+                                "Value": "US"
+                            },
+                            {
+                                "FieldName": "YearOfBirth",
+                                "Value": "1962"
+                            },
+                            {
+                                "FieldName": "MonthOfBirth",
+                                "Value": "7"
+                            },
+                            {
+                                "FieldName": "DayOfBirth",
+                                "Value": "23"
+                            }
+                        ]
+                    },
+                    "watchlistResults": {
+                        "Advanced Watchlist": {
+                            "watchlistStatus": "No Hit",
+                            "watchlistHitDetails": {
+                                "wlHitsNumber": 0,
+                                "amHitsNumber": 0,
+                                "pepHitsNumber": 0
+                            }
+                        }
+                    }
+                },
+                {
+                    "timestamp": 1759999035,
+                    "serviceStatus": "COMPLETED",
+                    "nodeId": "6716b4361287d277472c8a5e",
+                    "nodeTitle": "Person Match",
+                    "nodeType": "trulioo_eidv",
+                    "match": false,
+                    "transactionInfo": {
+                        "accountName": "KoreConX Inc.-PM-PersonMatchLive-3",
+                        "accountIdentifier": "8194a6db-2d8d-4609-898f-3b579dee3438",
+                        "countryCode": "US",
+                        "date": "2025-10-09T08:37:15.094+00:00",
+                        "transactionId": "2bac2b93-fe9b-473e-aefa-412a78ede963",
+                        "transactionRecordId": "20bfa631-c99d-794c-cb08-ef72aad88aee",
+                        "userName": "KoreConX-Inc.-Service-Worker-1725580690"
+                    },
+                    "fullServiceDetails": {
+                        "TransactionID": "2bac2b93-fe9b-473e-aefa-412a78ede963",
+                        "UploadedDt": "2025-10-09T08:37:14.403Z",
+                        "CompletedDt": "2025-10-09T08:37:15.094+00:00",
+                        "CountryCode": "US",
+                        "ProductName": "Identity Verification",
+                        "Record": {
+                            "TransactionRecordID": "20bfa631-c99d-794c-cb08-ef72aad88aee",
+                            "RecordStatus": "nomatch",
+                            "DatasourceResults": [
+                                {
+                                    "DatasourceName": "Address Validation",
+                                    "DatasourceFields": [],
+                                    "AppendedFields": [
+                                        {
+                                            "FieldName": "Address1",
+                                            "Data": "3838 N Fm 644"
+                                        },
+                                        {
+                                            "FieldName": "HouseNumber",
+                                            "Data": "3838"
+                                        },
+                                        {
+                                            "FieldName": "StreetName",
+                                            "Data": "N Fm 644"
+                                        },
+                                        {
+                                            "FieldName": "City",
+                                            "Data": "Loraine"
+                                        },
+                                        {
+                                            "FieldName": "State",
+                                            "Data": "TX"
+                                        },
+                                        {
+                                            "FieldName": "PostalCode",
+                                            "Data": "79532-2424"
+                                        },
+                                        {
+                                            "FieldName": "Country",
+                                            "Data": "US"
+                                        }
+                                    ],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                },
+                                {
+                                    "DatasourceName": "Citizen 2",
+                                    "DatasourceFields": [
+                                        {
+                                            "FieldName": "FirstSurName",
+                                            "Status": "nomatch"
+                                        },
+                                        {
+                                            "FieldName": "FirstGivenName",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "Address1",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "StateProvinceCode",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "PostalCode",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "DayOfBirth",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "MonthOfBirth",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "YearOfBirth",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "socialservice",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "City",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "UnitNumber",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "BuildingNumber",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "StreetName",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "StreetType",
+                                            "Status": "missing"
+                                        },
+                                        {
+                                            "FieldName": "FirstInitial",
+                                            "Status": "match"
+                                        },
+                                        {
+                                            "FieldName": "MiddleName",
+                                            "Status": "missing"
+                                        }
+                                    ],
+                                    "AppendedFields": [],
+                                    "Errors": [],
+                                    "FieldGroups": []
+                                }
+                            ],
+                            "Errors": [],
+                            "Rule": {
+                                "RuleName": "RuleScript - NameADDDOBID_v204",
+                                "Note": "1 Record Match (Name_v8 AND ID_v14 AND (DoB_v1 OR FullAddress1_v10))"
+                            },
+                            "SupplementaryRules": []
+                        },
+                        "CustomerReferenceID": "manual-2025-09-11-648486",
+                        "Errors": [],
+                        "UserGUID": "166596",
+                        "AccountIdentifier": "8194a6db-2d8d-4609-898f-3b579dee3438",
+                        "InputFields": [
+                            {
+                                "FieldName": "LastName",
+                                "Value": "Martin II"
+                            },
+                            {
+                                "FieldName": "FirstName",
+                                "Value": "Russell"
+                            },
+                            {
+                                "FieldName": "PostalCode",
+                                "Value": "79532"
+                            },
+                            {
+                                "FieldName": "Address1",
+                                "Value": "3838 N FM 644"
+                            },
+                            {
+                                "FieldName": "State",
+                                "Value": "TX"
+                            },
+                            {
+                                "FieldName": "SocialSecurityNumber",
+                                "Value": "452211429"
+                            },
+                            {
+                                "FieldName": "City",
+                                "Value": "Loraine"
+                            },
+                            {
+                                "FieldName": "YearOfBirth",
+                                "Value": "1962"
+                            },
+                            {
+                                "FieldName": "MonthOfBirth",
+                                "Value": "7"
+                            },
+                            {
+                                "FieldName": "DayOfBirth",
+                                "Value": "23"
+                            },
+                            {
+                                "FieldName": "UnitNumber",
+                                "Value": "644"
+                            },
+                            {
+                                "FieldName": "HouseNumber",
+                                "Value": "3838"
+                            },
+                            {
+                                "FieldName": "StreetName",
+                                "Value": "N FM"
+                            },
+                            {
+                                "FieldName": "FirstInitial",
+                                "Value": "R"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "notes": [],
+    "tasks": [],
+    "user": "7ef809bf-4f7d-4db7-90ca-8810da91ed70"
+}
