@@ -1,0 +1,152 @@
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /queue-status
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /kyc-pdf/
+APP_LOG: 2025/10/21 14:28:05 custom_mux.go:50: GET /api/kyc-clients
+APP_LOG: 2025/10/21 14:28:05 api.go:101: Server running on port 8080
+APP_LOG: 2025/10/21 14:28:06 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/21 14:28:06 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:28:06 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:28:06 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:26 manager.go:32: Initializing queue manager with 5 workers, queue size 100, rate limit 10/s
+APP_LOG: 2025/10/21 14:29:26 worker.go:49: Starting worker pool with 5 workers
+APP_LOG: 2025/10/21 14:29:26 manager.go:49: Queue manager initialized successfully
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:134: Get KYC RECORDS
+APP_LOG: 2025/10/21 14:29:26 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:26 worker.go:78: Worker 1 started
+APP_LOG: 2025/10/21 14:29:26 worker.go:78: Worker 0 started
+APP_LOG: 2025/10/21 14:29:26 worker.go:78: Worker 4 started
+APP_LOG: 2025/10/21 14:29:26 worker.go:78: Worker 2 started
+APP_LOG: 2025/10/21 14:29:26 worker.go:78: Worker 3 started
+APP_LOG: 2025/10/21 14:29:26 manager.go:81: Starting result processor
+APP_LOG: 2025/10/21 14:29:26 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:26 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:26 worker.go:70: Job kyc-1-1 added to queue
+APP_LOG: 2025/10/21 14:29:26 worker.go:83: Worker 1 processing job kyc-1-1 for record ID 1
+APP_LOG: 2025/10/21 14:29:26 worker.go:117: 🚀 Worker starting isolated KYC processing for job kyc-1-1, record ID 1
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:222: 🔐 Starting isolated KYC session kyc-1-1761056966 for record ID 1
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:444: INIT TRULIOO REQUEST: STEP 1
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:111: Using Trulioo environment: test
+APP_LOG: 2025/10/21 14:29:26 process_kyc.go:55: Successfully queued record Id 1 with job ID kyc-1-1
+APP_LOG: 2025/10/21 14:29:26 worker.go:70: Job kyc-2-2 added to queue
+APP_LOG: 2025/10/21 14:29:26 process_kyc.go:55: Successfully queued record Id 2 with job ID kyc-2-2
+APP_LOG: 2025/10/21 14:29:26 worker.go:70: Job kyc-3-3 added to queue
+APP_LOG: 2025/10/21 14:29:26 process_kyc.go:55: Successfully queued record Id 3 with job ID kyc-3-3
+APP_LOG: 2025/10/21 14:29:26 process_kyc.go:67: Queued 3 out of 3 records for KYC processing
+APP_LOG: 2025/10/21 14:29:26 worker.go:83: Worker 0 processing job kyc-2-2 for record ID 2
+APP_LOG: 2025/10/21 14:29:26 worker.go:117: 🚀 Worker starting isolated KYC processing for job kyc-2-2, record ID 2
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:222: 🔐 Starting isolated KYC session kyc-2-1761056966 for record ID 2
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:444: INIT TRULIOO REQUEST: STEP 1
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:111: Using Trulioo environment: test
+APP_LOG: 2025/10/21 14:29:26 worker.go:83: Worker 4 processing job kyc-3-3 for record ID 3
+APP_LOG: 2025/10/21 14:29:26 worker.go:117: 🚀 Worker starting isolated KYC processing for job kyc-3-3, record ID 3
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:222: 🔐 Starting isolated KYC session kyc-3-1761056966 for record ID 3
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:444: INIT TRULIOO REQUEST: STEP 1
+APP_LOG: 2025/10/21 14:29:26 trulioo_kyc_proccess.go:111: Using Trulioo environment: test
+APP_LOG: 2025/10/21 14:29:26 package_resource.go:11: Starting Search packages ...
+APP_LOG: 2025/10/21 14:29:26 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:26 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:26 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:28 log.go:78: Response logged to /app/responses/maria_costa/response/2025-10-21_step_1.json
+APP_LOG: 2025/10/21 14:29:28 trulioo_kyc_proccess.go:373: TRULIOO SUBMIT: STEP 2
+APP_LOG: 2025/10/21 14:29:28 trulioo_kyc_proccess.go:111: Using Trulioo environment: test
+APP_LOG: 2025/10/21 14:29:28 log.go:78: Response logged to /app/responses/maria_costa/request/2025-10-21_step_2.json
+APP_LOG: 2025/10/21 14:29:28 log.go:78: Response logged to /app/responses/carlos_lima/response/2025-10-21_step_1.json
+APP_LOG: 2025/10/21 14:29:28 trulioo_kyc_proccess.go:373: TRULIOO SUBMIT: STEP 2
+APP_LOG: 2025/10/21 14:29:28 trulioo_kyc_proccess.go:111: Using Trulioo environment: test
+APP_LOG: 2025/10/21 14:29:28 log.go:78: Response logged to /app/responses/carlos_lima/request/2025-10-21_step_2.json
+APP_LOG: 2025/10/21 14:29:28 log.go:78: Response logged to /app/responses/joão_santos/response/2025-10-21_step_1.json
+APP_LOG: 2025/10/21 14:29:28 trulioo_kyc_proccess.go:373: TRULIOO SUBMIT: STEP 2
+APP_LOG: 2025/10/21 14:29:28 trulioo_kyc_proccess.go:111: Using Trulioo environment: test
+APP_LOG: 2025/10/21 14:29:28 log.go:78: Response logged to /app/responses/joão_santos/request/2025-10-21_step_2.json
+APP_LOG: 2025/10/21 14:29:29 log.go:78: Response logged to /app/responses/joão_santos/response/2025-10-21_step_2.json
+APP_LOG: 2025/10/21 14:29:29 trulioo_kyc_proccess.go:235: 🔑 Session kyc-1-1761056966 acquired XHfSession: 68f798c82d000031003f9190
+APP_LOG: 2025/10/21 14:29:29 trulioo_kyc_proccess.go:325: TRULIOO GENERATE BEARER TOKEN: STEP 3
+APP_LOG: 2025/10/21 14:29:29 log.go:78: Response logged to /app/responses/maria_costa/response/2025-10-21_step_2.json
+APP_LOG: 2025/10/21 14:29:29 trulioo_kyc_proccess.go:235: 🔑 Session kyc-2-1761056966 acquired XHfSession: 68f798c82d00003b003f918e
+APP_LOG: 2025/10/21 14:29:29 trulioo_kyc_proccess.go:325: TRULIOO GENERATE BEARER TOKEN: STEP 3
+APP_LOG: 2025/10/21 14:29:29 log.go:78: Response logged to /app/responses/carlos_lima/response/2025-10-21_step_2.json
+APP_LOG: 2025/10/21 14:29:29 trulioo_kyc_proccess.go:235: 🔑 Session kyc-3-1761056966 acquired XHfSession: 68f798c82c00003b00977cec
+APP_LOG: 2025/10/21 14:29:29 trulioo_kyc_proccess.go:325: TRULIOO GENERATE BEARER TOKEN: STEP 3
+APP_LOG: 2025/10/21 14:29:30 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/21 14:29:30 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:30 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:30 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/21 14:29:30 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:30 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/21 14:29:30 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:30 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:30 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/21 14:29:30 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:30 log.go:78: Response logged to /app/responses/joão_santos/response/2025-10-21_step_3.json
+APP_LOG: 2025/10/21 14:29:30 trulioo_kyc_proccess.go:242: 🎫 Session kyc-1-1761056966 acquired Bearer Token: eyJhbGciOiJSUzI1NiIs...
+APP_LOG: 2025/10/21 14:29:30 trulioo_kyc_proccess.go:257: TRULIOO DETAILS FROM CLIENT: STEP 4
+APP_LOG: 2025/10/21 14:29:30 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:30 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:31 log.go:78: Response logged to /app/responses/carlos_lima/response/2025-10-21_step_3.json
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:242: 🎫 Session kyc-3-1761056966 acquired Bearer Token: eyJhbGciOiJSUzI1NiIs...
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:257: TRULIOO DETAILS FROM CLIENT: STEP 4
+APP_LOG: 2025/10/21 14:29:31 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:31 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:31 log.go:78: Response logged to /app/responses/maria_costa/response/2025-10-21_step_3.json
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:242: 🎫 Session kyc-2-1761056966 acquired Bearer Token: eyJhbGciOiJSUzI1NiIs...
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:257: TRULIOO DETAILS FROM CLIENT: STEP 4
+APP_LOG: 2025/10/21 14:29:31 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:31 log.go:78: Response logged to /app/responses/joão_santos/response/2025-10-21_step_4.json
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:315: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:31 worker.go:132: ❌ Worker failed processing job kyc-1-1: failed to retrieve details from Trulioo client for record Id 1: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 worker.go:95: Worker 1 failed to process job kyc-1-1 (took 4.513868787s): failed to retrieve details from Trulioo client for record Id 1: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 manager.go:85: Job kyc-1-1 completed with error: failed to retrieve details from Trulioo client for record Id 1: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:31 log.go:78: Response logged to /app/responses/carlos_lima/response/2025-10-21_step_4.json
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:315: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:31 worker.go:132: ❌ Worker failed processing job kyc-3-3: failed to retrieve details from Trulioo client for record Id 3: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 worker.go:95: Worker 4 failed to process job kyc-3-3 (took 4.799120122s): failed to retrieve details from Trulioo client for record Id 3: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 manager.go:85: Job kyc-3-3 completed with error: failed to retrieve details from Trulioo client for record Id 3: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 log.go:78: Response logged to /app/responses/maria_costa/response/2025-10-21_step_4.json
+APP_LOG: 2025/10/21 14:29:31 trulioo_kyc_proccess.go:315: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:31 worker.go:132: ❌ Worker failed processing job kyc-2-2: failed to retrieve details from Trulioo client for record Id 2: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 worker.go:95: Worker 0 failed to process job kyc-2-2 (took 5.028909584s): failed to retrieve details from Trulioo client for record Id 2: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:31 manager.go:85: Job kyc-2-2 completed with error: failed to retrieve details from Trulioo client for record Id 2: pq: column "am_reports_count" of relation "document_records" does not exist
+APP_LOG: 2025/10/21 14:29:40 pdf_controller.go:26: Generating PDF report for record ID: 5
+APP_LOG: 2025/10/21 14:29:40 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 14:29:40 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 14:29:40 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 14:29:40 pdf_controller.go:68: Successfully generated PDF report for record 5
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:48: Registered Routes:
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /static/
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /kyc-package-list
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: POST /kyc-request
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /process-kyc/
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /queue-status
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /kyc-pdf/
+APP_LOG: 2025/10/21 18:58:48 custom_mux.go:50: GET /api/kyc-clients
+APP_LOG: 2025/10/21 18:58:48 api.go:101: Server running on port 8080
+APP_LOG: 2025/10/21 19:00:48 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/21 19:00:48 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 19:00:48 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 19:00:48 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/21 19:00:48 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 19:00:48 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/21 19:00:48 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 19:00:48 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 19:00:48 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/21 19:00:48 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 19:02:01 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/21 19:02:01 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 19:02:01 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 19:02:01 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/21 19:02:01 db_config.go:39: Database Closed!
+APP_LOG: 2025/10/21 19:02:01 clients_controller.go:17: Fetching KYC clients list
+APP_LOG: 2025/10/21 19:02:01 db_config.go:11: Starting connect DB
+APP_LOG: 2025/10/21 19:02:01 db_config.go:32: Successfully connected to the database!
+APP_LOG: 2025/10/21 19:02:01 clients_controller.go:103: Successfully fetched 15 clients
+APP_LOG: 2025/10/21 19:02:01 db_config.go:39: Database Closed!

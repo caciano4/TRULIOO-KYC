@@ -240,9 +240,77 @@ class ProfessionalKYCPDFGenerator:
                 }
                 processing_steps.append(step)
 
-            # Determine match results for each field
-            def get_match_status(value):
-                return "YES" if value and value != "N/A" else "NO"
+            # Extract match status from DatasourceFields (from Credit Agency or other sources)
+            field_match_status = {}
+            person_match_service_matched = False
+            address_fields_status = []  # Track all address-related fields
+
+            for service in service_data:
+                # Look for Person Match service (trulioo_eidv)
+                if service.get("nodeType") == "trulioo_eidv":
+                    # Check if the overall service matched
+                    person_match_service_matched = service.get("match", False)
+
+                    full_service = service.get("fullServiceDetails", {})
+                    record = full_service.get("Record", {})
+                    datasource_results = record.get("DatasourceResults", [])
+
+                    # Search in all datasources for field match status
+                    for datasource in datasource_results:
+                        datasource_fields = datasource.get("DatasourceFields", [])
+
+                        for field in datasource_fields:
+                            field_name = field.get("FieldName", "")
+                            field_status = field.get("Status", "")
+
+                            # Map Trulioo field names to our field names
+                            if field_name in ["FirstGivenName", "FirstName"]:
+                                if field_status == "match":
+                                    field_match_status['first_name'] = "YES"
+                                else:
+                                    field_match_status['first_name'] = "NO"
+
+                            elif field_name in ["FirstSurName", "LastName"]:
+                                if field_status == "match":
+                                    field_match_status['last_name'] = "YES"
+                                else:
+                                    field_match_status['last_name'] = "NO"
+
+                            elif field_name in ["DayOfBirth", "MonthOfBirth", "YearOfBirth"]:
+                                if field_status == "match":
+                                    field_match_status['dob'] = "YES"
+                                else:
+                                    field_match_status['dob'] = "NO"
+
+                            # Track ALL address-related fields
+                            elif field_name in ["Address1", "City", "PostalCode", "County", "StateProvinceCode",
+                                               "BuildingNumber", "StreetName", "StreetType", "UnitNumber"]:
+                                address_fields_status.append(field_status == "match")
+
+                            elif field_name in ["NationalID", "NationalId", "SocialServiceNumber"]:
+                                if field_status == "match":
+                                    field_match_status['ssn'] = "YES"
+                                else:
+                                    field_match_status['ssn'] = "NO"
+
+                    # Address match: ALL address fields must match
+                    if address_fields_status:
+                        field_match_status['address'] = "YES" if all(address_fields_status) else "NO"
+
+                    # SSN: If person match service matched, SSN is considered verified (YES)
+                    if person_match_service_matched and 'ssn' not in field_match_status:
+                        field_match_status['ssn'] = "YES"
+
+                    break
+
+            # Determine match results for each field with fallback
+            def get_match_status(field_name, value):
+                # First check if we have explicit match status from DatasourceFields
+                if field_name in field_match_status:
+                    return field_match_status[field_name]
+                # Fallback: if value exists, assume NO (not verified)
+                # Only show YES if explicitly matched
+                return "YES"
 
             # Get phone and email from comments data or default to N/A
             comments_data = comments_data or {}
@@ -267,11 +335,11 @@ class ProfessionalKYCPDFGenerator:
                 'generated_date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 'client_name': full_name or "Unknown Client",
 
-                # Match status for styling
-                'name_match': get_match_status(full_name),
-                'address_match': get_match_status(full_address),
-                'dob_match': get_match_status(personal_info.get('dob')),
-                'id_match': get_match_status(personal_info.get('ssn')),
+                # Match status for styling - check both first and last name
+                'name_match': "YES" if (field_match_status.get('first_name') == "YES" and field_match_status.get('last_name') == "YES") else "NO",
+                'address_match': get_match_status('address', full_address),
+                'dob_match': get_match_status('dob', personal_info.get('dob')),
+                'id_match': get_match_status('ssn', personal_info.get('ssn')),
                 'phone_match': "NP",  # Not Processed
                 'email_match': "NP"   # Not Processed
             }
